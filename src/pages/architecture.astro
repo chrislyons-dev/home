@@ -1,0 +1,406 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Architecture — Chris Lyons" description="Architecture as code examples using Mermaid and PlantUML diagrams that live with the system.">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <h1 class="text-4xl sm:text-5xl font-bold mb-4">Architecture as Code</h1>
+    <p class="text-xl text-gray-600 dark:text-gray-400 mb-12">
+      Living documentation that evolves with your systems. These diagrams are generated from code,
+      version-controlled, and automatically updated.
+    </p>
+
+    <!-- Architecture Philosophy -->
+    <div class="mb-16 p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
+      <h2 class="text-2xl font-bold mb-4">Why Architecture as Code?</h2>
+      <div class="grid md:grid-cols-2 gap-6 text-gray-700 dark:text-gray-300">
+        <div>
+          <h3 class="font-semibold mb-2 text-blue-600 dark:text-blue-400">✓ Always Up to Date</h3>
+          <p class="text-sm">Diagrams live in the codebase and update with every change. No more outdated PowerPoints.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-blue-600 dark:text-blue-400">✓ Version Controlled</h3>
+          <p class="text-sm">Track architecture evolution over time. See what changed, when, and why.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-blue-600 dark:text-blue-400">✓ Review & Collaborate</h3>
+          <p class="text-sm">Architecture changes go through pull requests just like code. Team visibility built-in.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-blue-600 dark:text-blue-400">✓ Automated Publishing</h3>
+          <p class="text-sm">Diagrams render automatically in CI/CD. Documentation deploys with every release.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Example 1: Microservices Architecture -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">Example: Microservices Architecture</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">
+        Event-driven microservices with Kafka. This Mermaid diagram shows service boundaries,
+        data flow, and async communication patterns.
+      </p>
+
+      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+        <div class="mermaid-diagram mb-4">
+          <pre class="mermaid bg-white dark:bg-gray-900 p-4 rounded overflow-x-auto">
+graph TB
+    subgraph "Client Layer"
+        Web[Web App<br/>React]
+        Mobile[Mobile App<br/>iOS/Android]
+    end
+
+    subgraph "API Gateway"
+        Gateway[API Gateway<br/>Node.js]
+    end
+
+    subgraph "Microservices"
+        Auth[Auth Service<br/>Java/Spring]
+        User[User Service<br/>Node.js]
+        Order[Order Service<br/>Python]
+        Payment[Payment Service<br/>Java]
+    end
+
+    subgraph "Event Bus"
+        Kafka[Kafka Cluster]
+    end
+
+    subgraph "Data Layer"
+        AuthDB[(Auth DB<br/>PostgreSQL)]
+        UserDB[(User DB<br/>MongoDB)]
+        OrderDB[(Order DB<br/>PostgreSQL)]
+        PaymentDB[(Payment DB<br/>PostgreSQL)]
+    end
+
+    Web --> Gateway
+    Mobile --> Gateway
+    Gateway --> Auth
+    Gateway --> User
+    Gateway --> Order
+    Gateway --> Payment
+
+    Auth --> Kafka
+    User --> Kafka
+    Order --> Kafka
+    Payment --> Kafka
+
+    Auth --> AuthDB
+    User --> UserDB
+    Order --> OrderDB
+    Payment --> PaymentDB
+
+    style Kafka fill:#7C3AED,color:#fff
+    style Gateway fill:#2563EB,color:#fff
+          </pre>
+        </div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">
+          <strong>Source:</strong> <code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">docs/architecture/microservices.mmd</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Example 2: Data Pipeline Architecture -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">Example: Data Pipeline Architecture</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">
+        Real-time and batch data processing pipeline. Shows data flow from ingestion through
+        transformation to consumption.
+      </p>
+
+      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+        <div class="mermaid-diagram mb-4">
+          <pre class="mermaid bg-white dark:bg-gray-900 p-4 rounded overflow-x-auto">
+graph LR
+    subgraph "Data Sources"
+        API[External APIs]
+        DB[Legacy DB]
+        Stream[Event Stream]
+    end
+
+    subgraph "Ingestion Layer"
+        Glue[AWS Glue<br/>ETL Jobs]
+        Lambda[Lambda<br/>Real-time]
+    end
+
+    subgraph "Storage"
+        S3[S3 Data Lake]
+    end
+
+    subgraph "Processing"
+        Spark[Spark Jobs<br/>Batch Transform]
+        Stream2[Stream Processor<br/>Real-time]
+    end
+
+    subgraph "Data Warehouse"
+        Snowflake[(Snowflake<br/>Analytics)]
+    end
+
+    subgraph "Consumption"
+        BI[BI Dashboards]
+        API2[Data APIs]
+        ML[ML Models]
+    end
+
+    API --> Glue
+    DB --> Glue
+    Stream --> Lambda
+
+    Glue --> S3
+    Lambda --> S3
+
+    S3 --> Spark
+    S3 --> Stream2
+
+    Spark --> Snowflake
+    Stream2 --> Snowflake
+
+    Snowflake --> BI
+    Snowflake --> API2
+    Snowflake --> ML
+
+    style S3 fill:#FF9900,color:#000
+    style Snowflake fill:#29B5E8,color:#fff
+    style Spark fill:#E25A1C,color:#fff
+          </pre>
+        </div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">
+          <strong>Source:</strong> <code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">docs/architecture/data-pipeline.mmd</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Example 3: Deployment Architecture -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">Example: Zero Trust Deployment Architecture</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">
+        Modern cloud infrastructure with Okta OIDC for zero trust authentication. Every request is verified,
+        JWT tokens validated at the API layer, and full observability with Datadog.
+      </p>
+
+      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+        <div class="mermaid-diagram mb-4">
+          <pre class="mermaid bg-white dark:bg-gray-900 p-4 rounded overflow-x-auto">
+graph TB
+    subgraph "Identity & Access"
+        Okta[Okta OIDC<br/>Zero Trust Auth]
+    end
+
+    subgraph "Load Balancing"
+        LB[Load Balancer<br/>ALB]
+    end
+
+    subgraph "Kubernetes Cluster"
+        subgraph "Web Tier"
+            Web1[Web Pod 1<br/>React App]
+            Web2[Web Pod 2<br/>React App]
+            Web3[Web Pod 3<br/>React App]
+        end
+
+        subgraph "API Tier"
+            API1[API Pod 1<br/>Node.js + JWT]
+            API2[API Pod 2<br/>Node.js + JWT]
+            API3[API Pod 3<br/>Node.js + JWT]
+        end
+
+        subgraph "Worker Tier"
+            Worker1[Worker Pod 1<br/>Python]
+            Worker2[Worker Pod 2<br/>Python]
+        end
+    end
+
+    subgraph "Data Layer"
+        RDS[(RDS PostgreSQL<br/>Multi-AZ)]
+        Redis[(ElastiCache<br/>Redis Cluster)]
+        S3[(S3 Bucket<br/>File Storage)]
+    end
+
+    subgraph "Observability"
+        DD[Datadog Agent]
+        DDCloud[Datadog Cloud]
+    end
+
+    Okta -->|OIDC Token| Web1
+    Okta -->|OIDC Token| Web2
+    Okta -->|OIDC Token| Web3
+
+    LB --> Web1
+    LB --> Web2
+    LB --> Web3
+
+    Web1 -->|JWT Bearer| API1
+    Web2 -->|JWT Bearer| API2
+    Web3 -->|JWT Bearer| API3
+
+    API1 -->|Verify Token| Okta
+    API2 -->|Verify Token| Okta
+    API3 -->|Verify Token| Okta
+
+    API1 --> RDS
+    API2 --> RDS
+    API3 --> RDS
+
+    API1 --> Redis
+    API2 --> Redis
+    API3 --> Redis
+
+    API1 --> S3
+    Worker1 --> S3
+    Worker2 --> S3
+
+    Worker1 --> RDS
+    Worker2 --> RDS
+
+    API1 -.->|metrics/traces/logs| DD
+    API2 -.->|metrics/traces/logs| DD
+    Worker1 -.->|metrics/traces/logs| DD
+    Worker2 -.->|metrics/traces/logs| DD
+
+    DD --> DDCloud
+
+    style Okta fill:#007DC1,color:#fff
+    style LB fill:#FF9900,color:#000
+    style RDS fill:#527FFF,color:#fff
+    style Redis fill:#DC382D,color:#fff
+    style S3 fill:#569A31,color:#fff
+    style DDCloud fill:#632CA6,color:#fff
+          </pre>
+        </div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">
+          <strong>Source:</strong> <code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">docs/architecture/deployment.mmd</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Example 4: PlantUML C4 Model -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">PlantUML C4 Model Integration</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">
+        For more formal architecture documentation, PlantUML with C4 model provides
+        standardized component, container, and deployment views.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800">
+          <h3 class="text-xl font-semibold mb-3">Source Code</h3>
+          <pre class="text-xs overflow-x-auto bg-gray-50 dark:bg-gray-800 p-3 rounded"><code>{`@startuml
+!include C4_Component.puml
+
+Container_Boundary(api, "Order Service") {
+    Component(controller, "Controller")
+    Component(service, "Business Logic")
+    Component(repo, "Data Access")
+}
+
+ContainerDb(db, "Database", "PostgreSQL")
+Rel(controller, service, "Uses")
+Rel(service, repo, "Reads/Writes")
+Rel(repo, db, "SQL")
+@enduml`}</code></pre>
+        </div>
+
+        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800">
+          <h3 class="text-xl font-semibold mb-3">Rendering Options</h3>
+          <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-2">
+            <li>✓ <strong>Local CLI:</strong> <code class="bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded">plantuml diagram.puml</code></li>
+            <li>✓ <strong>CI/CD:</strong> GitHub Actions auto-generate PNGs</li>
+            <li>✓ <strong>VS Code:</strong> PlantUML extension for live preview</li>
+            <li>✓ <strong>Web Server:</strong> PlantUML server API for on-demand rendering</li>
+          </ul>
+          <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-950/30 rounded text-xs">
+            <strong>Pro tip:</strong> Store .puml files next to your code and render them
+            in CI/CD to ensure diagrams always match implementation.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools & Workflow -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">Tools & Workflow</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800">
+          <h3 class="text-xl font-semibold mb-3">🎨 Mermaid</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+            Text-based diagrams that render in markdown. Perfect for flowcharts, sequence diagrams,
+            and system architectures.
+          </p>
+          <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+            <li>✓ Renders in GitHub, GitLab, VS Code</li>
+            <li>✓ No external dependencies needed</li>
+            <li>✓ Fast iteration and easy diffs</li>
+          </ul>
+        </div>
+
+        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800">
+          <h3 class="text-xl font-semibold mb-3">🏗️ PlantUML</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+            Industry-standard for UML and C4 model diagrams. Integrates with CI/CD for
+            automated rendering.
+          </p>
+          <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+            <li>✓ C4 model support for architecture</li>
+            <li>✓ Sequence, class, deployment diagrams</li>
+            <li>✓ CI/CD integration for auto-publish</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CI/CD Integration -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">Automated Documentation Pipeline</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">
+        Every commit triggers diagram generation and documentation deployment.
+      </p>
+
+      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+        <pre class="text-sm overflow-x-auto bg-gray-50 dark:bg-gray-800 p-4 rounded"><code>{`# .github/workflows/docs.yml
+name: Generate Architecture Docs
+
+on:
+  push:
+    paths:
+      - 'docs/architecture/**'
+
+jobs:
+  generate-diagrams:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate PlantUML diagrams
+        uses: cloudbees/plantuml-github-action@master
+        with:
+          args: -v -tpng docs/architecture/*.puml
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: \${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs`}</code></pre>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <div class="p-8 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-800 text-center">
+      <h2 class="text-2xl font-bold mb-4">Want to See More?</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">
+        I can help you implement architecture as code practices in your organization.
+        From tooling setup to CI/CD integration and team training.
+      </p>
+      <a href="/contact"
+         class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+        Let's Talk Architecture
+      </a>
+    </div>
+  </div>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+    });
+  </script>
+</Layout>

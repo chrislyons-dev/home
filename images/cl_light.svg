@@ -1,0 +1,16 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="white" rx="8" ry="8"/>
+  <defs>
+    <linearGradient id="grad-light" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2563EB; stop-opacity:1" /> <!-- blue-600 -->
+      <stop offset="100%" style="stop-color:#9333EA; stop-opacity:1" /> <!-- purple-600 -->
+    </linearGradient>
+  </defs>
+  <text x="50%" y="50%" font-family="Arial, Helvetica, sans-serif"
+        font-size="26" text-anchor="middle" fill="url(#grad-light)" font-weight="bold" dominant-baseline="middle">CL</text>
+  <text x="15%" y="50%" font-family="Courier New, monospace"
+        font-size="28" text-anchor="middle" fill="url(#grad-light)" font-weight="bold" dominant-baseline="middle">[</text>
+  <text x="85%" y="50%" font-family="Courier New, monospace"
+        font-size="28" text-anchor="middle" fill="url(#grad-light)" font-weight="bold" dominant-baseline="middle">]</text>
+</svg>
