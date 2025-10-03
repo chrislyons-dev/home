@@ -1,56 +1,25 @@
 import { useEffect, useState } from 'react';
+import { ThemeManager } from '../services/ThemeManager';
+import { themeStorage, type Theme } from '../services/ThemeStorage';
+import { faviconManager } from '../services/FaviconManager';
+
+// Create theme manager instance
+const themeManager = new ThemeManager(themeStorage, faviconManager);
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
-    const updateFavicon = (isDark: boolean) => {
-      const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
-      if (favicon) {
-        favicon.href = isDark ? '/cl_dark.svg' : '/cl_light.svg';
-      }
-    };
-
-    // Initialize theme from localStorage or system preference
-    const stored = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    if (stored) {
-      setTheme(stored);
-      const isDark = stored === 'dark';
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-      updateFavicon(isDark);
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(prefersDark ? 'dark' : 'light');
-      if (prefersDark) {
-        document.documentElement.classList.add('dark');
-      }
-      updateFavicon(prefersDark);
-    }
+    // Initialize theme using the theme manager
+    const initialTheme = themeManager.initializeTheme();
+    setTheme(initialTheme);
   }, []);
 
-  const updateFavicon = (isDark: boolean) => {
-    const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
-    if (favicon) {
-      favicon.href = isDark ? '/cl_dark.svg' : '/cl_light.svg';
-    }
-  };
-
   const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    if (!theme) return;
 
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-      updateFavicon(true);
-    } else {
-      document.documentElement.classList.remove('dark');
-      updateFavicon(false);
-    }
+    const newTheme = themeManager.toggleTheme(theme);
+    setTheme(newTheme);
   };
 
   if (!theme) return null; // Prevent flash

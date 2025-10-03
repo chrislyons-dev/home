@@ -1,34 +1,15 @@
 import { useState, useEffect } from 'react';
+import { codeSnippets, type CodeSnippet } from '../data/codeSnippets';
 
-const codeSnippets = [
-  {
-    language: 'TypeScript',
-    code: `const buildGreatThings = async () => {
-  const idea = await brainstorm();
-  const architecture = design(idea);
-  const product = implement(architecture);
+interface CodeBlockProps {
+  snippets?: CodeSnippet[];
+  rotationInterval?: number;
+}
 
-  return ship(product);
-};`
-  },
-  {
-    language: 'Python',
-    code: `def solve_problem(challenge):
-    approach = analyze(challenge)
-    solution = code(approach)
-    return optimize(solution)`
-  },
-  {
-    language: 'JavaScript',
-    code: `const craftSolution = (problem) => {
-  const plan = break_down(problem);
-  const code = write(plan);
-  return test(code) ? deploy(code) : refactor(code);
-};`
-  }
-];
-
-export default function CodeBlock() {
+export default function CodeBlock({
+  snippets = codeSnippets,
+  rotationInterval = 4000
+}: CodeBlockProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -36,15 +17,15 @@ export default function CodeBlock() {
     const interval = setInterval(() => {
       setIsAnimating(true);
       setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % codeSnippets.length);
+        setCurrentIndex((prev) => (prev + 1) % snippets.length);
         setIsAnimating(false);
       }, 300);
-    }, 4000);
+    }, rotationInterval);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [snippets.length, rotationInterval]);
 
-  const currentSnippet = codeSnippets[currentIndex];
+  const currentSnippet = snippets[currentIndex];
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -70,7 +51,7 @@ export default function CodeBlock() {
 
         {/* Indicator dots */}
         <div className="flex justify-center gap-2 px-4 py-3 bg-gray-800 border-t border-gray-700">
-          {codeSnippets.map((_, index) => (
+          {snippets.map((_, index) => (
             <button
               key={index}
               onClick={() => {
@@ -85,7 +66,7 @@ export default function CodeBlock() {
                   ? 'bg-blue-500 w-6'
                   : 'bg-gray-600 hover:bg-gray-500'
               }`}
-              aria-label={`Show ${codeSnippets[index].language} snippet`}
+              aria-label={`Show ${snippets[index].language} snippet`}
             />
           ))}
         </div>

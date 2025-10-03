@@ -1,0 +1,51 @@
+graph LR
+    subgraph "Data Sources"
+        API[External APIs]
+        DB[Legacy DB]
+        Stream[Event Stream]
+    end
+
+    subgraph "Ingestion Layer"
+        Glue[AWS Glue<br/>ETL Jobs]
+        Lambda[Lambda<br/>Real-time]
+    end
+
+    subgraph "Storage"
+        S3[S3 Data Lake]
+    end
+
+    subgraph "Processing"
+        Spark[Spark Jobs<br/>Batch Transform]
+        Stream2[Stream Processor<br/>Real-time]
+    end
+
+    subgraph "Data Warehouse"
+        Snowflake[(Snowflake<br/>Analytics)]
+    end
+
+    subgraph "Consumption"
+        BI[BI Dashboards]
+        API2[Data APIs]
+        ML[ML Models]
+    end
+
+    API --> Glue
+    DB --> Glue
+    Stream --> Lambda
+
+    Glue --> S3
+    Lambda --> S3
+
+    S3 --> Spark
+    S3 --> Stream2
+
+    Spark --> Snowflake
+    Stream2 --> Snowflake
+
+    Snowflake --> BI
+    Snowflake --> API2
+    Snowflake --> ML
+
+    style S3 fill:#FF9900,color:#000
+    style Snowflake fill:#29B5E8,color:#fff
+    style Spark fill:#E25A1C,color:#fff

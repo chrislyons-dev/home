@@ -6,6 +6,30 @@ const projects = await getCollection('projects');
 const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
 ---
 
+<script>
+  import { initMermaid, refreshMermaid } from '../utils/mermaid';
+
+  // Initialize mermaid on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    initMermaid();
+    refreshMermaid();
+  });
+
+  // Re-render mermaid diagrams when theme changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'class') {
+        refreshMermaid();
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+</script>
+
 <Layout title="Projects — Chris Lyons" description="A showcase of development projects, architectural solutions, and open source contributions.">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <h1 class="text-4xl sm:text-5xl font-bold mb-4">Projects</h1>
@@ -39,7 +63,7 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
               ))}
             </div>
             {project.body && (
-              <div class="prose prose-sm dark:prose-invert mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+              <div class="prose prose-sm dark:prose-invert max-w-none mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
                 <Content />
               </div>
             )}

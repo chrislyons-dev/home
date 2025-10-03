@@ -11,6 +11,15 @@ export default defineConfig({
   site: 'https://chrislyons.dev',
   integrations: [react(), sitemap()],
 
+  markdown: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+    syntaxHighlight: 'shiki',
+    shikiConfig: {
+      theme: 'github-dark',
+    },
+  },
+
   experimental: {
     clientPrerender: true,
   },

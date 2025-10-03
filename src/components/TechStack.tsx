@@ -1,34 +1,21 @@
 import { useState } from 'react';
+import { technologies, techCategories, type Tech, type TechCategory } from '../data/technologies';
 
-interface Tech {
-  name: string;
-  category: 'frontend' | 'backend' | 'tools';
-  level: number; // 1-5
+interface TechStackProps {
+  techs?: Tech[];
 }
 
-const technologies: Tech[] = [
-  { name: 'TypeScript', category: 'frontend', level: 5 },
-  { name: 'React', category: 'frontend', level: 5 },
-  { name: 'Astro', category: 'frontend', level: 4 },
-  { name: 'Node.js', category: 'backend', level: 5 },
-  { name: 'Python', category: 'backend', level: 4 },
-  { name: 'PostgreSQL', category: 'backend', level: 4 },
-  { name: 'Docker', category: 'tools', level: 5 },
-  { name: 'Git', category: 'tools', level: 5 },
-  { name: 'AWS', category: 'tools', level: 4 },
-];
-
-export default function TechStack() {
-  const [filter, setFilter] = useState<'all' | 'frontend' | 'backend' | 'tools'>('all');
+export default function TechStack({ techs = technologies }: TechStackProps) {
+  const [filter, setFilter] = useState<TechCategory>('all');
 
   const filteredTech = filter === 'all'
-    ? technologies
-    : technologies.filter(tech => tech.category === filter);
+    ? techs
+    : techs.filter(tech => tech.category === filter);
 
   return (
     <div className="w-full">
       <div className="flex gap-2 mb-6 flex-wrap">
-        {(['all', 'frontend', 'backend', 'tools'] as const).map((category) => (
+        {techCategories.map((category) => (
           <button
             key={category}
             onClick={() => setFilter(category)}

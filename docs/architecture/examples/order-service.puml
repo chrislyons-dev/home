@@ -1,0 +1,16 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(api, "Order Service") {
+    Component(controller, "Order Controller", "Spring Boot Web MVC", "Handles HTTP requests")
+    Component(service, "Business Logic", "Spring Boot Service", "Order processing rules")
+    Component(repo, "Data Access", "Spring Data", "Database operations")
+}
+
+ContainerDb(db, "Order Database", "PostgreSQL", "Stores orders")
+
+Rel(controller, service, "Uses")
+Rel(service, repo, "Reads/Writes")
+Rel(repo, db, "SQL")
+
+@enduml

@@ -1,1 +1,10 @@
+echo "🔍 Running tests..."
 npm test
+
+echo "🏗️  Generating architecture documentation..."
+npm run docs:arch
+
+echo "🔎 Checking for circular dependencies and CI rule violations..."
+npm run deps:check
+
+echo "✅ Pre-commit checks passed!"

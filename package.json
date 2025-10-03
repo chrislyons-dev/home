@@ -10,15 +10,21 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "prepare": "husky"
+    "prepare": "husky",
+    "docs:arch": "node scripts/generate-architecture-docs.js",
+    "deps:check": "depcruise --config .dependency-cruiser.json src",
+    "deps:graph": "depcruise --config .dependency-cruiser.json --output-type dot src | dot -T svg > docs/architecture/dependencies.svg"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.0",
     "@astrojs/sitemap": "^3.6.0",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.14",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "astro": "^5.14.1",
+    "mermaid": "^11.12.0",
+    "plantuml-encoder": "^1.4.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.14"
@@ -28,10 +34,13 @@
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@vitest/ui": "^3.2.4",
+    "dependency-cruiser": "^17.0.1",
     "gray-matter": "^4.0.3",
     "happy-dom": "^19.0.2",
     "husky": "^9.1.7",
+    "madge": "^8.0.0",
     "remark-mermaid": "^0.2.0",
+    "rollup-plugin-visualizer": "^6.0.4",
     "vitest": "^3.2.4"
   }
 }

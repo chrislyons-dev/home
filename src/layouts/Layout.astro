@@ -42,16 +42,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Theme initialization script (prevents flash) -->
-    <script is:inline>
-      const theme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const isDark = theme === 'dark' || (!theme && prefersDark);
-
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-        const favicon = document.querySelector('link[rel="icon"]');
-        if (favicon) favicon.href = '/cl_dark.svg';
-      }
+    <script is:inline define:vars={{ themeInitScript: (await import('../utils/themeInit')).getThemeInitScript() }}>
+      eval(themeInitScript);
     </script>
   </head>
   <body class="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors">

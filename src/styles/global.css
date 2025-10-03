@@ -64,3 +64,61 @@ html {
 code {
   font-family: var(--font-mono);
 }
+
+/* Mermaid diagram styling */
+.mermaid-container {
+  @apply my-6 overflow-x-auto;
+}
+
+.mermaid-container svg {
+  @apply max-w-full h-auto;
+}
+
+/* Prose styling for project cards */
+.prose h2 {
+  @apply text-xl font-bold mt-6 mb-3;
+}
+
+.prose h3 {
+  @apply text-lg font-semibold mt-4 mb-2;
+}
+
+.prose p {
+  @apply my-3;
+}
+
+.prose ul {
+  @apply list-disc pl-5 my-3;
+}
+
+.prose ol {
+  @apply list-decimal pl-5 my-3;
+}
+
+.prose li {
+  @apply my-1;
+}
+
+.prose code {
+  @apply bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm;
+}
+
+.prose pre {
+  @apply bg-gray-900 dark:bg-gray-950 p-4 rounded-lg overflow-x-auto my-4;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 text-gray-100;
+}
+
+.prose a {
+  @apply text-blue-600 dark:text-blue-400 hover:underline;
+}
+
+.prose strong {
+  @apply font-semibold;
+}
+
+.prose em {
+  @apply italic;
+}
