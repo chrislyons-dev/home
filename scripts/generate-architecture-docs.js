@@ -20,36 +20,34 @@ console.log('🏗️  Generating architecture documentation...\n');
 // 1. Module Dependency Graph with circular dependency detection
 console.log('📊 Generating module dependency graph...');
 try {
-  // Generate DOT format for visualization
-  const dotOutput = execSync('npx madge --circular --extensions ts,tsx,astro,jsx,js --exclude "node_modules|.astro" src/', {
+  // Check for circular dependencies - madge returns paths if circular deps exist
+  const circularCheck = execSync('npx madge --circular --extensions ts,tsx,astro,jsx,js --exclude "node_modules|.astro" --json src/', {
     cwd: rootDir,
-    encoding: 'utf-8',
-    stdio: ['pipe', 'pipe', 'pipe']
+    encoding: 'utf-8'
   });
 
-  // Check for circular dependencies
-  const circularCheck = execSync('npx madge --circular --extensions ts,tsx,astro,jsx,js --exclude "node_modules|.astro" src/', {
-    cwd: rootDir,
-    encoding: 'utf-8',
-    stdio: ['pipe', 'pipe', 'pipe']
-  });
-
-  if (circularCheck.trim()) {
+  const circularDeps = JSON.parse(circularCheck);
+  if (Object.keys(circularDeps).length > 0) {
     console.log('  ⚠️  Warning: Circular dependencies detected!');
-    writeFileSync(join(docsDir, 'circular-dependencies.txt'), circularCheck);
+    writeFileSync(join(docsDir, 'circular-dependencies.json'), JSON.stringify(circularDeps, null, 2));
   }
 
-  // Generate Graphviz DOT file
-  execSync(`npx madge --extensions ts,tsx,astro,jsx,js --exclude "node_modules|.astro" --dot src/ > "${join(docsDir, 'dependencies.dot')}"`, {
-    cwd: rootDir,
-    shell: true
-  });
+  // Generate Graphviz DOT file and Mermaid diagram
+  try {
+    const dotOutput = execSync('npx madge --extensions ts,tsx,astro,jsx,js --exclude "node_modules|.astro" --dot src/', {
+      cwd: rootDir,
+      encoding: 'utf-8'
+    });
+    writeFileSync(join(docsDir, 'dependencies.dot'), dotOutput);
 
-  // Convert to Mermaid format
-  const mermaidGraph = convertDotToMermaid(dotOutput);
-  writeFileSync(join(docsDir, 'module-dependencies.mmd'), mermaidGraph);
+    // Convert to Mermaid format
+    const mermaidGraph = convertDotToMermaid(dotOutput);
+    writeFileSync(join(docsDir, 'module-dependencies.mmd'), mermaidGraph);
 
-  console.log('  ✓ Module dependency graph generated');
+    console.log('  ✓ Module dependency graph generated');
+  } catch (dotError) {
+    console.log('  ⚠️  Skipping DOT graph generation (graphviz may not be available)');
+  }
 } catch (error) {
   console.error('  ✗ Failed to generate dependency graph:', error.message);
 }
