@@ -98,7 +98,7 @@ code {
 }
 
 .card-hover {
-  @apply card hover:border-blue-600 dark:hover:border-blue-400 transition-colors;
+  @apply p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-blue-600 dark:hover:border-blue-400 transition-colors;
 }
 
 .card-featured {
