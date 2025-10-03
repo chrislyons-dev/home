@@ -9,6 +9,7 @@ interface Props {
 
 const { title, description = "Chris Lyons — Developer, Architect, and Builder" } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -55,11 +56,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           </a>
 
           <div class="flex items-center gap-6">
-            <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
-            <a href="/about" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
-            <a href="/projects" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</a>
-            <a href="/architecture" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Architecture</a>
-            <a href="/contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
+            <a href="/" class:list={["nav-link", currentPath === '/' && "nav-link-active"]}>Home</a>
+            <a href="/projects" class:list={["nav-link", currentPath === '/projects' && "nav-link-active"]}>Projects</a>
+            <a href="/architecture" class:list={["nav-link", currentPath === '/architecture' && "nav-link-active"]}>Architecture</a>
+            <a href="/about" class:list={["nav-link", currentPath === '/about' && "nav-link-active"]}>About</a>
+            <a href="/contact" class:list={["nav-link", currentPath === '/contact' && "nav-link-active"]}>Contact</a>
             <ThemeToggle client:load />
           </div>
         </div>

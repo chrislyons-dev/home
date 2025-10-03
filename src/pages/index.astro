@@ -17,14 +17,8 @@ import Layout from '../layouts/Layout.astro';
         clean code, and building products that matter.
       </p>
       <div class="flex gap-4 justify-center">
-        <a href="/projects"
-           class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
-          View Projects
-        </a>
-        <a href="/contact"
-           class="px-8 py-3 border border-gray-300 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 rounded-lg font-medium transition-colors">
-          Get in Touch
-        </a>
+        <a href="/projects" class="btn-primary">View Projects</a>
+        <a href="/contact" class="btn-secondary">Get in Touch</a>
       </div>
     </div>
   </section>
@@ -32,25 +26,23 @@ import Layout from '../layouts/Layout.astro';
   <!-- Skills Section -->
   <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900/50">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">
-        Technical Expertise
-      </h2>
+      <h2 class="section-title">Technical Expertise</h2>
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-blue-600 dark:hover:border-blue-400 transition-colors">
+        <div class="card-hover">
           <div class="text-3xl mb-4">⚡</div>
           <h3 class="text-xl font-semibold mb-3">Development</h3>
           <p class="text-gray-600 dark:text-gray-400">
             Building full solutions that fit the need—cloud, AI, microservices, serverless, containerized.
           </p>
         </div>
-        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-blue-600 dark:hover:border-blue-400 transition-colors">
+        <div class="card-hover">
           <div class="text-3xl mb-4">🏗️</div>
           <h3 class="text-xl font-semibold mb-3">Architecture</h3>
           <p class="text-gray-600 dark:text-gray-400">
             Designing systems that scale and adapt to real-world challenges.
           </p>
         </div>
-        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-blue-600 dark:hover:border-blue-400 transition-colors">
+        <div class="card-hover">
           <div class="text-3xl mb-4">🔨</div>
           <h3 class="text-xl font-semibold mb-3">Building</h3>
           <p class="text-gray-600 dark:text-gray-400">
@@ -61,18 +53,11 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
   <!-- CTA Section -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-6">
-        Let's Build Something Great
-      </h2>
-      <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
-        I'm always interested in hearing about new projects and opportunities.
-      </p>
-      <a href="/contact"
-         class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
-        Start a Conversation
-      </a>
-    </div>
+  <section class="section-container-narrow text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold mb-6">Let's Build Something Great</h2>
+    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+      I'm always interested in hearing about new projects and opportunities.
+    </p>
+    <a href="/contact" class="inline-block btn-primary">Start a Conversation</a>
   </section>
 </Layout>

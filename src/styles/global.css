@@ -74,6 +74,55 @@ code {
   @apply max-w-full h-auto;
 }
 
+/* Navigation link styling */
+.nav-link {
+  @apply hover:text-blue-600 dark:hover:text-blue-400 transition-colors;
+}
+
+.nav-link-active {
+  @apply text-blue-600 dark:text-blue-400 font-medium;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors;
+}
+
+.btn-secondary {
+  @apply px-8 py-3 border border-gray-300 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 rounded-lg font-medium transition-colors;
+}
+
+/* Card styles */
+.card {
+  @apply p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800;
+}
+
+.card-hover {
+  @apply card hover:border-blue-600 dark:hover:border-blue-400 transition-colors;
+}
+
+.card-featured {
+  @apply p-6 rounded-lg border-2 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 border-blue-200 dark:border-blue-800;
+}
+
+/* Section containers */
+.section-container {
+  @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20;
+}
+
+.section-container-narrow {
+  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20;
+}
+
+/* Headings */
+.page-title {
+  @apply text-4xl sm:text-5xl font-bold mb-8;
+}
+
+.section-title {
+  @apply text-3xl sm:text-4xl font-bold text-center mb-12;
+}
+
 /* Prose styling for project cards */
 .prose h2 {
   @apply text-xl font-bold mt-6 mb-3;
