@@ -69,14 +69,12 @@ jobs:
       - name: Generate SVG dependency graph
         run: npm run deps:graph || true
 
-      - name: Install PlantUML
-        run: sudo apt-get install -y plantuml
-
       - name: Generate PlantUML diagrams
         run: |
-          if [ -d "docs/architecture/generated" ]; then
-            find docs/architecture/generated -name "*.puml" -exec plantuml -tpng {} \;
+          if [ -d "docs/architecture/generated" ] && [ -n "$(find docs/architecture/generated -name '*.puml' 2>/dev/null)" ]; then
+            docker run --rm -v "$PWD:/data" plantuml/plantuml:latest -tpng "/data/docs/architecture/generated/*.puml"
           fi
+        continue-on-error: true
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
