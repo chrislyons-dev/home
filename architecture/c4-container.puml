@@ -1,0 +1,27 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Container diagram for ChrisLyons.dev
+
+Person(user, "Visitor", "A person visiting the portfolio website")
+
+System_Boundary(website, "ChrisLyons.dev") {
+    Container(pages, "Astro Pages", "Astro", "Server-side rendered pages and static content")
+    Container(components, "React Components", "React/TypeScript", "Interactive UI components")
+    Container(diagrams, "Architecture Diagrams", "Mermaid/PlantUML", "Technical documentation and visualizations")
+    Container(assets, "Static Assets", "CSS/Images", "Styling and media files")
+}
+
+System_Ext(github, "GitHub Pages", "Static hosting")
+System_Ext(cdn, "CDN", "Content delivery network")
+
+Rel(user, pages, "Requests pages", "HTTPS")
+Rel(pages, components, "Renders", "JavaScript")
+Rel(pages, diagrams, "Includes", "SVG/PNG")
+Rel(pages, assets, "Uses", "")
+Rel(pages, github, "Served from", "HTTPS")
+Rel(github, cdn, "Cached by", "HTTPS")
+
+@enduml

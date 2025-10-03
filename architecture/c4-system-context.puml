@@ -1,0 +1,19 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Context diagram for ChrisLyons.dev
+
+Person(user, "Visitor", "A person visiting the portfolio website")
+
+System(website, "ChrisLyons.dev", "Static portfolio website showcasing projects, architecture examples, and professional experience")
+
+System_Ext(github, "GitHub Pages", "Hosts the static website")
+System_Ext(analytics, "Analytics Service", "Tracks website usage")
+
+Rel(user, website, "Views content", "HTTPS")
+Rel(website, github, "Deployed to", "Git/HTTPS")
+Rel(website, analytics, "Sends events", "HTTPS")
+
+@enduml
