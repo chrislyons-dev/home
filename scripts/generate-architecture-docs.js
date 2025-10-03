@@ -15,6 +15,9 @@ if (!existsSync(docsDir)) {
   mkdirSync(docsDir, { recursive: true });
 }
 
+// Disable Jekyll for GitHub Pages
+writeFileSync(join(docsDir, '.nojekyll'), '');
+
 console.log('🏗️  Generating architecture documentation...\n');
 
 // 1. Module Dependency Graph with circular dependency detection
