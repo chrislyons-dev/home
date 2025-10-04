@@ -1,0 +1,13 @@
+graph TD
+  %% Application Routes
+  Root["/"] --> Pages
+
+  Pages --> route_404["/404"]
+  Pages --> route_about["/about"]
+  Pages --> route_architecture["/architecture"]
+  Pages --> route_contact["/contact"]
+  Pages --> route_index["/"]
+  Pages --> route_projects["/projects"]
+
+  style Root fill:#2563EB,color:#fff
+  style Pages fill:#7C3AED,color:#fff

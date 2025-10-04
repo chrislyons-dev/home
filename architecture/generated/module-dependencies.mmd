@@ -1,0 +1,13 @@
+graph LR
+  %% Module Dependencies
+  %% Generated from madge analysis
+
+  components_AnimatedGrid_tsx[components/AnimatedGrid.tsx] --> utils_GridAnimation_ts[utils/GridAnimation.ts]
+  components_CodeBlock_tsx[components/CodeBlock.tsx] --> data_codeSnippets_ts[data/codeSnippets.ts]
+  components_TechStack_tsx[components/TechStack.tsx] --> data_technologies_ts[data/technologies.ts]
+  components_ThemeToggle_tsx[components/ThemeToggle.tsx] --> services_FaviconManager_ts[services/FaviconManager.ts]
+  components_ThemeToggle_tsx[components/ThemeToggle.tsx] --> services_ThemeManager_ts[services/ThemeManager.ts]
+  components_ThemeToggle_tsx[components/ThemeToggle.tsx] --> services_ThemeStorage_ts[services/ThemeStorage.ts]
+  services_FaviconManager_ts[services/FaviconManager.ts] --> services_interfaces_IFaviconManager_ts[services/interfaces/IFaviconManager.ts]
+  services_ThemeManager_ts[services/ThemeManager.ts] --> services_ThemeStorage_ts[services/ThemeStorage.ts]
+  services_ThemeManager_ts[services/ThemeManager.ts] --> services_interfaces_IFaviconManager_ts[services/interfaces/IFaviconManager.ts]

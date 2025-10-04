@@ -1,0 +1,53 @@
+graph TB
+    subgraph "Client Layer"
+        Client[Client App<br/>Web/Mobile/Desktop]
+    end
+
+    subgraph "Identity Provider"
+        Okta[Okta OIDC<br/>Access Tokens]
+    end
+
+    subgraph "API Gateway"
+        Gateway[API Gateway<br/>Node.js<br/>Token Validation]
+    end
+
+    subgraph "Microservices"
+        User[User Service<br/>Node.js<br/>Token Validation]
+        Order[Order Service<br/>Python<br/>Token Validation]
+        Payment[Payment Service<br/>Java<br/>Token Validation]
+    end
+
+    subgraph "Event Bus"
+        Kafka[Kafka Cluster]
+    end
+
+    subgraph "Data Layer"
+        UserDB[(User DB<br/>MongoDB)]
+        OrderDB[(Order DB<br/>PostgreSQL)]
+        PaymentDB[(Payment DB<br/>PostgreSQL)]
+    end
+
+    Client --> Okta
+    Okta -.Access Token.-> Client
+
+    Client --> Gateway
+    Gateway --> User
+    Gateway --> Order
+    Gateway --> Payment
+
+    Gateway -.Validate Token.-> Okta
+    User -.Validate Token.-> Okta
+    Order -.Validate Token.-> Okta
+    Payment -.Validate Token.-> Okta
+
+    User --> Kafka
+    Order --> Kafka
+    Payment --> Kafka
+
+    User --> UserDB
+    Order --> OrderDB
+    Payment --> PaymentDB
+
+    style Kafka fill:#7C3AED,color:#fff
+    style Gateway fill:#2563EB,color:#fff
+    style Okta fill:#007DC1,color:#fff

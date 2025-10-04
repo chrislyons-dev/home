@@ -1,0 +1,26 @@
+[
+  {
+    "file": "src/pages/404.astro",
+    "path": "/404"
+  },
+  {
+    "file": "src/pages/about.astro",
+    "path": "/about"
+  },
+  {
+    "file": "src/pages/architecture.astro",
+    "path": "/architecture"
+  },
+  {
+    "file": "src/pages/contact.astro",
+    "path": "/contact"
+  },
+  {
+    "file": "src/pages/index.astro",
+    "path": "/"
+  },
+  {
+    "file": "src/pages/projects.astro",
+    "path": "/projects"
+  }
+]
