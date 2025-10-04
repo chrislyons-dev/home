@@ -147,10 +147,12 @@ try {
   const c4Component = generateC4ComponentDiagram(componentStructure, projectConfig);
   writeFileSync(join(docsDir, 'c4-component.puml'), c4Component);
 
-  const c4Code = generateC4CodeDiagram(codeStructure, projectConfig);
-  writeFileSync(join(docsDir, 'c4-code.puml'), c4Code);
+  // Level 4 (Code) diagrams intentionally skipped - they quickly become overwhelming
+  // at scale. Generate them manually for critical components when needed.
+  // const c4Code = generateC4CodeDiagram(codeStructure, projectConfig);
+  // writeFileSync(join(docsDir, 'c4-code.puml'), c4Code);
 
-  console.log('  ✓ C4 diagrams generated');
+  console.log('  ✓ C4 diagrams generated (Levels 1-3)');
 } catch (error) {
   console.error('  ✗ Failed to generate C4 diagrams:', error.message);
 }

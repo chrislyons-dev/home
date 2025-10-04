@@ -52,17 +52,16 @@ Interactive components are isolated "islands":
   <h1>Static Content</h1>
 
   <!-- Island: Interactive component -->
-  <ThemeToggle client:load />
+  <ThemeToggle client:idle />
 
   <p>More static content</p>
 </div>
 ```
 
-**Hydration Strategies:**
+**Hydration Strategies Used:**
 
-- `client:load` - Load immediately
-- `client:idle` - Load when idle
-- `client:visible` - Load when in viewport
+- `client:idle` - Load when browser is idle (used for ThemeToggle)
+- `client:visible` - Load when component enters viewport (used for PlantUMLDiagram)
 
 ### 3. Component-Based
 
@@ -70,10 +69,11 @@ React components for reusable UI:
 
 ```
 src/components/
-├── ThemeToggle.tsx    # Dark mode toggle
-├── TechStack.tsx      # Tech stack display
-├── CodeBlock.tsx      # Syntax highlighting
-└── Navigation.tsx     # Site navigation
+├── ThemeToggle.tsx      # Dark mode toggle
+├── TechStack.tsx        # Tech stack display
+├── CodeBlock.tsx        # Syntax highlighting
+├── PlantUMLDiagram.tsx  # PlantUML diagram rendering
+└── AnimatedGrid.tsx     # Animated background grid
 ```
 
 ### 4. File-Based Routing
@@ -82,11 +82,12 @@ Pages auto-route based on file structure:
 
 ```
 src/pages/
-├── index.astro        → /
-├── about.astro        → /about
-├── projects.astro     → /projects
-└── blog/
-    └── [slug].astro   → /blog/*
+├── index.astro         → /
+├── about.astro         → /about
+├── projects.astro      → /projects
+├── architecture.astro  → /architecture
+├── contact.astro       → /contact
+└── 404.astro          → 404 error page
 ```
 
 ## System Design
@@ -134,9 +135,9 @@ sequenceDiagram
 src/layouts/
 └── Layout.astro       # Base layout
     ├── <head>         # Meta tags, styles
-    ├── <Header>       # Site header
-    ├── <main>         # Page content
-    └── <Footer>       # Site footer
+    ├── <nav>          # Inline navigation with ThemeToggle
+    ├── <main>         # Page content slot
+    └── <footer>       # Inline footer
 ```
 
 ### Component Hierarchy
@@ -144,15 +145,19 @@ src/layouts/
 ```mermaid
 graph TD
     Layout[Layout.astro]
-    Layout --> Header[Header]
+    Layout --> Nav[Navigation nav]
     Layout --> Main[Main Content]
-    Layout --> Footer[Footer]
+    Layout --> Footer[Footer footer]
 
-    Header --> Nav[Navigation]
-    Header --> Theme[ThemeToggle]
+    Nav --> Theme[ThemeToggle.tsx]
 
-    Main --> Page[Page Content]
+    Main --> Page[Page Content Slot]
     Main --> Components[React Components]
+
+    Components --> TechStack[TechStack.tsx]
+    Components --> CodeBlock[CodeBlock.tsx]
+    Components --> PlantUML[PlantUMLDiagram.tsx]
+    Components --> AnimGrid[AnimatedGrid.tsx]
 ```
 
 ## Styling Architecture
@@ -165,24 +170,22 @@ graph TD
 
 /* Theme variables */
 @theme {
-  --color-primary: oklch(0.5 0.2 250);
-  --color-bg: oklch(0.1 0 0);
+  --color-accent: oklch(70% 0.2 250);
+  --color-accent-dark: oklch(60% 0.2 250);
+  --font-sans: system-ui, ...;
+  --font-mono: ui-monospace, ...;
 }
 
-/* Custom utilities */
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Dark mode variants */
+@variant dark (&:where(.dark, .dark *));
+
+/* Responsive color scheme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: oklch(15% 0.01 250);
+    --color-text: oklch(95% 0.01 250);
   }
 }
-```
-
-### CSS Layers
-
-```
-@layer base          # Base styles, resets
-@layer components    # Component styles
-@layer utilities     # Utility classes
 ```
 
 ## State Management
@@ -224,20 +227,21 @@ export function ThemeProvider({ children }) {
 
 ## Build Architecture
 
-### Vite Configuration
+### Astro + Vite Configuration
 
 ```javascript
-export default {
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          "react-vendor": ["react", "react-dom"],
-        },
-      },
-    },
-  },
-};
+// astro.config.mjs
+export default defineConfig({
+  site: 'https://chrislyons.dev',
+  integrations: [react(), sitemap()],
+
+  vite: {
+    plugins: [tailwindcss()],
+    build: {
+      cssMinify: 'lightningcss',
+    }
+  }
+});
 ```
 
 ### Output Structure
@@ -245,17 +249,129 @@ export default {
 ```
 dist/
 ├── index.html
-├── about.html
-├── _astro/
-│   ├── [hash].css
-│   └── [hash].js
-└── assets/
-    └── [optimized images]
+├── 404.html
+├── about/
+│   └── index.html
+├── architecture/
+│   └── index.html
+├── contact/
+│   └── index.html
+├── projects/
+│   └── index.html
+└── _astro/
+    ├── [hash].css
+    └── [hash].js
 ```
 
-## Generated Architecture Diagrams
+## C4 Architecture Model
 
-All architecture diagrams are automatically generated and rendered as part of the CI/CD pipeline.
+All architecture diagrams follow the C4 model (Levels 1-4) and are automatically generated as part of the CI/CD pipeline.
+
+### Level 1: System Context
+
+The big picture—showing how the portfolio site fits into the broader ecosystem of external systems and users.
+
+![C4 System Context](generated/c4-system-context.png)
+
+[View PlantUML Source](generated/c4-system-context.puml) | [View SVG](generated/c4-system-context.svg)
+
+**Generated from**: GitHub Actions workflows (cd.yml, ci.yml), wrangler.toml, package.json
+
+---
+
+### Level 2: Container Diagram
+
+Zooming into the system to show the major technical containers (applications, data stores, microservices).
+
+![C4 Container](generated/c4-container.png)
+
+[View PlantUML Source](generated/c4-container.puml) | [View SVG](generated/c4-container.svg)
+
+**Generated from**: package.json dependencies, astro.config.mjs, build configuration
+
+---
+
+### Level 3: Component Diagram
+
+Zooming into a container to show the major components and their interactions.
+
+![C4 Component](generated/c4-component.png)
+
+[View PlantUML Source](generated/c4-component.puml) | [View SVG](generated/c4-component.svg)
+
+**Generated from**: Source code structure analysis (src/pages, src/components, src/services)
+
+---
+
+### Level 4: Code Diagram (Selective)
+
+> **Note**: Level 4 diagrams are optional. They're great for critical algorithms, security components, or complex business logic that needs detailed documentation. But avoid generating them for entire systems—they quickly become overwhelming and unmaintainable at scale.
+
+#### Theme Management System
+
+The theme management system demonstrates dependency injection and separation of concerns—a critical component for user experience consistency across the site.
+
+```mermaid
+classDiagram
+    class ThemeManager {
+        -storage: IThemeStorage
+        -faviconManager: IFaviconManager
+        +getThemePreference() ThemePreference
+        +applyTheme(theme: Theme) void
+        +setTheme(theme: Theme) void
+        +initializeTheme() Theme
+        +toggleTheme(currentTheme: Theme) Theme
+    }
+
+    class IThemeStorage {
+        <<interface>>
+        +getTheme() Theme | null
+        +setTheme(theme: Theme) void
+        +clearTheme() void
+    }
+
+    class ThemeStorage {
+        -storageKey: string
+        +getTheme() Theme | null
+        +setTheme(theme: Theme) void
+        +clearTheme() void
+    }
+
+    class IFaviconManager {
+        <<interface>>
+        +updateFavicon(isDark: boolean) void
+        +setLightFavicon() void
+        +setDarkFavicon() void
+    }
+
+    class FaviconManager {
+        -lightFavicon: string
+        -darkFavicon: string
+        +updateFavicon(isDark: boolean) void
+        +setLightFavicon() void
+        +setDarkFavicon() void
+    }
+
+    ThemeManager --> IThemeStorage : depends on
+    ThemeManager --> IFaviconManager : depends on
+    ThemeStorage ..|> IThemeStorage : implements
+    FaviconManager ..|> IFaviconManager : implements
+
+    note for ThemeManager "Orchestrates theme changes\nwith dependency injection"
+    note for ThemeStorage "Persists to localStorage"
+    note for FaviconManager "Updates favicon dynamically"
+```
+
+**Key Design Patterns:**
+- **Dependency Injection**: ThemeManager depends on interfaces, not concrete implementations
+- **Single Responsibility**: Each class has one clear purpose
+- **Singleton Pattern**: Storage and favicon managers are singleton instances
+
+**Generated from**: AST analysis of `src/services/ThemeManager.ts`, `ThemeStorage.ts`, `FaviconManager.ts`
+
+---
+
+## Additional Generated Diagrams
 
 ### Module Dependencies
 
@@ -272,18 +388,6 @@ Application routes structure:
 ![Routes Map](../images/architecture/routes-map.mmd.svg)
 
 [View Source](generated/routes-map.mmd) | [View JSON](generated/routes.json)
-
-### C4 System Context
-
-![C4 System Context](../images/architecture/c4-system-context.png)
-
-[View PlantUML Source](generated/c4-system-context.puml)
-
-### C4 Container Diagram
-
-![C4 Container](../images/architecture/c4-container.png)
-
-[View PlantUML Source](generated/c4-container.puml)
 
 ## Deployment Architecture
 
@@ -319,10 +423,9 @@ graph LR
 
 ### Build Security
 
-- Dependabot updates
-- npm audit in CI
-- Commit signing
-- Branch protection
+- Automated CI/CD pipeline
+- GitHub Actions security scanning
+- Static site architecture (minimal attack surface)
 
 ## Performance Architecture
 
