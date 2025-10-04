@@ -57,10 +57,14 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: ci
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -82,26 +86,72 @@ jobs:
           pip install mkdocstrings
           pip install pymdown-extensions
 
+      - name: Install Graphviz and PlantUML dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz default-jre
+
+      - name: Download PlantUML
+        run: |
+          wget https://github.com/plantuml/plantuml/releases/download/v1.2024.3/plantuml-1.2024.3.jar -O plantuml.jar
+
       - name: Generate architecture documentation
         run: npm run docs:arch
-
-      - name: Install Graphviz for dependency graphs
-        run: sudo apt-get update && sudo apt-get install -y graphviz
 
       - name: Generate SVG dependency graph
         run: npm run deps:graph || true
 
-      - name: Generate PlantUML diagrams
+      - name: Generate PlantUML diagrams (PNG)
         run: |
-          if [ -d "docs/architecture/generated" ] && [ -n "$(find docs/architecture/generated -name '*.puml' 2>/dev/null)" ]; then
-            docker run --rm -v "$PWD:/data" plantuml/plantuml:latest -tpng "/data/docs/architecture/generated/*.puml"
+          if [ -d "docs/architecture/generated" ]; then
+            find docs/architecture/generated -name "*.puml" -exec java -jar plantuml.jar -tpng {} \;
+          fi
+          if [ -d "docs/architecture/examples" ]; then
+            find docs/architecture/examples -name "*.puml" -exec java -jar plantuml.jar -tpng {} \;
+          fi
+        continue-on-error: true
+
+      - name: Generate PlantUML diagrams (SVG)
+        run: |
+          if [ -d "docs/architecture/generated" ]; then
+            find docs/architecture/generated -name "*.puml" -exec java -jar plantuml.jar -tsvg {} \;
+          fi
+          if [ -d "docs/architecture/examples" ]; then
+            find docs/architecture/examples -name "*.puml" -exec java -jar plantuml.jar -tsvg {} \;
+          fi
+        continue-on-error: true
+
+      - name: Generate Mermaid diagrams (SVG)
+        run: |
+          npm install -g @mermaid-js/mermaid-cli
+          if [ -d "docs/architecture/generated" ]; then
+            find docs/architecture/generated -name "*.mmd" -exec mmdc -i {} -o {}.svg -t neutral -b transparent \;
+          fi
+          if [ -d "docs/architecture/examples" ]; then
+            find docs/architecture/examples -name "*.mmd" -exec mmdc -i {} -o {}.svg -t neutral -b transparent \;
+          fi
+        continue-on-error: true
+
+      - name: Copy generated diagrams to docs
+        run: |
+          mkdir -p docs/images/architecture
+          if [ -d "docs/architecture/generated" ]; then
+            find docs/architecture/generated \( -name "*.png" -o -name "*.svg" \) -exec cp {} docs/images/architecture/ \;
+          fi
+          if [ -d "docs/architecture/examples" ]; then
+            find docs/architecture/examples \( -name "*.png" -o -name "*.svg" \) -exec cp {} docs/images/architecture/ \;
           fi
         continue-on-error: true
 
       - name: Build MkDocs site
         run: mkdocs build --strict
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: site/
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'docs: update documentation'

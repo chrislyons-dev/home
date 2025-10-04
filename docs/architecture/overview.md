@@ -251,6 +251,38 @@ dist/
     └── [optimized images]
 ```
 
+## Generated Architecture Diagrams
+
+All architecture diagrams are automatically generated and rendered as part of the CI/CD pipeline.
+
+### Module Dependencies
+
+View the module dependency graph:
+
+![Module Dependencies](../images/architecture/module-dependencies.mmd.svg)
+
+[View Source](generated/module-dependencies.mmd) | [View DOT](generated/dependencies.dot)
+
+### Routes Map
+
+Application routes structure:
+
+![Routes Map](../images/architecture/routes-map.mmd.svg)
+
+[View Source](generated/routes-map.mmd) | [View JSON](generated/routes.json)
+
+### C4 System Context
+
+![C4 System Context](../images/architecture/c4-system-context.png)
+
+[View PlantUML Source](generated/c4-system-context.puml)
+
+### C4 Container Diagram
+
+![C4 Container](../images/architecture/c4-container.png)
+
+[View PlantUML Source](generated/c4-container.puml)
+
 ## Deployment Architecture
 
 ### Cloudflare Pages (Primary)
