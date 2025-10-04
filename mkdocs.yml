@@ -81,6 +81,7 @@ nav:
       - Tech Stack: features/tech-stack.md
       - Performance: features/performance.md
       - Accessibility: features/accessibility.md
+      - Observability: features/observability.md
   - Architecture:
       - Overview: architecture/overview.md
       - System Design: architecture/system-design.md

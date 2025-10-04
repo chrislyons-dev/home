@@ -51,6 +51,16 @@ A comprehensive look at what makes this site special.
 
 [Learn more about the tech stack →](tech-stack.md)
 
+### 📊 Observability
+
+- **Web Analytics**: Cloudflare Web Analytics (privacy-focused, no cookies)
+- **Performance Monitoring**: Core Web Vitals tracking (LCP, FID, CLS)
+- **Build Metrics**: Lighthouse CI on every deployment
+- **Error Tracking**: Real-time error rates via Cloudflare
+- **Deployment Monitoring**: GitHub Actions + Cloudflare Pages
+
+[Learn more about observability →](observability.md)
+
 ## Interactive Components
 
 ### Theme Toggle
