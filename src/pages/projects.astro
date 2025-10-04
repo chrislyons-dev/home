@@ -7,26 +7,48 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <script>
-  import { initMermaid, refreshMermaid } from '../utils/mermaid';
+  // Dynamically import Mermaid utilities only when needed
+  let mermaidLoaded = false;
 
-  // Initialize mermaid on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    initMermaid();
-    refreshMermaid();
-  });
+  const loadMermaid = async () => {
+    if (mermaidLoaded) return;
+    mermaidLoaded = true;
 
-  // Re-render mermaid diagrams when theme changes
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.attributeName === 'class') {
-        refreshMermaid();
+    const { initMermaid, refreshMermaid } = await import('../utils/mermaid');
+    await initMermaid();
+    await refreshMermaid();
+
+    // Re-render mermaid diagrams when theme changes
+    const themeObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          refreshMermaid();
+        }
+      });
+    });
+
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  };
+
+  // Use Intersection Observer to load Mermaid only when diagrams are visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        loadMermaid();
+        observer.disconnect();
       }
     });
-  });
+  }, { rootMargin: '100px' });
 
-  observer.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ['class'],
+  // Wait for DOM and observe first mermaid diagram
+  document.addEventListener('DOMContentLoaded', () => {
+    const firstDiagram = document.querySelector('.mermaid');
+    if (firstDiagram) {
+      observer.observe(firstDiagram);
+    }
   });
 </script>
 

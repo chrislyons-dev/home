@@ -41,14 +41,22 @@ jobs:
       - name: Build project
         run: npm run build
 
-  generate-arch-docs:
+      - name: Run Lighthouse CI
+        run: npm run lighthouse
+        continue-on-error: true
+
+      - name: Upload Lighthouse results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: .lighthouseci
+          retention-days: 30
+
+  build-docs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: ci
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
 
     steps:
       - name: Checkout code
@@ -60,8 +68,20 @@ jobs:
           node-version: "20"
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Install Node dependencies
         run: npm ci
+
+      - name: Install MkDocs and dependencies
+        run: |
+          pip install mkdocs-material
+          pip install mkdocstrings
+          pip install pymdown-extensions
 
       - name: Generate architecture documentation
         run: npm run docs:arch
@@ -79,11 +99,10 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Build MkDocs site
+        run: mkdocs build --strict
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs/architecture/generated
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-        id: deployment
+          path: site/

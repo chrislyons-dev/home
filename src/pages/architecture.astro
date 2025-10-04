@@ -19,7 +19,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     <!-- Architecture Philosophy -->
     <div class="mb-16 p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
       <h2 class="text-2xl font-bold mb-4">Why Architecture as Code?</h2>
-      <div class="grid md:grid-cols-2 gap-6 text-gray-700 dark:text-gray-300">
+      <div class="grid md:grid-cols-2 gap-6 text-gray-900 dark:text-gray-100">
         <div>
           <h3 class="font-semibold mb-2 text-blue-600 dark:text-blue-400">✓ Always Up to Date</h3>
           <p class="text-sm">Diagrams live in the codebase and update with every change. No more outdated PowerPoints.</p>
@@ -83,7 +83,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
         standardized component, container, and deployment views.
       </p>
 
-      <PlantUMLDiagram code={orderServiceDiagram} alt="C4 Component Diagram - Order Service" client:load />
+      <PlantUMLDiagram code={orderServiceDiagram} alt="C4 Component Diagram - Order Service" client:visible />
 
       <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
         <details class="cursor-pointer">
@@ -237,10 +237,15 @@ jobs:
   </div>
 
   <script>
-    import mermaid from 'mermaid';
+    // Dynamically import Mermaid only when diagrams are in viewport
+    let mermaidLoaded = false;
 
-    // Initialize and render mermaid
-    const initAndRender = () => {
+    const loadAndInitMermaid = async () => {
+      if (mermaidLoaded) return;
+      mermaidLoaded = true;
+
+      const { default: mermaid } = await import('mermaid');
+
       const isDark = document.documentElement.classList.contains('dark');
 
       mermaid.initialize({
@@ -254,22 +259,31 @@ jobs:
       });
 
       // Run mermaid on all .mermaid elements
-      mermaid.run({
+      await mermaid.run({
         querySelector: 'pre.mermaid',
       });
     };
 
-    // Initialize on page load
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initAndRender);
-    } else {
-      initAndRender();
+    // Use Intersection Observer to load Mermaid only when diagrams are visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          loadAndInitMermaid();
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: '50px' });
+
+    // Observe the first mermaid diagram
+    const firstDiagram = document.querySelector('pre.mermaid');
+    if (firstDiagram) {
+      observer.observe(firstDiagram);
     }
 
-    // Re-render when theme changes
-    const observer = new MutationObserver((mutations) => {
+    // Re-render when theme changes (only if mermaid is already loaded)
+    const themeObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
+        if (mutation.attributeName === 'class' && mermaidLoaded) {
           // Reset and re-render all diagrams
           document.querySelectorAll('.mermaid-container').forEach(el => {
             const pre = document.createElement('pre');
@@ -277,12 +291,12 @@ jobs:
             pre.textContent = el.dataset.mermaidCode;
             el.replaceWith(pre);
           });
-          setTimeout(initAndRender, 100);
+          setTimeout(loadAndInitMermaid, 100);
         }
       });
     });
 
-    observer.observe(document.documentElement, {
+    themeObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class'],
     });

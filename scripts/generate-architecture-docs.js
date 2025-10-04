@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execSync } from 'child_process';
-import { writeFileSync, mkdirSync, existsSync } from 'fs';
+import { writeFileSync, mkdirSync, existsSync, readdirSync, statSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -83,23 +83,34 @@ export default {
 // 3. Routes Map
 console.log('🗺️  Generating routes map...');
 try {
-  const routesOutput = execSync('find src/pages -type f \\( -name "*.astro" -o -name "*.md" \\) 2>/dev/null || true', {
-    cwd: rootDir,
-    encoding: 'utf-8',
-    shell: true
-  });
+  const pagesDir = join(rootDir, 'src', 'pages');
 
-  const routes = routesOutput
-    .split('\n')
-    .filter(Boolean)
-    .map(route => {
-      const path = route
-        .replace('src/pages/', '/')
-        .replace('/index.astro', '/')
-        .replace('.astro', '')
-        .replace('.md', '');
-      return { file: route, path };
-    });
+  // Recursively find all .astro and .md files
+  function findRouteFiles(dir, baseDir = dir) {
+    let files = [];
+    const entries = readdirSync(dir, { withFileTypes: true });
+
+    for (const entry of entries) {
+      const fullPath = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        files = files.concat(findRouteFiles(fullPath, baseDir));
+      } else if (entry.name.endsWith('.astro') || entry.name.endsWith('.md')) {
+        files.push(fullPath.replace(/\\/g, '/').replace(baseDir.replace(/\\/g, '/') + '/', ''));
+      }
+    }
+    return files;
+  }
+
+  const routeFiles = findRouteFiles(pagesDir);
+
+  const routes = routeFiles.map(route => {
+    const path = route
+      .replace(/^/, '/')
+      .replace('/index.astro', '/')
+      .replace('.astro', '')
+      .replace('.md', '');
+    return { file: `src/pages/${route}`, path };
+  });
 
   const routesMermaid = generateRoutesMermaid(routes);
   writeFileSync(join(docsDir, 'routes-map.mmd'), routesMermaid);
@@ -133,11 +144,7 @@ console.log(`📁 Output directory: ${docsDir}\n`);
 
 function convertDotToMermaid(dotOutput) {
   // Basic DOT to Mermaid conversion
-  return `graph LR
-  %% Module Dependencies
-  %% Generated from madge analysis
-
-  ${dotOutput
+  const lines = dotOutput
     .split('\n')
     .filter(line => line.includes('->'))
     .map(line => {
@@ -150,21 +157,29 @@ function convertDotToMermaid(dotOutput) {
       return '';
     })
     .filter(Boolean)
-    .join('\n')}
+    .join('\n');
+
+  return `graph LR
+  %% Module Dependencies
+  %% Generated from madge analysis
+
+${lines}
 `;
 }
 
 function generateRoutesMermaid(routes) {
-  return `graph TD
-  %% Application Routes
-  Root[/] --> Pages
-
-  ${routes
+  const routeLines = routes
     .map(route => {
-      const id = route.path.replace(/[\/\-]/g, '_').replace(/^_/, 'route_');
+      const id = route.path === '/' ? 'route_index' : route.path.replace(/[\/\-]/g, '_').replace(/^_/, 'route_');
       return `  Pages --> ${id}["${route.path}"]`;
     })
-    .join('\n')}
+    .join('\n');
+
+  return `graph TD
+  %% Application Routes
+  Root["/"] --> Pages
+
+${routeLines}
 
   style Root fill:#2563EB,color:#fff
   style Pages fill:#7C3AED,color:#fff

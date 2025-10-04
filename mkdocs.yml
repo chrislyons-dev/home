@@ -1,0 +1,119 @@
+site_name: Chris Lyons - Developer, Architect, Builder
+site_url: https://chrislyons-dev.github.io/home/
+site_description: Personal website and portfolio for Chris Lyons
+site_author: Chris Lyons
+
+repo_url: https://github.com/chrislyons-dev/home
+repo_name: chrislyons-dev/home
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - autorefs
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - def_list
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Quick Start: getting-started/quick-start.md
+      - Configuration: getting-started/configuration.md
+  - Features:
+      - Overview: features/overview.md
+      - Tech Stack: features/tech-stack.md
+      - Performance: features/performance.md
+      - Accessibility: features/accessibility.md
+  - Architecture:
+      - Overview: architecture/overview.md
+      - System Design: architecture/system-design.md
+      - Dependencies: architecture/dependencies.md
+  - Deployment:
+      - Overview: deployment/overview.md
+      - Cloudflare Pages: deployment/cloudflare.md
+      - Vercel: deployment/vercel.md
+      - GitHub Pages: deployment/github-pages.md
+  - API Reference: api/index.md
+  - About: about.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/chrisalexlyons
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/chrisalexlyons/
+
+  analytics:
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve by
+            <a href="https://github.com/chrisalexlyons/home/issues/new" target="_blank" rel="noopener">opening an issue</a>.
+
+copyright: Copyright &copy; 2024 Chris Lyons

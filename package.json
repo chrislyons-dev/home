@@ -13,7 +13,8 @@
     "prepare": "husky",
     "docs:arch": "node scripts/generate-architecture-docs.js",
     "deps:check": "depcruise --config .dependency-cruiser.json src",
-    "deps:graph": "depcruise --config .dependency-cruiser.json --output-type dot src | dot -T svg > docs/architecture/dependencies.svg"
+    "deps:graph": "depcruise --config .dependency-cruiser.json --output-type dot src | dot -T svg > docs/architecture/dependencies.svg",
+    "lighthouse": "lhci autorun"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.0",
@@ -38,6 +39,7 @@
     "gray-matter": "^4.0.3",
     "happy-dom": "^19.0.2",
     "husky": "^9.1.7",
+    "@lhci/cli": "^0.14.0",
     "madge": "^8.0.0",
     "remark-mermaid": "^0.2.0",
     "rollup-plugin-visualizer": "^6.0.4",

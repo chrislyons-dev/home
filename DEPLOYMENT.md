@@ -2,45 +2,43 @@
 
 This site is optimized for deployment to modern static hosting platforms.
 
+> **Note:** For detailed deployment documentation, see the [MkDocs documentation site](https://chrislyons-dev.github.io/home/).
+
 ## Quick Deploy
 
-### Vercel (Recommended)
+### Cloudflare Pages (Primary)
 
-1. Install Vercel CLI (optional):
-   ```bash
-   npm i -g vercel
-   ```
-
-2. Deploy:
-   ```bash
-   vercel
-   ```
-
-Or connect your GitHub repository to Vercel for automatic deployments.
-
-### Netlify
-
-1. Install Netlify CLI:
-   ```bash
-   npm i -g netlify-cli
-   ```
-
-2. Deploy:
-   ```bash
-   netlify deploy --prod
-   ```
-
-Build command: `npm run build`
-Publish directory: `dist`
-
-### Cloudflare Pages
+**Primary production deployment platform.**
 
 1. Connect your GitHub repository to Cloudflare Pages
+2. Cloudflare auto-detects Astro configuration
+3. Push to configured branches triggers deployment
 
-2. Configuration:
-   - Build command: `npm run build`
-   - Build output directory: `dist`
-   - Node version: 18 or higher
+See [detailed Cloudflare guide](https://chrislyons-dev.github.io/home/deployment/cloudflare/) for full setup.
+
+### Vercel (Alternative)
+
+1. Connect your GitHub repository to Vercel
+2. Vercel auto-detects Astro configuration
+3. Push to `main` branch triggers deployment
+
+See [detailed Vercel guide](https://chrislyons-dev.github.io/home/deployment/vercel/) for advanced configuration.
+
+### GitHub Pages
+
+**Documentation site deployment.**
+
+MkDocs documentation automatically deploys to GitHub Pages via GitHub Actions.
+
+See [detailed GitHub Pages guide](https://chrislyons-dev.github.io/home/deployment/github-pages/) for setup.
+
+### Other Platforms
+
+Also compatible with:
+- Netlify
+- Cloudflare Pages
+- AWS S3 + CloudFront
+- Any static host
 
 ## Manual Deployment
 
@@ -57,23 +55,31 @@ Publish directory: `dist`
 
 No environment variables required for the basic site.
 
+Optional:
+```bash
+PUBLIC_SITE_URL=https://chrislyons.dev
+```
+
 ## Custom Domain
 
 1. Add your domain in your hosting provider's dashboard
 2. Update DNS records as instructed
 3. SSL/TLS certificates are typically auto-generated
 
-## Performance Tips
+## Performance
 
-- ✅ Already optimized for Core Web Vitals
-- ✅ Static site generation (SSG) enabled
-- ✅ CSS minification via Lightning CSS
-- ✅ Automatic image optimization
-- ✅ View Transitions API for smooth navigation
+Already optimized for:
+- ✅ Core Web Vitals
+- ✅ Static site generation (SSG)
+- ✅ CSS minification
+- ✅ Image optimization
+- ✅ View Transitions API
 
-## Monitoring
+## Documentation
 
-Consider adding:
-- Google Analytics or Plausible for analytics
-- Sentry for error tracking
-- Vercel Analytics for performance monitoring
+For comprehensive deployment guides, visit the [documentation site](https://chrislyons-dev.github.io/home/):
+
+- [Deployment Overview](https://chrislyons-dev.github.io/home/deployment/overview/)
+- [Cloudflare Pages](https://chrislyons-dev.github.io/home/deployment/cloudflare/) (Primary)
+- [Vercel Deployment](https://chrislyons-dev.github.io/home/deployment/vercel/)
+- [GitHub Pages Setup](https://chrislyons-dev.github.io/home/deployment/github-pages/)

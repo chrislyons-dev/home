@@ -1,0 +1,65 @@
+# Cloudflare Pages configuration
+name = "chrislyons-dev"
+compatibility_date = "2024-01-01"
+
+[site]
+bucket = "./dist"
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = "."
+
+[build.upload]
+format = "service-worker"
+dir = "./dist"
+
+# Environment variables (set in Cloudflare dashboard)
+# [vars]
+# PUBLIC_SITE_URL = "https://chrislyons.dev"
+
+# Branch deployments
+# Production branch
+[[pages_build_output_dir]]
+path = "./dist"
+
+# Headers for security and performance
+[[headers]]
+for = "/*"
+
+  [headers.values]
+  X-Frame-Options = "DENY"
+  X-Content-Type-Options = "nosniff"
+  X-XSS-Protection = "1; mode=block"
+  Referrer-Policy = "strict-origin-when-cross-origin"
+  Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+for = "/assets/*"
+
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.css"
+
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.js"
+
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.svg"
+
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.woff2"
+
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
