@@ -4,7 +4,9 @@ How this site achieves exceptional performance.
 
 ## Lighthouse Scores
 
-Current scores across all metrics (tested locally with Lighthouse CI):
+> **Latest CI Results:** [View Lighthouse Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1759579083622-95849.report.html) | Last Updated: 2025-10-04
+
+Current scores across all metrics (tested with Lighthouse CI):
 
 | Metric         | Score | Details                      |
 | -------------- | ----- | ---------------------------- |
@@ -12,8 +14,6 @@ Current scores across all metrics (tested locally with Lighthouse CI):
 | Accessibility  | 100   | WCAG AA compliant            |
 | Best Practices | 100   | Modern standards             |
 | SEO            | 100   | Complete meta tags           |
-
-**Note:** Scores vary by page complexity. The architecture page (with Mermaid diagrams) scores lower on performance (84-86) and accessibility (91) due to diagram rendering.
 
 ## Optimization Techniques
 
@@ -39,11 +39,13 @@ import ThemeToggle from '../components/ThemeToggle';
 ```
 
 **Loading Strategies:**
+
 - `client:idle` - Load after initial page is idle (used for ThemeToggle)
 - `client:visible` - Load when component enters viewport (used for PlantUML diagrams)
 - Dynamic imports for heavy libraries (Mermaid loaded on-demand)
 
 **Bundle Sizes:**
+
 - Main bundle: ~5kb (gzipped)
 - React + deps: ~40kb (only on interactive pages, loaded when idle)
 - Mermaid: ~200kb (dynamically imported when diagrams are visible)
@@ -59,6 +61,7 @@ import ThemeToggle from '../components/ThemeToggle';
 - Compressed with Sharp
 
 **CSS:**
+
 - Tailwind CSS 4.x with tree-shaking
 - Custom utility classes for common patterns
 - GPU-accelerated animations (`transform`, `will-change`)
@@ -66,6 +69,7 @@ import ThemeToggle from '../components/ThemeToggle';
 - System fonts (no external font loading)
 
 **Fonts:**
+
 - System fonts only (no web font overhead)
 - Optimized for performance and consistency
 - Font optical sizing for better rendering
@@ -114,16 +118,19 @@ export default {
 ### 6. Rendering Optimizations
 
 **Layout Stability:**
+
 - Reserved space for dynamic content (Mermaid diagrams)
 - Explicit dimensions to prevent Cumulative Layout Shift (CLS)
 - Minimum heights on containers
 
 **Animation Performance:**
+
 - GPU-accelerated transforms instead of layout-triggering properties
 - `will-change: transform` hints for the compositor
 - Smooth 60fps animations on buttons, cards, and interactive elements
 
 **Resource Loading:**
+
 - DNS prefetch for external resources
 - Preconnect to critical origins
 - Intersection Observer for lazy loading
@@ -131,11 +138,13 @@ export default {
 ### 7. Caching Strategy
 
 **Static Assets:**
+
 - Long-term caching (1 year)
 - Content-hashed filenames
 - Immutable cache headers
 
 **HTML:**
+
 - Short cache (5 minutes)
 - CDN edge caching
 - Stale-while-revalidate

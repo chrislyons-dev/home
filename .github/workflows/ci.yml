@@ -82,6 +82,10 @@ jobs:
           retention-days: 30
           if-no-files-found: ignore
 
+      - name: Update performance.md with Lighthouse scores
+        if: success()
+        run: node scripts/update-lighthouse-scores.js
+
   build-docs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'

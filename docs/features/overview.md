@@ -84,19 +84,6 @@ Filterable, interactive technology showcase:
 - Smooth animations
 - Responsive grid layout
 
-## Performance Metrics
-
-Lighthouse CI scores (automated testing):
-
-| Metric         | Score Range |
-| -------------- | ----------- |
-| Performance    | 95+         |
-| Accessibility  | 95+         |
-| Best Practices | 95+         |
-| SEO            | 95+         |
-
-Scores vary by page complexity. Simpler pages score higher; the architecture page (with diagram rendering) scores lower.
-
 ## Browser Support
 
 - ✅ Chrome/Edge 90+
