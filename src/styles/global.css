@@ -154,11 +154,11 @@ pre.mermaid {
 }
 
 .badge-primary {
-  @apply badge bg-blue-600 text-white;
+  @apply px-3 py-1 text-sm rounded-full bg-blue-600 text-white;
 }
 
 .badge-secondary {
-  @apply badge bg-gray-200 dark:bg-gray-800;
+  @apply px-3 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-800;
 }
 
 /* Icon container */
