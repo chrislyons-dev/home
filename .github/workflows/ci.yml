@@ -46,7 +46,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload Lighthouse results
-        if: always()
+        if: always() && hashFiles('.lighthouseci/**') != ''
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-results
@@ -136,7 +136,7 @@ jobs:
             libxfixes3 \
             libxrandr2 \
             libgbm1 \
-            libasound2
+            libasound2t64
 
       - name: Generate Mermaid diagrams (SVG)
         run: |
