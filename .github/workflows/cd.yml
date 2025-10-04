@@ -1,11 +1,11 @@
 name: CD
 
 on:
-  # workflow_run:
-  # workflows: ["CI"]
-  # types:
-  #   - completed
-  # branches: [main]
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -30,9 +30,38 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+  check-deployment-needed:
+    runs-on: ubuntu-latest
+    outputs:
+      should-deploy: ${{ steps.check.outputs.deploy }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if deployment needed
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "deploy=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Check if source files changed in the last commit
+          git diff --name-only HEAD~1 HEAD > changed_files.txt
+          if grep -v -E '^(docs/|.*\.md$|CONTRIBUTING\.md|DEVELOPMENT\.md|DEPLOYMENT\.md|README\.md)' changed_files.txt; then
+            echo "deploy=true" >> $GITHUB_OUTPUT
+            echo "Source code changes detected - deployment needed"
+          else
+            echo "deploy=false" >> $GITHUB_OUTPUT
+            echo "Only documentation changes - skipping deployment"
+          fi
+
   deploy-cloudflare:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    needs: check-deployment-needed
+    if: ${{ needs.check-deployment-needed.outputs.should-deploy == 'true' && (github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch') }}
     permissions:
       contents: read
       deployments: write

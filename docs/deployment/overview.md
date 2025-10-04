@@ -102,6 +102,21 @@ VERCEL_TOKEN=xxx
 
 ## Deployment Workflow
 
+### Automated Deployment
+
+The CI/CD pipeline automatically handles deployments:
+
+**CI Workflow** (runs on every push to main):
+- Runs tests and builds
+- Generates architecture documentation
+- Uploads Lighthouse performance reports
+- **Always deploys to GitHub Pages** (documentation)
+
+**CD Workflow** (conditional deployment):
+- **Deploys to Cloudflare Pages** only when source code changes
+- **Skips deployment** for documentation-only changes (docs/, *.md files)
+- Can be triggered manually via workflow_dispatch
+
 ### Development
 
 ```bash
@@ -116,7 +131,7 @@ git push origin feature/my-feature
 ### Pull Request
 
 - Automated checks run
-- Preview deployment created
+- Tests and build validation
 - Review and merge
 
 ### Production
@@ -124,8 +139,19 @@ git push origin feature/my-feature
 ```bash
 git checkout main
 git pull
-# Automatic deployment to production
+# Automatic deployment (conditional based on changes)
 ```
+
+### Deployment Triggers
+
+**Cloudflare Pages deploys when:**
+- Source files change (src/, components/, scripts/, config files)
+- Manual workflow dispatch is triggered
+- NOT when only docs/ or .md files change
+
+**GitHub Pages deploys when:**
+- Any push to main branch
+- Documentation or architecture diagrams updated
 
 ## Rollback Strategy
 

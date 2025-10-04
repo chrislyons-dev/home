@@ -493,15 +493,20 @@ Husky runs automatically:
 
 ### GitHub Actions
 
-```yaml
-# .github/workflows/ci.yml
+**CI Workflow** (`.github/workflows/ci.yml`):
 - Checkout code
 - Install dependencies
+- Validate commit messages
 - Run tests
 - Build project
-- Deploy to Vercel
-- Deploy docs to Pages
-```
+- Run Lighthouse CI
+- Generate architecture documentation
+- Deploy docs to GitHub Pages
+
+**CD Workflow** (`.github/workflows/cd.yml`):
+- Conditional deployment to Cloudflare Pages
+- Only deploys when source code changes (not docs/markdown)
+- Can be triggered manually via workflow_dispatch
 
 ### Local CI Testing
 

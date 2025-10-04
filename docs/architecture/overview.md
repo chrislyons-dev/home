@@ -27,12 +27,14 @@ graph TB
 ### 1. Static-First
 
 **Benefits:**
+
 - No server required
 - Infinite scalability
 - Excellent performance
 - Low cost
 
 **Trade-offs:**
+
 - No dynamic server logic
 - Build-time data fetching
 - Content updates require rebuild
@@ -57,6 +59,7 @@ Interactive components are isolated "islands":
 ```
 
 **Hydration Strategies:**
+
 - `client:load` - Load immediately
 - `client:idle` - Load when idle
 - `client:visible` - Load when in viewport
@@ -108,18 +111,19 @@ graph LR
 ```mermaid
 sequenceDiagram
     participant User
-    participant CDN
     participant Browser
+    participant CDN
 
-    User->>CDN: Request page
-    CDN->>User: HTML (cached)
+    User->>Browser: Navigate to URL
+    Browser->>CDN: Request HTML
+    CDN->>Browser: HTML (cached)
     Browser->>Browser: Parse HTML
     Browser->>CDN: Request CSS
     CDN->>Browser: CSS (cached)
     Browser->>CDN: Request JS (if needed)
     CDN->>Browser: JS (cached)
     Browser->>Browser: Hydrate components
-    Browser->>User: Interactive page
+    Browser->>User: Display interactive page
 ```
 
 ## Component Architecture
@@ -188,17 +192,17 @@ graph TD
 React components use hooks:
 
 ```tsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function Component() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    const stored = localStorage.getItem('theme');
+    const stored = localStorage.getItem("theme");
     if (stored) setTheme(stored);
   }, []);
 
-  return <button onClick={() => setTheme('dark')}>Toggle</button>;
+  return <button onClick={() => setTheme("dark")}>Toggle</button>;
 }
 ```
 
@@ -207,15 +211,13 @@ export default function Component() {
 Shared via context or localStorage:
 
 ```tsx
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
-const ThemeContext = createContext('light');
+const ThemeContext = createContext("light");
 
 export function ThemeProvider({ children }) {
   return (
-    <ThemeContext.Provider value={theme}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
   );
 }
 ```
@@ -230,7 +232,7 @@ export default {
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
+          "react-vendor": ["react", "react-dom"],
         },
       },
     },

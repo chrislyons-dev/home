@@ -36,7 +36,6 @@ See [detailed GitHub Pages guide](https://chrislyons-dev.github.io/home/deployme
 
 Also compatible with:
 - Netlify
-- Cloudflare Pages
 - AWS S3 + CloudFront
 - Any static host
 

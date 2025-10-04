@@ -14,7 +14,7 @@ Personal website for Chris Lyons — developer, architect, and builder — hoste
 - **SEO Optimized**: Meta tags, Open Graph, sitemap, and robots.txt
 - **Accessible**: WCAG compliant with keyboard navigation and screen reader support
 - **Interactive Components**: React islands for dynamic functionality
-- **Performance**: Lighthouse CI automated testing (84-98 performance, 90-95 accessibility)
+- **Performance**: Lighthouse CI automated testing (95+ performance, 95+ accessibility)
 
 ## 🛠️ Tech Stack
 
@@ -30,8 +30,8 @@ Personal website for Chris Lyons — developer, architect, and builder — hoste
 /
 ├── .github/
 │   └── workflows/        # CI/CD pipelines
-│       ├── ci.yml        # Build, test, deploy
-│       └── docs.yml      # MkDocs deployment
+│       ├── ci.yml        # Build, test, docs, GitHub Pages
+│       └── cd.yml        # Cloudflare deployment
 ├── docs/                 # MkDocs documentation
 │   ├── getting-started/
 │   ├── features/

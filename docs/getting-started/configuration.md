@@ -116,7 +116,11 @@ for = "/*"
   X-Content-Type-Options = "nosniff"
 ```
 
-Deployment is automated via `.github/workflows/cd.yml` when CI passes.
+Deployment is automated via `.github/workflows/cd.yml` with conditional logic:
+
+- **Deploys to Cloudflare Pages** only when source code changes (src/, components/, scripts/, config files)
+- **Skips deployment** for documentation-only changes (docs/, *.md files)
+- Can be manually triggered via workflow_dispatch
 
 Required secrets in GitHub repository settings:
 - `CLOUDFLARE_API_TOKEN`
