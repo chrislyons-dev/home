@@ -121,20 +121,41 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Install Chromium dependencies for Mermaid
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 \
+            libatk1.0-0 \
+            libatk-bridge2.0-0 \
+            libcups2 \
+            libdrm2 \
+            libxkbcommon0 \
+            libxcomposite1 \
+            libxdamage1 \
+            libxfixes3 \
+            libxrandr2 \
+            libgbm1 \
+            libasound2
+
       - name: Generate Mermaid diagrams (SVG)
         run: |
           npm install -g @mermaid-js/mermaid-cli
+          echo "Checking for .mmd files in docs/architecture/generated:"
+          ls -la docs/architecture/generated/*.mmd 2>/dev/null || echo "No .mmd files found"
           if [ -d "docs/architecture/generated" ]; then
             for file in docs/architecture/generated/*.mmd; do
               if [ -f "$file" ]; then
-                mmdc -i "$file" -o "${file}.svg" -t neutral -b transparent || echo "Failed to generate ${file}.svg"
+                echo "Generating SVG for: $file"
+                mmdc -i "$file" -o "${file}.svg" -t neutral -b transparent --puppeteerConfigFile ./puppeteer-config.json && echo "✓ Generated ${file}.svg" || echo "✗ Failed to generate ${file}.svg"
               fi
             done
           fi
           if [ -d "docs/architecture/examples" ]; then
             for file in docs/architecture/examples/*.mmd; do
               if [ -f "$file" ]; then
-                mmdc -i "$file" -o "${file}.svg" -t neutral -b transparent || echo "Failed to generate ${file}.svg"
+                echo "Generating SVG for: $file"
+                mmdc -i "$file" -o "${file}.svg" -t neutral -b transparent --puppeteerConfigFile ./puppeteer-config.json && echo "✓ Generated ${file}.svg" || echo "✗ Failed to generate ${file}.svg"
               fi
             done
           fi
@@ -146,12 +167,16 @@ jobs:
           # List what we have
           echo "Contents of docs/architecture/generated:"
           ls -la docs/architecture/generated/ || true
-          # Copy all diagram files (including .mmd.svg)
+          # Copy Mermaid SVG files
           if [ -d "docs/architecture/generated" ]; then
-            find docs/architecture/generated \( -name "*.png" -o -name "*.svg" -o -name "*.mmd.svg" \) -exec cp -v {} docs/images/architecture/ \;
+            cp -v docs/architecture/generated/*.mmd.svg docs/images/architecture/ 2>/dev/null || echo "No .mmd.svg files found in generated/"
+            cp -v docs/architecture/generated/*.png docs/images/architecture/ 2>/dev/null || echo "No .png files found in generated/"
+            cp -v docs/architecture/generated/*.svg docs/images/architecture/ 2>/dev/null || echo "No .svg files found in generated/"
           fi
           if [ -d "docs/architecture/examples" ]; then
-            find docs/architecture/examples \( -name "*.png" -o -name "*.svg" -o -name "*.mmd.svg" \) -exec cp -v {} docs/images/architecture/ \;
+            cp -v docs/architecture/examples/*.mmd.svg docs/images/architecture/ 2>/dev/null || echo "No .mmd.svg files found in examples/"
+            cp -v docs/architecture/examples/*.png docs/images/architecture/ 2>/dev/null || echo "No .png files found in examples/"
+            cp -v docs/architecture/examples/*.svg docs/images/architecture/ 2>/dev/null || echo "No .svg files found in examples/"
           fi
           # Show what we copied
           echo "Contents of docs/images/architecture:"
