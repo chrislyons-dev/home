@@ -4,7 +4,7 @@ Understanding the system design and architecture.
 
 ## System Context
 
-This is a static website built with modern web technologies, focusing on performance and developer experience.
+Static website built with modern web technologies, deployed to CDN edge networks for optimal performance.
 
 ```mermaid
 graph TB
@@ -27,21 +27,17 @@ graph TB
 ### 1. Static-First
 
 **Benefits:**
-
-- No server required
-- Infinite scalability
-- Excellent performance
-- Low cost
+- No server required - infinite scalability
+- Excellent performance - pre-rendered HTML
+- Low cost - free tier deployments
 
 **Trade-offs:**
-
 - No dynamic server logic
-- Build-time data fetching
 - Content updates require rebuild
 
 ### 2. Island Architecture
 
-Interactive components are isolated "islands":
+Interactive components are isolated "islands" of interactivity in a static sea:
 
 ```astro
 ---
@@ -58,10 +54,9 @@ Interactive components are isolated "islands":
 </div>
 ```
 
-**Hydration Strategies Used:**
-
-- `client:idle` - Load when browser is idle (used for ThemeToggle)
-- `client:visible` - Load when component enters viewport (used for PlantUMLDiagram)
+**Hydration Strategies:**
+- `client:idle` - Load when browser is idle (ThemeToggle)
+- `client:visible` - Load when component enters viewport (PlantUMLDiagram)
 
 ### 3. Component-Based
 
@@ -72,8 +67,8 @@ src/components/
 ├── ThemeToggle.tsx      # Dark mode toggle
 ├── TechStack.tsx        # Tech stack display
 ├── CodeBlock.tsx        # Syntax highlighting
-├── PlantUMLDiagram.tsx  # PlantUML diagram rendering
-└── AnimatedGrid.tsx     # Animated background grid
+├── PlantUMLDiagram.tsx  # PlantUML diagrams
+└── AnimatedGrid.tsx     # Animated backgrounds
 ```
 
 ### 4. File-Based Routing
@@ -87,7 +82,7 @@ src/pages/
 ├── projects.astro      → /projects
 ├── architecture.astro  → /architecture
 ├── contact.astro       → /contact
-└── 404.astro          → 404 error page
+└── 404.astro          → 404 error
 ```
 
 ## System Design
@@ -124,7 +119,7 @@ sequenceDiagram
     Browser->>CDN: Request JS (if needed)
     CDN->>Browser: JS (cached)
     Browser->>Browser: Hydrate components
-    Browser->>User: Display interactive page
+    Browser->>User: Display page
 ```
 
 ## Component Architecture
@@ -135,57 +130,25 @@ sequenceDiagram
 src/layouts/
 └── Layout.astro       # Base layout
     ├── <head>         # Meta tags, styles
-    ├── <nav>          # Inline navigation with ThemeToggle
+    ├── <nav>          # Navigation with ThemeToggle
     ├── <main>         # Page content slot
-    └── <footer>       # Inline footer
+    └── <footer>       # Footer
 ```
 
-### Component Hierarchy
+### Styling Architecture
 
-```mermaid
-graph TD
-    Layout[Layout.astro]
-    Layout --> Nav[Navigation nav]
-    Layout --> Main[Main Content]
-    Layout --> Footer[Footer footer]
-
-    Nav --> Theme[ThemeToggle.tsx]
-
-    Main --> Page[Page Content Slot]
-    Main --> Components[React Components]
-
-    Components --> TechStack[TechStack.tsx]
-    Components --> CodeBlock[CodeBlock.tsx]
-    Components --> PlantUML[PlantUMLDiagram.tsx]
-    Components --> AnimGrid[AnimatedGrid.tsx]
-```
-
-## Styling Architecture
-
-### Tailwind CSS 4.x
+Tailwind CSS 4 with custom theme:
 
 ```css
 /* global.css */
 @import "tailwindcss";
 
-/* Theme variables */
 @theme {
   --color-accent: oklch(70% 0.2 250);
-  --color-accent-dark: oklch(60% 0.2 250);
-  --font-sans: system-ui, ...;
-  --font-mono: ui-monospace, ...;
+  --font-sans: system-ui, -apple-system, sans-serif;
 }
 
-/* Dark mode variants */
 @variant dark (&:where(.dark, .dark *));
-
-/* Responsive color scheme */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: oklch(15% 0.01 250);
-    --color-text: oklch(95% 0.01 250);
-  }
-}
 ```
 
 ## State Management
@@ -209,22 +172,6 @@ export default function Component() {
 }
 ```
 
-### Global State
-
-Shared via context or localStorage:
-
-```tsx
-import { createContext, useContext } from "react";
-
-const ThemeContext = createContext("light");
-
-export function ThemeProvider({ children }) {
-  return (
-    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
-  );
-}
-```
-
 ## Build Architecture
 
 ### Astro + Vite Configuration
@@ -234,7 +181,6 @@ export function ThemeProvider({ children }) {
 export default defineConfig({
   site: 'https://chrislyons.dev',
   integrations: [react(), sitemap()],
-
   vite: {
     plugins: [tailwindcss()],
     build: {
@@ -250,14 +196,10 @@ export default defineConfig({
 dist/
 ├── index.html
 ├── 404.html
-├── about/
-│   └── index.html
-├── architecture/
-│   └── index.html
-├── contact/
-│   └── index.html
-├── projects/
-│   └── index.html
+├── about/index.html
+├── architecture/index.html
+├── contact/index.html
+├── projects/index.html
 └── _astro/
     ├── [hash].css
     └── [hash].js
@@ -265,23 +207,23 @@ dist/
 
 ## C4 Architecture Model
 
-All architecture diagrams follow the C4 model (Levels 1-4) and are automatically generated as part of the CI/CD pipeline.
+Architecture diagrams follow the C4 model and are automatically generated in CI/CD.
 
 ### Level 1: System Context
 
-The big picture—showing how the portfolio site fits into the broader ecosystem of external systems and users.
+The big picture—how the portfolio site fits into the broader ecosystem.
 
 ![C4 System Context](generated/c4-system-context.png)
 
 [View PlantUML Source](generated/c4-system-context.puml) | [View SVG](generated/c4-system-context.svg)
 
-**Generated from**: GitHub Actions workflows (cd.yml, ci.yml), wrangler.toml, package.json
+**Generated from**: GitHub Actions workflows, wrangler.toml, package.json
 
 ---
 
 ### Level 2: Container Diagram
 
-Zooming into the system to show the major technical containers (applications, data stores, microservices).
+Major technical containers (applications, data stores, microservices).
 
 ![C4 Container](generated/c4-container.png)
 
@@ -293,7 +235,7 @@ Zooming into the system to show the major technical containers (applications, da
 
 ### Level 3: Component Diagram
 
-Zooming into a container to show the major components and their interactions.
+Major components and their interactions.
 
 ![C4 Component](generated/c4-component.png)
 
@@ -303,13 +245,9 @@ Zooming into a container to show the major components and their interactions.
 
 ---
 
-### Level 4: Code Diagram (Selective)
+### Level 4: Code Diagram - Theme Management
 
-> **Note**: Level 4 diagrams are optional. They're great for critical algorithms, security components, or complex business logic that needs detailed documentation. But avoid generating them for entire systems—they quickly become overwhelming and unmaintainable at scale.
-
-#### Theme Management System
-
-The theme management system demonstrates dependency injection and separation of concerns—a critical component for user experience consistency across the site.
+The theme management system demonstrates dependency injection and separation of concerns.
 
 ```mermaid
 classDiagram
@@ -340,16 +278,12 @@ classDiagram
     class IFaviconManager {
         <<interface>>
         +updateFavicon(isDark: boolean) void
-        +setLightFavicon() void
-        +setDarkFavicon() void
     }
 
     class FaviconManager {
         -lightFavicon: string
         -darkFavicon: string
         +updateFavicon(isDark: boolean) void
-        +setLightFavicon() void
-        +setDarkFavicon() void
     }
 
     ThemeManager --> IThemeStorage : depends on
@@ -358,36 +292,30 @@ classDiagram
     FaviconManager ..|> IFaviconManager : implements
 
     note for ThemeManager "Orchestrates theme changes\nwith dependency injection"
-    note for ThemeStorage "Persists to localStorage"
-    note for FaviconManager "Updates favicon dynamically"
 ```
 
 **Key Design Patterns:**
-- **Dependency Injection**: ThemeManager depends on interfaces, not concrete implementations
-- **Single Responsibility**: Each class has one clear purpose
-- **Singleton Pattern**: Storage and favicon managers are singleton instances
+- **Dependency Injection**: ThemeManager depends on interfaces
+- **Single Responsibility**: Each class has one purpose
+- **Singleton Pattern**: Storage and favicon managers are singletons
 
 **Generated from**: AST analysis of `src/services/ThemeManager.ts`, `ThemeStorage.ts`, `FaviconManager.ts`
 
 ---
 
-## Additional Generated Diagrams
+## Generated Diagrams
 
 ### Module Dependencies
 
-View the module dependency graph:
-
 ![Module Dependencies](../images/architecture/module-dependencies.mmd.svg)
 
-[View Source](generated/module-dependencies.mmd) | [View DOT](generated/dependencies.dot)
+[View Source](generated/module-dependencies.mmd)
 
 ### Routes Map
 
-Application routes structure:
-
 ![Routes Map](../images/architecture/routes-map.mmd.svg)
 
-[View Source](generated/routes-map.mmd) | [View JSON](generated/routes.json)
+[View Source](generated/routes-map.mmd)
 
 ## Deployment Architecture
 
@@ -414,18 +342,10 @@ graph LR
 
 ## Security Architecture
 
-### Content Security
-
-- Static content (no user input)
-- No server-side code
-- No database
+- Static content (no user input, no database)
+- No server-side code - minimal attack surface
 - CDN-level DDoS protection
-
-### Build Security
-
-- Automated CI/CD pipeline
-- GitHub Actions security scanning
-- Static site architecture (minimal attack surface)
+- Automated security scanning in CI
 
 ## Performance Architecture
 
@@ -433,14 +353,14 @@ graph LR
 
 1. **Build Time**: Minification, tree-shaking
 2. **CDN Layer**: Edge caching, compression
-3. **Browser**: Service workers, cache API
-4. **Runtime**: Lazy loading, code splitting
+3. **Browser**: Lazy loading, code splitting
+4. **Runtime**: Island hydration on-demand
 
 ### Caching Strategy
 
 ```
-HTML:         5 minutes
-CSS/JS:       1 year (immutable)
+HTML:         5 minutes (stale-while-revalidate)
+CSS/JS:       1 year (immutable, content-hashed)
 Images:       1 year (immutable)
 Fonts:        1 year (immutable)
 ```

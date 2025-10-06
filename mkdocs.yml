@@ -97,9 +97,9 @@ nav:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/chrisalexlyons
+      link: https://github.com/chrislyons-dev
     - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/chrisalexlyons/
+      link: https://www.linkedin.com/in/chris-lyons-811563a/
 
   analytics:
     feedback:
@@ -115,6 +115,6 @@ extra:
           data: 0
           note: >-
             Thanks for your feedback! Help us improve by
-            <a href="https://github.com/chrisalexlyons/home/issues/new" target="_blank" rel="noopener">opening an issue</a>.
+            <a href="https://github.com/chrislyons-dev/home/issues/new" target="_blank" rel="noopener">opening an issue</a>.
 
 copyright: Copyright &copy; 2024 Chris Lyons

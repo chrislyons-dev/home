@@ -8,12 +8,12 @@ How this site achieves exceptional performance.
 
 Current scores across all metrics (tested with Lighthouse CI):
 
-| Metric         | Score | Details                      |
-| -------------- | ----- | ---------------------------- |
-| Performance    | 100   | Optimized assets, minimal JS |
-| Accessibility  | 100   | WCAG AA compliant            |
-| Best Practices | 100   | Modern standards             |
-| SEO            | 100   | Complete meta tags           |
+| Metric         | Score  | Details                      |
+| -------------- | ------ | ---------------------------- |
+| Performance    | 95+    | Optimized assets, minimal JS |
+| Accessibility  | 95+    | WCAG AA compliant            |
+| Best Practices | 95+    | Modern standards             |
+| SEO            | 95+    | Complete meta tags           |
 
 ## Optimization Techniques
 
@@ -46,10 +46,9 @@ import ThemeToggle from '../components/ThemeToggle';
 
 **Bundle Sizes:**
 
-- Main bundle: ~5kb (gzipped)
-- React + deps: ~40kb (only on interactive pages, loaded when idle)
+- Initial critical path: ~45kb (gzipped) - includes React + core islands
 - Mermaid: ~200kb (dynamically imported when diagrams are visible)
-- Total initial JS: < 10kb (rest loaded on-demand)
+- Total build output: ~3.2MB (includes all assets, heavily cached)
 
 ### 3. Optimized Assets
 
@@ -221,15 +220,16 @@ const HeavyComponent = lazy(() => import("./HeavyComponent"));
 
 ## Performance Budget
 
-Target budgets for different resource types:
+Target budgets for critical path (initial page load):
 
-| Resource   | Budget | Current  |
-| ---------- | ------ | -------- |
-| HTML       | 20kb   | 15kb ✅  |
-| CSS        | 30kb   | 25kb ✅  |
-| JavaScript | 100kb  | 45kb ✅  |
-| Images     | 500kb  | 200kb ✅ |
-| Total      | 650kb  | 285kb ✅ |
+| Resource   | Budget | Current  | Notes                          |
+| ---------- | ------ | -------- | ------------------------------ |
+| HTML       | 20kb   | ~15kb ✅  | Per page                       |
+| CSS        | 30kb   | ~25kb ✅  | Global styles                  |
+| JavaScript | 100kb  | ~45kb ✅  | React + interactive islands    |
+| Images     | 500kb  | ~200kb ✅ | Lazy loaded, optimized formats |
+
+**Note:** Total build output (~3.2MB) includes all pages, assets, and vendor libraries. These are aggressively cached (1 year for immutable assets) and loaded on-demand.
 
 ## Continuous Monitoring
 

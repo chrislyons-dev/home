@@ -12,9 +12,9 @@
     "test:coverage": "vitest --coverage",
     "prepare": "husky",
     "docs:arch": "node scripts/generate-architecture-docs.js",
-    "deps:check": "depcruise --config .dependency-cruiser.json src",
-    "deps:graph": "depcruise --config .dependency-cruiser.json --output-type dot src | dot -T svg > docs/architecture/dependencies.svg",
-    "lighthouse": "lhci autorun"
+    "deps:check": "depcruise --config config/.dependency-cruiser.json src",
+    "deps:graph": "depcruise --config config/.dependency-cruiser.json --output-type dot src | dot -T svg > docs/architecture/dependencies.svg",
+    "lighthouse": "lhci autorun --config=config/.lighthouserc.json"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.0",

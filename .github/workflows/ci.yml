@@ -72,6 +72,8 @@ jobs:
       - name: Run Lighthouse CI
         run: npm run lighthouse
         continue-on-error: true
+        env:
+          LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.sha }}
 
       - name: Upload Lighthouse results
         if: always()
@@ -182,7 +184,7 @@ jobs:
             for file in docs/architecture/generated/*.mmd; do
               if [ -f "$file" ]; then
                 echo "Generating SVG for: $file"
-                mmdc -i "$file" -o "${file}.svg" -t neutral -b transparent --puppeteerConfigFile ./puppeteer-config.json && echo "✓ Generated ${file}.svg" || echo "✗ Failed to generate ${file}.svg"
+                mmdc -i "$file" -o "${file}.svg" -t neutral -b transparent --puppeteerConfigFile ./config/puppeteer-config.json && echo "✓ Generated ${file}.svg" || echo "✗ Failed to generate ${file}.svg"
               fi
             done
           fi
@@ -190,7 +192,7 @@ jobs:
             for file in docs/architecture/examples/*.mmd; do
               if [ -f "$file" ]; then
                 echo "Generating SVG for: $file"
-                mmdc -i "$file" -o "${file}.svg" -t neutral -b transparent --puppeteerConfigFile ./puppeteer-config.json && echo "✓ Generated ${file}.svg" || echo "✗ Failed to generate ${file}.svg"
+                mmdc -i "$file" -o "${file}.svg" -t neutral -b transparent --puppeteerConfigFile ./config/puppeteer-config.json && echo "✓ Generated ${file}.svg" || echo "✗ Failed to generate ${file}.svg"
               fi
             done
           fi

@@ -53,9 +53,9 @@ Guides for deploying to production environments.
 - Vercel
 - GitHub Pages
 
-### API Reference
+### Component Reference
 
-Component and utility API documentation.
+Component usage examples and patterns.
 
 ## Contributing to Docs
 
@@ -103,7 +103,7 @@ This documentation is licensed under the MIT License.
 ## Contact
 
 - **GitHub:** [@chrislyons-dev](https://github.com/chrislyons-dev)
-- **LinkedIn:** [chrisalexlyons](https://www.linkedin.com/in/chrisalexlyons/)
+- **LinkedIn:** [chris-lyons-811563a](https://www.linkedin.com/in/chris-lyons-811563a/)
 - **Website:** [chrislyons.dev](https://chrislyons.dev)
 
 ## Version
