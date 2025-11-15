@@ -287,6 +287,47 @@ pre.mermaid {
   font-weight: 500;
 }
 
+.nav-toggle {
+  @apply min-h-[44px] min-w-[44px] rounded-lg border border-transparent p-2 text-gray-700 transition-colors dark:text-gray-200;
+}
+
+.nav-toggle:hover {
+  @apply bg-gray-100 text-gray-900 dark:bg-slate-900 dark:text-white;
+}
+
+.nav-toggle[aria-expanded='true'] {
+  color: var(--accent-text);
+}
+
+.mobile-nav {
+  @apply dark:border-electric-500/20 border-t border-slate-200 bg-white/95 px-4 pb-4 shadow-sm backdrop-blur-sm dark:bg-slate-950/95;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.2s ease;
+}
+
+.mobile-nav[data-open='true'] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-link {
+  @apply w-full rounded-lg px-3 py-2 text-base font-medium text-gray-900 transition-colors dark:text-slate-100;
+}
+
+.mobile-nav-link:hover {
+  @apply bg-gray-100 text-gray-900 dark:bg-slate-900 dark:text-white;
+}
+
+html.nav-scroll-lock,
+html.nav-scroll-lock body {
+  overflow: hidden;
+}
+
 /* Button styles - use transform for hardware acceleration */
 .btn-primary {
   @apply min-h-[44px] min-w-[44px] rounded-2xl border px-8 py-4 font-medium;

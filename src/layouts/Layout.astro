@@ -11,6 +11,13 @@ const { title, description = 'Chris Lyons — Developer, Architect, and Builder'
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const currentPath = Astro.url.pathname;
 const isHome = currentPath === '/';
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/architecture', label: 'Architecture' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
 ---
 
 <!doctype html>
@@ -76,35 +83,76 @@ const isHome = currentPath === '/';
             CL
           </a>
 
-          <div class="flex items-center gap-6">
-            <a
-              href="/"
-              data-route="/"
-              class:list={['nav-link', currentPath === '/' && 'nav-link-active']}>Home</a
-            >
-            <a
-              href="/projects"
-              data-route="/projects"
-              class:list={['nav-link', currentPath === '/projects' && 'nav-link-active']}
-              >Projects</a
-            >
-            <a
-              href="/architecture"
-              data-route="/architecture"
-              class:list={['nav-link', currentPath === '/architecture' && 'nav-link-active']}
-              >Architecture</a
-            >
-            <a
-              href="/about"
-              data-route="/about"
-              class:list={['nav-link', currentPath === '/about' && 'nav-link-active']}>About</a
-            >
-            <a
-              href="/contact"
-              data-route="/contact"
-              class:list={['nav-link', currentPath === '/contact' && 'nav-link-active']}>Contact</a
-            >
+          <div class="flex items-center gap-2 sm:gap-4">
+            <div class="hidden items-center gap-4 md:flex lg:gap-6">
+              {
+                navLinks.map(({ href, label }) => (
+                  <a
+                    href={href}
+                    data-route={href}
+                    class:list={['nav-link', currentPath === href && 'nav-link-active']}
+                  >
+                    {label}
+                  </a>
+                ))
+              }
+            </div>
             <ThemeToggle client:idle />
+            <button
+              type="button"
+              class="nav-toggle flex items-center justify-center md:hidden"
+              aria-label="Toggle navigation"
+              aria-controls="mobile-nav"
+              aria-expanded="false"
+              data-nav-toggle
+            >
+              <span class="sr-only">Toggle navigation</span>
+              <svg
+                class="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                data-icon="menu"
+              >
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+              <svg
+                class="hidden h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                data-icon="close"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div id="mobile-nav" class="mobile-nav md:hidden" data-mobile-nav data-open="false">
+          <div class="space-y-1 py-4">
+            {
+              navLinks.map(({ href, label }) => (
+                <a
+                  href={href}
+                  data-route={href}
+                  class:list={[
+                    'nav-link mobile-nav-link',
+                    currentPath === href && 'nav-link-active',
+                  ]}
+                >
+                  {label}
+                </a>
+              ))
+            }
           </div>
         </div>
       </div>
@@ -174,10 +222,50 @@ const isHome = currentPath === '/';
         });
       };
 
-      document.addEventListener('astro:page-load', setActiveNavLink);
-      document.addEventListener('astro:after-swap', setActiveNavLink);
-      window.addEventListener('popstate', setActiveNavLink);
+      const navToggle = document.querySelector('[data-nav-toggle]');
+      const mobileNav = document.querySelector('[data-mobile-nav]');
+
+      const setMobileNavState = (isOpen) => {
+        if (!navToggle || !mobileNav) return;
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        mobileNav.dataset.open = String(isOpen);
+        mobileNav.style.maxHeight = isOpen ? `${mobileNav.scrollHeight}px` : '0px';
+        document.documentElement.classList.toggle('nav-scroll-lock', isOpen);
+
+        const menuIcon = navToggle.querySelector('[data-icon="menu"]');
+        const closeIcon = navToggle.querySelector('[data-icon="close"]');
+        menuIcon?.classList.toggle('hidden', isOpen);
+        closeIcon?.classList.toggle('hidden', !isOpen);
+      };
+
+      const closeMobileNav = () => setMobileNavState(false);
+
+      navToggle?.addEventListener('click', () => {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        setMobileNavState(!expanded);
+      });
+
+      mobileNav?.querySelectorAll('a[data-route]').forEach((link) => {
+        link.addEventListener('click', closeMobileNav);
+      });
+
+      const handleRouteUpdate = () => {
+        setActiveNavLink();
+        closeMobileNav();
+      };
+
+      document.addEventListener('astro:page-load', handleRouteUpdate);
+      document.addEventListener('astro:after-swap', handleRouteUpdate);
+      window.addEventListener('popstate', handleRouteUpdate);
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+          closeMobileNav();
+        }
+      });
+
       setActiveNavLink();
+      setMobileNavState(false);
     </script>
   </body>
 </html>
