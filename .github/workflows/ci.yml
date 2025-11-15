@@ -116,6 +116,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate architecture docs
+        run: npm run docs:arch
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
