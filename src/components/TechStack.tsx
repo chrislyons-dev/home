@@ -28,7 +28,7 @@ export default function TechStack({ techs = technologies }: TechStackProps) {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {filteredTech.map((tech) => (
           <div
             key={tech.name}
