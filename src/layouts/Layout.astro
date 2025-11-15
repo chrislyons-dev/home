@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import ThemeToggle from '../components/ThemeToggle';
+import { getThemeInitScript } from '../utils/themeInit';
 
 interface Props {
   title: string;
@@ -58,12 +59,7 @@ const navLinks = [
     />
 
     <!-- Theme initialization script (prevents flash) -->
-    <script
-      is:inline
-      define:vars={{ themeInitScript: (await import('../utils/themeInit')).getThemeInitScript() }}
-    >
-      eval(themeInitScript);
-    </script>
+    <script is:inline set:html={getThemeInitScript()} />
   </head>
   <body
     class:list={[

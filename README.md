@@ -73,6 +73,16 @@ npm run build  # Output in dist/
 
 See [.docs/DEPLOYMENT.md](.docs/DEPLOYMENT.md) for platform-specific guides.
 
+## Security Headers
+
+Strict transport and isolation headers are defined in `public/_headers`. They enforce:
+
+- Hardened CSP aligned with current assets (self-hosted scripts plus hashed inline theme bootstrap)
+- Frame protection via `frame-ancestors 'none'` and `X-Frame-Options: DENY`
+- COOP/CORP for process isolation, plus HSTS, Referrer-Policy, and restrictive Permissions-Policy
+
+Cloudflare Pages automatically picks up this file at deploy time.
+
 ## Contributing
 
 See [.docs/CONTRIBUTING.md](.docs/CONTRIBUTING.md) for guidelines.
