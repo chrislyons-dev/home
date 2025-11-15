@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PlantUMLDiagram from '../components/PlantUMLDiagram';
+import { getArchitectureMermaidScript } from '../utils/inlineScripts';
 
 // Import example diagrams at build time
 import microservicesDiagram from '../../docs/architecture/examples/microservices.mmd?raw';
@@ -437,72 +438,5 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     </div>
   </div>
 
-  <script>
-    // Dynamically import Mermaid only when diagrams are in viewport
-    let mermaidLoaded = false;
-
-    const loadAndInitMermaid = async () => {
-      if (mermaidLoaded) return;
-      mermaidLoaded = true;
-
-      const { default: mermaid } = await import('mermaid');
-
-      const isDark = document.documentElement.classList.contains('dark');
-
-      mermaid.initialize({
-        startOnLoad: false,
-        theme: isDark ? 'dark' : 'default',
-        themeVariables: {
-          darkMode: isDark,
-        },
-        securityLevel: 'loose',
-        fontFamily: 'ui-sans-serif, system-ui, sans-serif',
-      });
-
-      // Run mermaid on all .mermaid elements
-      await mermaid.run({
-        querySelector: 'pre.mermaid',
-      });
-    };
-
-    // Use Intersection Observer to load Mermaid only when diagrams are visible
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            loadAndInitMermaid();
-            observer.disconnect();
-          }
-        });
-      },
-      { rootMargin: '50px' }
-    );
-
-    // Observe the first mermaid diagram
-    const firstDiagram = document.querySelector('pre.mermaid');
-    if (firstDiagram) {
-      observer.observe(firstDiagram);
-    }
-
-    // Re-render when theme changes (only if mermaid is already loaded)
-    const themeObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class' && mermaidLoaded) {
-          // Reset and re-render all diagrams
-          document.querySelectorAll('.mermaid-container').forEach((el) => {
-            const pre = document.createElement('pre');
-            pre.className = 'mermaid bg-white dark:bg-slate-900 p-4 rounded overflow-x-auto';
-            pre.textContent = el.dataset.mermaidCode;
-            el.replaceWith(pre);
-          });
-          setTimeout(loadAndInitMermaid, 100);
-        }
-      });
-    });
-
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-  </script>
+  <script is:inline set:html={getArchitectureMermaidScript()} />
 </Layout>
