@@ -77,23 +77,31 @@ const isHome = currentPath === '/';
           </a>
 
           <div class="flex items-center gap-6">
-            <a href="/" class:list={['nav-link', currentPath === '/' && 'nav-link-active']}>Home</a>
+            <a
+              href="/"
+              data-route="/"
+              class:list={['nav-link', currentPath === '/' && 'nav-link-active']}>Home</a
+            >
             <a
               href="/projects"
+              data-route="/projects"
               class:list={['nav-link', currentPath === '/projects' && 'nav-link-active']}
               >Projects</a
             >
             <a
               href="/architecture"
+              data-route="/architecture"
               class:list={['nav-link', currentPath === '/architecture' && 'nav-link-active']}
               >Architecture</a
             >
             <a
               href="/about"
+              data-route="/about"
               class:list={['nav-link', currentPath === '/about' && 'nav-link-active']}>About</a
             >
             <a
               href="/contact"
+              data-route="/contact"
               class:list={['nav-link', currentPath === '/contact' && 'nav-link-active']}>Contact</a
             >
             <ThemeToggle client:idle />
@@ -143,5 +151,33 @@ const isHome = currentPath === '/';
         </div>
       </div>
     </footer>
+
+    <script is:inline>
+      const normalizePath = (path) => {
+        if (!path) return '/';
+        const trimmed = path.replace(/\/+$/, '');
+        return trimmed === '' ? '/' : trimmed;
+      };
+
+      const setActiveNavLink = () => {
+        if (typeof window === 'undefined') return;
+        const currentPath = normalizePath(window.location.pathname);
+        document.querySelectorAll('nav a[data-route]').forEach((link) => {
+          const target = normalizePath(
+            link.getAttribute('data-route') || link.getAttribute('href')
+          );
+          if (target === currentPath) {
+            link.classList.add('nav-link-active');
+          } else {
+            link.classList.remove('nav-link-active');
+          }
+        });
+      };
+
+      document.addEventListener('astro:page-load', setActiveNavLink);
+      document.addEventListener('astro:after-swap', setActiveNavLink);
+      window.addEventListener('popstate', setActiveNavLink);
+      setActiveNavLink();
+    </script>
   </body>
 </html>
