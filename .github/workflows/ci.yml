@@ -125,8 +125,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Graphviz and Java
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz default-jre
+
+      - name: Download PlantUML
+        run: wget https://github.com/plantuml/plantuml/releases/download/v1.2024.3/plantuml-1.2024.3.jar -O plantuml.jar
+
       - name: Generate architecture docs
         run: npm run docs:arch
+
+      - name: Render PlantUML diagrams
+        run: |
+          if [ -d "docs/architecture/generated" ]; then
+            find docs/architecture/generated -name "*.puml" -exec java -jar plantuml.jar -tpng {} \;
+            find docs/architecture/generated -name "*.puml" -exec java -jar plantuml.jar -tsvg {} \;
+          fi
 
       - name: Setup Python
         uses: actions/setup-python@v5
