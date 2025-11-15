@@ -33,11 +33,11 @@ export class GridAnimation {
     this.ctx = ctx;
     this.config = {
       gridSize: config.gridSize ?? 50,
-      dotColor: config.dotColor ?? 'rgba(59, 130, 246, 0.3)',
-      dotOpacity: config.dotOpacity ?? 0.3,
+      dotColor: config.dotColor ?? 'rgba(0, 255, 136, 0.25)',
+      dotOpacity: config.dotOpacity ?? 0.25,
       dotRadius: config.dotRadius ?? 2,
       connectionDistance: config.connectionDistance ?? 1.5,
-      connectionOpacity: config.connectionOpacity ?? 0.1,
+      connectionOpacity: config.connectionOpacity ?? 0.08,
       velocityRange: config.velocityRange ?? 0.5,
     };
 

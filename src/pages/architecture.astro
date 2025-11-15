@@ -14,42 +14,38 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
 >
   <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
     <h1 class="mb-4 text-4xl font-bold sm:text-5xl">Architecture as Code</h1>
-    <p class="mb-12 text-xl text-gray-600 dark:text-gray-400">
+    <p class="mb-12 text-xl text-gray-600 dark:text-slate-400">
       Living documentation that evolves with your systems. These diagrams are generated from code,
       version-controlled, and automatically updated.
     </p>
 
     <!-- Architecture Philosophy -->
     <div
-      class="mb-16 rounded-lg border border-blue-200 bg-gradient-to-br from-blue-50 to-purple-50 p-6 dark:border-blue-800 dark:from-blue-950/20 dark:to-purple-950/20"
+      class="border-electric-600/20 dark:border-electric-600/40 dark:to-slate-850 mb-16 rounded-lg border bg-gradient-to-br from-white to-gray-50 p-6 dark:from-slate-900"
     >
       <h2 class="mb-4 text-2xl font-bold">Why Architecture as Code?</h2>
       <div class="grid gap-6 text-gray-900 md:grid-cols-2 dark:text-gray-100">
         <div>
-          <h3 class="mb-2 font-semibold text-blue-600 dark:text-blue-400">✓ Always Up to Date</h3>
+          <h3 class="text-accent mb-2 font-semibold">✓ Always Up to Date</h3>
           <p class="text-sm">
             Diagrams live in the codebase and update with every change. No more outdated
             PowerPoints.
           </p>
         </div>
         <div>
-          <h3 class="mb-2 font-semibold text-blue-600 dark:text-blue-400">✓ Version Controlled</h3>
+          <h3 class="text-accent mb-2 font-semibold">✓ Version Controlled</h3>
           <p class="text-sm">
             Track architecture evolution over time. See what changed, when, and why.
           </p>
         </div>
         <div>
-          <h3 class="mb-2 font-semibold text-blue-600 dark:text-blue-400">
-            ✓ Review & Collaborate
-          </h3>
+          <h3 class="text-accent mb-2 font-semibold">✓ Review & Collaborate</h3>
           <p class="text-sm">
             Architecture changes go through pull requests just like code. Team visibility built-in.
           </p>
         </div>
         <div>
-          <h3 class="mb-2 font-semibold text-blue-600 dark:text-blue-400">
-            ✓ Automated Publishing
-          </h3>
+          <h3 class="text-accent mb-2 font-semibold">✓ Automated Publishing</h3>
           <p class="text-sm">
             Diagrams render automatically in CI/CD. Documentation deploys with every release.
           </p>
@@ -60,7 +56,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     <!-- C4 Model Levels -->
     <section class="mb-16">
       <h2 class="mb-6 text-3xl font-bold">C4 Model: 4 Levels of Architecture Diagrams</h2>
-      <p class="mb-6 text-gray-600 dark:text-gray-400">
+      <p class="mb-6 text-gray-600 dark:text-slate-400">
         Progressive zoom from system context down to code level. Each level can be automatically
         generated from your infrastructure and application code.
       </p>
@@ -68,16 +64,13 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
       <div class="grid gap-6 md:grid-cols-2">
         <!-- Level 1: System Context -->
         <div
-          class="rounded-lg border-2 border-blue-200 bg-white p-6 dark:border-blue-800 dark:bg-gray-900"
+          class="border-electric-600/20 dark:border-electric-600/40 rounded-lg border-2 bg-white p-6 dark:bg-slate-900"
         >
           <div class="mb-4 flex items-center justify-between">
             <h3 class="text-xl font-bold">Level 1: System Context</h3>
-            <span
-              class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900 dark:text-blue-300"
-              >System</span
-            >
+            <span class="badge-accent">System</span>
           </div>
-          <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+          <p class="mb-4 text-sm text-gray-600 dark:text-slate-400">
             Big picture: your system, users, and external dependencies
           </p>
           <div class="mb-4 rounded bg-gray-50 p-3 font-mono text-xs dark:bg-gray-800">
@@ -88,13 +81,13 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
           <div class="space-y-2 text-sm">
             <div>
               <strong class="text-green-600 dark:text-green-400">⚡ How It Works:</strong>
-              <p class="mt-1 text-gray-600 dark:text-gray-400">
+              <p class="mt-1 text-gray-600 dark:text-slate-400">
                 Parse deployment pipelines and infrastructure configs to extract external systems
               </p>
             </div>
-            <div class="border-l-2 border-blue-200 pl-4 dark:border-blue-700">
-              <strong class="text-xs text-blue-600 dark:text-blue-400">Real Example:</strong>
-              <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+            <div class="border-electric-600/20 border-l-2 pl-4 dark:border-blue-700">
+              <strong class="text-accent text-xs">Real Example:</strong>
+              <p class="mt-1 text-xs text-gray-600 dark:text-slate-400">
                 Parse <code class="rounded bg-gray-100 px-1 dark:bg-gray-700"
                   >.github/workflows/cd.yml</code
                 > to extract Cloudflare Pages, deployment triggers, and external services
@@ -105,16 +98,16 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
 
         <!-- Level 2: Container -->
         <div
-          class="rounded-lg border-2 border-purple-200 bg-white p-6 dark:border-purple-800 dark:bg-gray-900"
+          class="rounded-lg border-2 border-gray-300 bg-white p-6 dark:border-white/10 dark:bg-slate-900"
         >
           <div class="mb-4 flex items-center justify-between">
             <h3 class="text-xl font-bold">Level 2: Container</h3>
             <span
-              class="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900 dark:text-purple-300"
+              class="rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-700 dark:bg-gray-800 dark:text-slate-300"
               >Container</span
             >
           </div>
-          <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+          <p class="mb-4 text-sm text-gray-600 dark:text-slate-400">
             Applications, databases, microservices, file systems
           </p>
           <div class="mb-4 rounded bg-gray-50 p-3 font-mono text-xs dark:bg-gray-800">
@@ -126,13 +119,13 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
           <div class="space-y-2 text-sm">
             <div>
               <strong class="text-green-600 dark:text-green-400">⚡ How It Works:</strong>
-              <p class="mt-1 text-gray-600 dark:text-gray-400">
+              <p class="mt-1 text-gray-600 dark:text-slate-400">
                 Parse Infrastructure as Code to extract resources and dependencies
               </p>
             </div>
-            <div class="border-l-2 border-purple-200 pl-4 dark:border-purple-700">
-              <strong class="text-xs text-purple-600 dark:text-purple-400">Real Example:</strong>
-              <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+            <div class="border-l-2 border-gray-300 pl-4 dark:border-gray-600">
+              <strong class="text-xs text-gray-600 dark:text-slate-400">Real Example:</strong>
+              <p class="mt-1 text-xs text-gray-600 dark:text-slate-400">
                 <code class="rounded bg-gray-100 px-1 dark:bg-gray-700"
                   >inframap generate terraform/</code
                 > generates PlantUML from Terraform state, or parse <code
@@ -145,7 +138,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
 
         <!-- Level 3: Component -->
         <div
-          class="rounded-lg border-2 border-green-200 bg-white p-6 dark:border-green-800 dark:bg-gray-900"
+          class="rounded-lg border-2 border-green-200 bg-white p-6 dark:border-green-800 dark:bg-slate-900"
         >
           <div class="mb-4 flex items-center justify-between">
             <h3 class="text-xl font-bold">Level 3: Component</h3>
@@ -154,7 +147,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
               >Component</span
             >
           </div>
-          <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+          <p class="mb-4 text-sm text-gray-600 dark:text-slate-400">
             Services, controllers, repositories within a container
           </p>
           <div class="mb-4 rounded bg-gray-50 p-3 font-mono text-xs dark:bg-gray-800">
@@ -166,13 +159,13 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
           <div class="space-y-2 text-sm">
             <div>
               <strong class="text-green-600 dark:text-green-400">⚡ How It Works:</strong>
-              <p class="mt-1 text-gray-600 dark:text-gray-400">
+              <p class="mt-1 text-gray-600 dark:text-slate-400">
                 Scan source code directory structure and module organization
               </p>
             </div>
             <div class="border-l-2 border-green-200 pl-4 dark:border-green-700">
               <strong class="text-xs text-green-600 dark:text-green-400">Real Example:</strong>
-              <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+              <p class="mt-1 text-xs text-gray-600 dark:text-slate-400">
                 Recursively scan <code class="rounded bg-gray-100 px-1 dark:bg-gray-700"
                   >src/services/</code
                 >, <code class="rounded bg-gray-100 px-1 dark:bg-gray-700">src/components/</code> directories
@@ -184,7 +177,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
 
         <!-- Level 4: Code -->
         <div
-          class="rounded-lg border-2 border-orange-200 bg-white p-6 dark:border-orange-800 dark:bg-gray-900"
+          class="rounded-lg border-2 border-orange-200 bg-white p-6 dark:border-orange-800 dark:bg-slate-900"
         >
           <div class="mb-4 flex items-center justify-between">
             <h3 class="text-xl font-bold">Level 4: Code</h3>
@@ -193,7 +186,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
               >Code</span
             >
           </div>
-          <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+          <p class="mb-4 text-sm text-gray-600 dark:text-slate-400">
             Classes, methods, functions, interfaces
           </p>
           <div class="mb-4 rounded bg-gray-50 p-3 font-mono text-xs dark:bg-gray-800">
@@ -206,13 +199,13 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
           <div class="space-y-2 text-sm">
             <div>
               <strong class="text-green-600 dark:text-green-400">⚡ How It Works:</strong>
-              <p class="mt-1 text-gray-600 dark:text-gray-400">
+              <p class="mt-1 text-gray-600 dark:text-slate-400">
                 Use AST parsers to extract class structures, method signatures, and dependencies
               </p>
             </div>
             <div class="border-l-2 border-orange-200 pl-4 dark:border-orange-700">
               <strong class="text-xs text-orange-600 dark:text-orange-400">Real Example:</strong>
-              <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+              <p class="mt-1 text-xs text-gray-600 dark:text-slate-400">
                 Use <code class="rounded bg-gray-100 px-1 dark:bg-gray-700">acorn</code> or <code
                   class="rounded bg-gray-100 px-1 dark:bg-gray-700">@babel/parser</code
                 > to parse TypeScript files and extract class methods, or use <code
@@ -225,9 +218,9 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
       </div>
 
       <div
-        class="mt-6 rounded border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/20"
+        class="border-electric-600/20 dark:border-electric-600/40 mt-6 rounded border bg-blue-50 p-4 dark:bg-blue-950/20"
       >
-        <p class="text-sm text-gray-700 dark:text-gray-300">
+        <p class="text-sm text-gray-700 dark:text-slate-300">
           <strong>💡 This Portfolio:</strong> All 4 C4 levels are auto-generated from code using
           <code class="rounded bg-white px-2 py-1 text-xs dark:bg-gray-800">npm run docs:arch</code>
         </p>
@@ -237,23 +230,20 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     <!-- Example 1: C4 Level 1 - System Context -->
     <section class="mb-16">
       <h2 class="mb-6 text-3xl font-bold">
-        <span
-          class="mr-2 rounded bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700 dark:bg-blue-900 dark:text-blue-300"
-          >Level 1</span
-        >
+        <span class="badge-accent mr-2 text-sm font-semibold">Level 1</span>
         System Context Example
       </h2>
-      <p class="mb-6 text-gray-600 dark:text-gray-400">
+      <p class="mb-6 text-gray-600 dark:text-slate-400">
         High-level view of this portfolio site and its external dependencies, auto-generated from
         GitHub Actions workflows.
       </p>
 
       <div
-        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-white/5 dark:bg-slate-900"
       >
         <div class="mermaid-diagram mb-4">
           <pre
-            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-gray-900">{`graph TB
+            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-slate-900">{`graph TB
     User[Visitor]
     Site[ChrisLyons.dev<br/>Portfolio Site]
     CF[Cloudflare Pages<br/>Hosting + CDN]
@@ -273,7 +263,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     style CF fill:#f97316,color:#fff
     style GH fill:#059669,color:#fff`}</pre>
         </div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">
+        <div class="text-sm text-gray-600 dark:text-slate-400">
           <strong>Generated from:</strong>
           <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
             >.github/workflows/cd.yml</code
@@ -286,24 +276,24 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     <section class="mb-16">
       <h2 class="mb-6 text-3xl font-bold">
         <span
-          class="mr-2 rounded bg-purple-100 px-3 py-1 text-sm font-semibold text-purple-700 dark:bg-purple-900 dark:text-purple-300"
+          class="mr-2 rounded bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700 dark:bg-gray-800 dark:text-slate-300"
           >Level 2</span
         >
         Container Example: Microservices Architecture
       </h2>
-      <p class="mb-6 text-gray-600 dark:text-gray-400">
+      <p class="mb-6 text-gray-600 dark:text-slate-400">
         Event-driven microservices with Kafka showing containers (services, databases, message
         queues) and their interactions.
       </p>
 
       <div
-        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-white/5 dark:bg-slate-900"
       >
         <div class="mermaid-diagram mb-4">
           <pre
-            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-gray-900">{microservicesDiagram}</pre>
+            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-slate-900">{microservicesDiagram}</pre>
         </div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">
+        <div class="text-sm text-gray-600 dark:text-slate-400">
           <strong>Source:</strong>
           <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
             >docs/architecture/examples/microservices.mmd</code
@@ -316,24 +306,24 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     <section class="mb-16">
       <h2 class="mb-6 text-3xl font-bold">
         <span
-          class="mr-2 rounded bg-purple-100 px-3 py-1 text-sm font-semibold text-purple-700 dark:bg-purple-900 dark:text-purple-300"
+          class="mr-2 rounded bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700 dark:bg-gray-800 dark:text-slate-300"
           >Level 2</span
         >
         Container Example: Data Pipeline Architecture
       </h2>
-      <p class="mb-6 text-gray-600 dark:text-gray-400">
+      <p class="mb-6 text-gray-600 dark:text-slate-400">
         Real-time and batch data processing containers showing data flow from ingestion through
         transformation to consumption.
       </p>
 
       <div
-        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-white/5 dark:bg-slate-900"
       >
         <div class="mermaid-diagram mb-4">
           <pre
-            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-gray-900">{dataPipelineDiagram}</pre>
+            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-slate-900">{dataPipelineDiagram}</pre>
         </div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">
+        <div class="text-sm text-gray-600 dark:text-slate-400">
           <strong>Source:</strong>
           <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
             >docs/architecture/examples/data-pipeline.mmd</code
@@ -351,7 +341,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
         >
         Component Example: Order Service
       </h2>
-      <p class="mb-6 text-gray-600 dark:text-gray-400">
+      <p class="mb-6 text-gray-600 dark:text-slate-400">
         Zooming into the Order Service container to show its internal components, controllers, and
         repositories.
       </p>
@@ -366,9 +356,9 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
         <details class="cursor-pointer">
           <summary class="mb-2 text-sm font-semibold">View PlantUML Source Code</summary>
           <pre
-            class="mt-2 overflow-x-auto rounded bg-white p-3 text-xs dark:bg-gray-900"><code>{orderServiceDiagram}</code></pre>
+            class="mt-2 overflow-x-auto rounded bg-white p-3 text-xs dark:bg-slate-900"><code>{orderServiceDiagram}</code></pre>
         </details>
-        <div class="mt-3 text-sm text-gray-600 dark:text-gray-400">
+        <div class="mt-3 text-sm text-gray-600 dark:text-slate-400">
           <strong>Source:</strong>
           <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
             >docs/architecture/examples/order-service.puml</code
@@ -386,7 +376,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
         >
         Code Example: ThemeManager Class
       </h2>
-      <p class="mb-6 text-gray-600 dark:text-gray-400">
+      <p class="mb-6 text-gray-600 dark:text-slate-400">
         Zooming into a component to show class structure and method signatures, auto-generated from
         TypeScript source code.
         <strong>Note:</strong> Level 4 diagrams are optional. They're great for critical algorithms,
@@ -395,11 +385,11 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
       </p>
 
       <div
-        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-white/5 dark:bg-slate-900"
       >
         <div class="mermaid-diagram mb-4">
           <pre
-            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-gray-900">{`classDiagram
+            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-slate-900">{`classDiagram
     class ThemeManager {
         -storage: ThemeStorage
         -favicon: FaviconManager
@@ -424,7 +414,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
 
     note "Auto-generated from src/services/ThemeManager.ts"`}</pre>
         </div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">
+        <div class="text-sm text-gray-600 dark:text-slate-400">
           <strong>Generated from:</strong>
           <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
             >src/services/ThemeManager.ts</code
@@ -435,19 +425,14 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
 
     <!-- Call to Action -->
     <div
-      class="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center dark:border-gray-800 dark:bg-gray-900/50"
+      class="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center dark:border-white/5 dark:bg-slate-900/50"
     >
       <h2 class="mb-4 text-2xl font-bold">Want to See More?</h2>
-      <p class="mb-6 text-gray-600 dark:text-gray-400">
+      <p class="mb-6 text-gray-600 dark:text-slate-400">
         I can help you implement architecture as code practices in your organization. From tooling
         setup to CI/CD integration and team training.
       </p>
-      <a
-        href="/contact"
-        class="inline-block rounded-lg bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700"
-      >
-        Let's Talk Architecture
-      </a>
+      <a href="/contact" class="btn-primary inline-block"> Let's Talk Architecture </a>
     </div>
   </div>
 
@@ -505,7 +490,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
           // Reset and re-render all diagrams
           document.querySelectorAll('.mermaid-container').forEach((el) => {
             const pre = document.createElement('pre');
-            pre.className = 'mermaid bg-white dark:bg-gray-900 p-4 rounded overflow-x-auto';
+            pre.className = 'mermaid bg-white dark:bg-slate-900 p-4 rounded overflow-x-auto';
             pre.textContent = el.dataset.mermaidCode;
             el.replaceWith(pre);
           });

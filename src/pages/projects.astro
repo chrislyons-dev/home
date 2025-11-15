@@ -61,7 +61,7 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
 >
   <div class="section-container">
     <h1 class="page-title mb-4">Projects</h1>
-    <p class="mb-12 text-xl text-gray-600 dark:text-gray-400">
+    <p class="mb-12 text-xl text-gray-600 dark:text-slate-400">
       A selection of work showcasing technical depth and product thinking.
     </p>
 
@@ -73,19 +73,19 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
             <article
               class={`rounded-lg border p-6 transition-all hover:shadow-lg ${
                 project.data.featured
-                  ? 'border-blue-200 bg-gradient-to-br from-blue-50 to-purple-50 dark:border-blue-800 dark:from-blue-950/20 dark:to-purple-950/20'
-                  : 'border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900'
+                  ? 'border-electric-600/20 dark:border-electric-600/40 dark:to-slate-850 bg-gradient-to-br from-white to-gray-50 dark:from-slate-900'
+                  : 'border-gray-200 bg-white dark:border-white/5 dark:bg-slate-900'
               }`}
             >
               <div class="mb-3 flex items-start justify-between">
                 <h2 class="text-2xl font-bold">{project.data.title}</h2>
                 {project.data.featured && (
-                  <span class="rounded-full bg-blue-600 px-3 py-1 text-sm text-white">
+                  <span class="bg-electric-600 rounded-full px-3 py-1 text-sm text-white">
                     Featured
                   </span>
                 )}
               </div>
-              <p class="mb-4 text-gray-700 dark:text-gray-300">{project.data.description}</p>
+              <p class="mb-4 text-gray-700 dark:text-slate-300">{project.data.description}</p>
               <div class="mb-4 flex flex-wrap gap-2">
                 {project.data.tech.map((tech) => (
                   <span class="rounded-md bg-gray-200 px-3 py-1 text-sm dark:bg-gray-800">
@@ -94,7 +94,7 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
                 ))}
               </div>
               {project.body && (
-                <div class="prose prose-sm dark:prose-invert mt-4 max-w-none border-t border-gray-200 pt-4 dark:border-gray-800">
+                <div class="prose prose-sm dark:prose-invert mt-4 max-w-none border-t border-gray-200 pt-4 dark:border-white/5">
                   <Content />
                 </div>
               )}
@@ -105,10 +105,10 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
     </div>
 
     <div
-      class="mt-16 rounded-lg border border-gray-200 bg-gray-50 p-8 text-center dark:border-gray-800 dark:bg-gray-900/50"
+      class="mt-16 rounded-lg border border-gray-200 bg-gray-50 p-8 text-center dark:border-white/5 dark:bg-slate-900/50"
     >
       <h2 class="mb-4 text-2xl font-bold">Want to See More?</h2>
-      <p class="mb-6 text-gray-600 dark:text-gray-400">
+      <p class="mb-6 text-gray-600 dark:text-slate-400">
         These are just highlights. I'm always working on something new.
       </p>
       <a href="/contact" class="btn-primary inline-block">Get in Touch</a>

@@ -19,7 +19,7 @@ export default function TechStack({ techs = technologies }: TechStackProps) {
             onClick={() => setFilter(category)}
             className={`rounded-lg px-4 py-2 font-medium transition-all ${
               filter === category
-                ? 'scale-105 bg-blue-600 text-white shadow-lg'
+                ? 'bg-electric-600 scale-105 text-white shadow-lg'
                 : 'bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700'
             }`}
           >
@@ -32,7 +32,7 @@ export default function TechStack({ techs = technologies }: TechStackProps) {
         {filteredTech.map((tech) => (
           <div
             key={tech.name}
-            className="rounded-lg border border-gray-200 bg-white p-4 transition-all hover:border-blue-600 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-400"
+            className="hover:border-electric-600 dark:hover:border-electric-400 rounded-lg border border-gray-200 bg-white p-4 transition-all hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
           >
             <div className="mb-2 flex items-center justify-between">
               <span className="font-semibold">{tech.name}</span>
@@ -45,7 +45,9 @@ export default function TechStack({ techs = technologies }: TechStackProps) {
                 <div
                   key={i}
                   className={`h-2 flex-1 rounded ${
-                    i < tech.level ? 'bg-blue-600 dark:bg-blue-400' : 'bg-gray-200 dark:bg-gray-800'
+                    i < tech.level
+                      ? 'bg-electric-600 dark:bg-blue-400'
+                      : 'bg-gray-200 dark:bg-gray-800'
                   }`}
                 />
               ))}

@@ -10,6 +10,7 @@ interface Props {
 const { title, description = 'Chris Lyons — Developer, Architect, and Builder' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/';
 ---
 
 <!doctype html>
@@ -36,7 +37,18 @@ const currentPath = Astro.url.pathname;
     <meta name="twitter:description" content={description} />
 
     <!-- Favicon (updated dynamically by theme toggle) -->
-    <link rel="icon" type="image/svg+xml" href="/cl_light.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/cl_light_graphite-green.svg"
+      data-favicon-variant="svg"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/cl_light_graphite-green.ico"
+      data-favicon-variant="ico"
+    />
 
     <!-- Theme initialization script (prevents flash) -->
     <script
@@ -47,16 +59,19 @@ const currentPath = Astro.url.pathname;
     </script>
   </head>
   <body
-    class="min-h-screen bg-white text-gray-900 transition-colors dark:bg-gray-950 dark:text-gray-100"
+    class:list={[
+      'min-h-screen bg-white text-gray-900 transition-colors dark:bg-slate-950 dark:text-gray-100',
+      !isHome && 'page-surface',
+    ]}
   >
     <nav
-      class="fixed top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/80"
+      class="dark:border-electric-500/20 fixed top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-sm dark:bg-slate-950/80"
     >
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
           <a
             href="/"
-            class="flex min-h-[44px] min-w-[44px] items-center justify-center text-xl font-bold transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+            class="hover-accent flex min-h-[44px] min-w-[44px] items-center justify-center text-xl font-bold transition-colors"
           >
             CL
           </a>
@@ -91,10 +106,10 @@ const currentPath = Astro.url.pathname;
       <slot />
     </main>
 
-    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800">
+    <footer class="dark:border-electric-500/20 mt-20 border-t border-slate-200">
       <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between">
-          <p class="text-sm text-gray-600 dark:text-gray-400">
+          <p class="text-sm text-gray-600 dark:text-slate-400">
             © {new Date().getFullYear()} Chris Lyons
           </p>
           <div class="flex gap-4">

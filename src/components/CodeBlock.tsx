@@ -64,7 +64,7 @@ export default function CodeBlock({
                 }, 300);
               }}
               className={`h-2 w-2 rounded-full transition-all ${
-                index === currentIndex ? 'w-6 bg-blue-500' : 'bg-gray-600 hover:bg-gray-500'
+                index === currentIndex ? 'bg-electric-500 w-6' : 'bg-gray-600 hover:bg-gray-500'
               }`}
               aria-label={`Show ${snippets[index].language} snippet`}
             />
