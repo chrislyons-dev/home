@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-AZ+sBQafo8lO6pO+i9RVlKp+1c3iAyp/R0NvBu2Nhoo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.plantuml.com; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests;
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-AZ+sBQafo8lO6pO+i9RVlKp+1c3iAyp/R0NvBu2Nhoo=' 'sha256-aC8Ikm4b9TfCg5oRL98hxL9VoAgIECSlToXMxDyWzdU=' 'sha256-KmpcT33KzQaye+wVhkEYsOvq347NdUDFWOsjtdXpweo=' 'sha256-z5TtZwznv/9Tn8y0JHGWwoxomAHYVFeSZyYy0+7y1PA=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.plantuml.com; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests;
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
   X-Content-Type-Options: nosniff

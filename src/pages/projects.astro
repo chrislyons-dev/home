@@ -1,59 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { getProjectsMermaidScript } from '../utils/inlineScripts';
 
 const projects = await getCollection('projects');
 const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
 ---
-
-<script>
-  // Dynamically import Mermaid utilities only when needed
-  let mermaidLoaded = false;
-
-  const loadMermaid = async () => {
-    if (mermaidLoaded) return;
-    mermaidLoaded = true;
-
-    const { initMermaid, refreshMermaid } = await import('../utils/mermaid');
-    await initMermaid();
-    await refreshMermaid();
-
-    // Re-render mermaid diagrams when theme changes
-    const themeObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          refreshMermaid();
-        }
-      });
-    });
-
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-  };
-
-  // Use Intersection Observer to load Mermaid only when diagrams are visible
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          loadMermaid();
-          observer.disconnect();
-        }
-      });
-    },
-    { rootMargin: '100px' }
-  );
-
-  // Wait for DOM and observe first mermaid diagram
-  document.addEventListener('DOMContentLoaded', () => {
-    const firstDiagram = document.querySelector('.mermaid');
-    if (firstDiagram) {
-      observer.observe(firstDiagram);
-    }
-  });
-</script>
 
 <Layout
   title="Projects — Chris Lyons"
@@ -113,5 +65,6 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
       </p>
       <a href="/contact" class="btn-primary inline-block">Get in Touch</a>
     </div>
+    <script is:inline set:html={getProjectsMermaidScript()} />
   </div>
 </Layout>

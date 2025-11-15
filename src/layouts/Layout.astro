@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import ThemeToggle from '../components/ThemeToggle';
 import { getThemeInitScript } from '../utils/themeInit';
+import { getNavInteractionScript } from '../utils/inlineScripts';
 
 interface Props {
   title: string;
@@ -203,85 +204,6 @@ const navLinks = [
       </div>
     </footer>
 
-    <script is:inline>
-      const normalizePath = (path) => {
-        if (!path) return '/';
-        const trimmed = path.replace(/\/+$/, '');
-        return trimmed === '' ? '/' : trimmed;
-      };
-
-      const setActiveNavLink = () => {
-        if (typeof window === 'undefined') return;
-        const currentPath = normalizePath(window.location.pathname);
-        document.querySelectorAll('nav a[data-route]').forEach((link) => {
-          const target = normalizePath(
-            link.getAttribute('data-route') || link.getAttribute('href')
-          );
-          if (target === currentPath) {
-            link.classList.add('nav-link-active');
-          } else {
-            link.classList.remove('nav-link-active');
-          }
-        });
-      };
-
-      const navToggle = document.querySelector('[data-nav-toggle]');
-      const mobileNav = document.querySelector('[data-mobile-nav]');
-      const mobileOverlay = document.querySelector('[data-mobile-overlay]');
-
-      const setMobileNavState = (isOpen) => {
-        if (!navToggle || !mobileNav) return;
-        navToggle.setAttribute('aria-expanded', String(isOpen));
-        mobileNav.dataset.open = String(isOpen);
-        mobileNav.style.maxHeight = isOpen ? `${mobileNav.scrollHeight}px` : '0px';
-        document.documentElement.classList.toggle('nav-scroll-lock', isOpen);
-        if (mobileOverlay) {
-          mobileOverlay.dataset.open = String(isOpen);
-          mobileOverlay.setAttribute('aria-hidden', String(!isOpen));
-        }
-
-        const menuIcon = navToggle.querySelector('[data-icon="menu"]');
-        const closeIcon = navToggle.querySelector('[data-icon="close"]');
-        menuIcon?.classList.toggle('hidden', isOpen);
-        closeIcon?.classList.toggle('hidden', !isOpen);
-      };
-
-      const closeMobileNav = () => setMobileNavState(false);
-
-      navToggle?.addEventListener('click', () => {
-        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-        setMobileNavState(!expanded);
-      });
-
-      mobileNav
-        ?.querySelectorAll('a[data-route]')
-        .forEach((link) => link.addEventListener('click', closeMobileNav));
-
-      mobileOverlay?.addEventListener('click', closeMobileNav);
-
-      window.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          closeMobileNav();
-        }
-      });
-
-      const handleRouteUpdate = () => {
-        setActiveNavLink();
-        closeMobileNav();
-      };
-
-      document.addEventListener('astro:page-load', handleRouteUpdate);
-      document.addEventListener('astro:after-swap', handleRouteUpdate);
-      window.addEventListener('popstate', handleRouteUpdate);
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth >= 768) {
-          closeMobileNav();
-        }
-      });
-
-      setActiveNavLink();
-      setMobileNavState(false);
-    </script>
+    <script is:inline set:html={getNavInteractionScript()} />
   </body>
 </html>
