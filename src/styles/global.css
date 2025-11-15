@@ -226,6 +226,16 @@ code {
   background: var(--hero-vignette);
 }
 
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  line-height: 1.1;
+}
+
+.hero-tagline {
+  font-size: clamp(1.25rem, 4.5vw, 2rem);
+  line-height: 1.4;
+}
+
 .text-accent {
   color: var(--accent-text);
 }
@@ -300,7 +310,7 @@ pre.mermaid {
 }
 
 .mobile-nav {
-  @apply dark:border-electric-500/20 border-t border-slate-200 bg-white/95 px-4 pb-4 shadow-sm backdrop-blur-sm dark:bg-slate-950/95;
+  @apply dark:border-electric-500/20 relative z-50 border-t border-slate-200 bg-white/95 px-4 pb-4 shadow-sm backdrop-blur-sm dark:bg-slate-950/95;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
@@ -311,6 +321,16 @@ pre.mermaid {
 }
 
 .mobile-nav[data-open='true'] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-overlay {
+  @apply fixed inset-x-0 top-16 bottom-0 z-40 bg-slate-900/60 opacity-0 transition-opacity duration-200 ease-out;
+  pointer-events: none;
+}
+
+.mobile-nav-overlay[data-open='true'] {
   opacity: 1;
   pointer-events: auto;
 }
@@ -326,6 +346,27 @@ pre.mermaid {
 html.nav-scroll-lock,
 html.nav-scroll-lock body {
   overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav,
+  .mobile-nav-overlay {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-container,
+  .section-container-narrow {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .section-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 
 /* Button styles - use transform for hardware acceleration */
@@ -498,11 +539,15 @@ html.nav-scroll-lock body {
 
 /* Headings */
 .page-title {
-  @apply mb-8 text-4xl font-bold sm:text-5xl;
+  @apply mb-8 font-bold;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.15;
 }
 
 .section-title {
-  @apply mb-12 text-center text-3xl font-bold sm:text-4xl;
+  @apply mb-12 text-center font-bold;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.2;
 }
 
 .subsection-title {

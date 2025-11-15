@@ -155,6 +155,13 @@ const navLinks = [
             }
           </div>
         </div>
+        <div
+          class="mobile-nav-overlay md:hidden"
+          data-mobile-overlay
+          data-open="false"
+          aria-hidden="true"
+        >
+        </div>
       </div>
     </nav>
 
@@ -224,6 +231,7 @@ const navLinks = [
 
       const navToggle = document.querySelector('[data-nav-toggle]');
       const mobileNav = document.querySelector('[data-mobile-nav]');
+      const mobileOverlay = document.querySelector('[data-mobile-overlay]');
 
       const setMobileNavState = (isOpen) => {
         if (!navToggle || !mobileNav) return;
@@ -231,6 +239,10 @@ const navLinks = [
         mobileNav.dataset.open = String(isOpen);
         mobileNav.style.maxHeight = isOpen ? `${mobileNav.scrollHeight}px` : '0px';
         document.documentElement.classList.toggle('nav-scroll-lock', isOpen);
+        if (mobileOverlay) {
+          mobileOverlay.dataset.open = String(isOpen);
+          mobileOverlay.setAttribute('aria-hidden', String(!isOpen));
+        }
 
         const menuIcon = navToggle.querySelector('[data-icon="menu"]');
         const closeIcon = navToggle.querySelector('[data-icon="close"]');
@@ -245,8 +257,16 @@ const navLinks = [
         setMobileNavState(!expanded);
       });
 
-      mobileNav?.querySelectorAll('a[data-route]').forEach((link) => {
-        link.addEventListener('click', closeMobileNav);
+      mobileNav
+        ?.querySelectorAll('a[data-route]')
+        .forEach((link) => link.addEventListener('click', closeMobileNav));
+
+      mobileOverlay?.addEventListener('click', closeMobileNav);
+
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeMobileNav();
+        }
       });
 
       const handleRouteUpdate = () => {
