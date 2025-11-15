@@ -27,11 +27,13 @@ graph TB
 ### 1. Static-First
 
 **Benefits:**
+
 - No server required - infinite scalability
 - Excellent performance - pre-rendered HTML
 - Low cost - free tier deployments
 
 **Trade-offs:**
+
 - No dynamic server logic
 - Content updates require rebuild
 
@@ -55,6 +57,7 @@ Interactive components are isolated "islands" of interactivity in a static sea:
 ```
 
 **Hydration Strategies:**
+
 - `client:idle` - Load when browser is idle (ThemeToggle)
 - `client:visible` - Load when component enters viewport (PlantUMLDiagram)
 
@@ -141,7 +144,7 @@ Tailwind CSS 4 with custom theme:
 
 ```css
 /* global.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-accent: oklch(70% 0.2 250);
@@ -158,17 +161,17 @@ Tailwind CSS 4 with custom theme:
 React components use hooks:
 
 ```tsx
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export default function Component() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
+    const stored = localStorage.getItem('theme');
     if (stored) setTheme(stored);
   }, []);
 
-  return <button onClick={() => setTheme("dark")}>Toggle</button>;
+  return <button onClick={() => setTheme('dark')}>Toggle</button>;
 }
 ```
 
@@ -185,8 +188,8 @@ export default defineConfig({
     plugins: [tailwindcss()],
     build: {
       cssMinify: 'lightningcss',
-    }
-  }
+    },
+  },
 });
 ```
 
@@ -295,6 +298,7 @@ classDiagram
 ```
 
 **Key Design Patterns:**
+
 - **Dependency Injection**: ThemeManager depends on interfaces
 - **Single Responsibility**: Each class has one purpose
 - **Singleton Pattern**: Storage and favicon managers are singletons

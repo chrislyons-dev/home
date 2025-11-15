@@ -1,7 +1,7 @@
 ---
-title: "AI Employee Assistant with RAG"
-description: "Retrieval-augmented generation chatbot that helps employees quickly find company policies and procedures. Reduces support tickets and improves policy compliance."
-tech: ["React", "Node.js", "LangChain", "pgvector"]
+title: 'AI Employee Assistant with RAG'
+description: 'Retrieval-augmented generation chatbot that helps employees quickly find company policies and procedures. Reduces support tickets and improves policy compliance.'
+tech: ['React', 'Node.js', 'LangChain', 'pgvector']
 featured: false
 order: 5
 ---

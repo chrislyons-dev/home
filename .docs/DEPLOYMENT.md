@@ -35,6 +35,7 @@ See [detailed GitHub Pages guide](https://chrislyons-dev.github.io/home/deployme
 ### Other Platforms
 
 Also compatible with:
+
 - Netlify
 - AWS S3 + CloudFront
 - Any static host
@@ -42,6 +43,7 @@ Also compatible with:
 ## Manual Deployment
 
 1. Build the site:
+
    ```bash
    npm run build
    ```
@@ -55,6 +57,7 @@ Also compatible with:
 No environment variables required for the basic site.
 
 Optional:
+
 ```bash
 PUBLIC_SITE_URL=https://chrislyons.dev
 ```
@@ -68,6 +71,7 @@ PUBLIC_SITE_URL=https://chrislyons.dev
 ## Performance
 
 Already optimized for:
+
 - ✅ Core Web Vitals
 - ✅ Static site generation (SSG)
 - ✅ CSS minification

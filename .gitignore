@@ -143,3 +143,6 @@ docs/architecture/generated/
 
 # MkDocs build output
 site/
+
+CLAUDE.md
+./claude1

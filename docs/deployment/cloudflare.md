@@ -32,6 +32,7 @@ Deploy your site to Cloudflare's global edge network.
 Cloudflare auto-detects Astro, but verify these settings:
 
 **Build Configuration:**
+
 - **Framework preset**: Astro
 - **Build command**: `npm run build`
 - **Build output directory**: `dist`
@@ -39,6 +40,7 @@ Cloudflare auto-detects Astro, but verify these settings:
 - **Node version**: 20
 
 **Environment Variables:**
+
 ```
 PUBLIC_SITE_URL=https://chrislyons.dev
 ```
@@ -89,12 +91,14 @@ For more control, use the GitHub Actions workflow.
 ### 1. Get Cloudflare Credentials
 
 **API Token:**
+
 1. Cloudflare Dashboard → **My Profile** → **API Tokens**
 2. Click **Create Token**
 3. Use template: **Edit Cloudflare Workers**
 4. Copy the token
 
 **Account ID:**
+
 1. Cloudflare Dashboard → **Workers & Pages**
 2. Copy **Account ID** from the right sidebar
 
@@ -117,9 +121,9 @@ The workflow in `.github/workflows/cloudflare.yml` handles deployment:
 on:
   push:
     branches:
-      - main        # Production
-      - staging     # Staging environment
-      - develop     # Development preview
+      - main # Production
+      - staging # Staging environment
+      - develop # Development preview
 ```
 
 **Customize branches** by editing the workflow file.
@@ -143,11 +147,13 @@ GitHub Actions will build and deploy automatically.
 3. Choose setup method:
 
 **Option A: Cloudflare-managed DNS**
+
 1. Domain already on Cloudflare
 2. Click **Activate domain**
 3. DNS records added automatically
 
 **Option B: External DNS**
+
 1. Add CNAME record:
    ```
    Type: CNAME
@@ -159,6 +165,7 @@ GitHub Actions will build and deploy automatically.
 ### SSL/TLS
 
 SSL certificates are automatically provisioned:
+
 - Universal SSL (default)
 - Auto-renewal every 90 days
 - Full (strict) encryption mode recommended
@@ -174,6 +181,7 @@ SSL certificates are automatically provisioned:
    - **Preview**: All other branches
 
 **Example:**
+
 ```
 PUBLIC_SITE_URL
   Production: https://chrislyons.dev
@@ -219,6 +227,7 @@ Trigger builds only on specific file changes:
 ### Edge Caching
 
 Cloudflare automatically caches:
+
 - **Static assets**: 1 year
 - **HTML**: Configurable
 - **Images**: Auto-optimized
@@ -237,6 +246,7 @@ for = "/*"
 ### Compression
 
 Auto-enabled:
+
 - Brotli compression
 - Gzip fallback
 - Smart compression
@@ -258,7 +268,11 @@ Auto-enabled:
 Add to your site:
 
 ```html
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "your-token"}'></script>
+<script
+  defer
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "your-token"}'
+></script>
 ```
 
 ## Functions (Optional)
@@ -297,6 +311,7 @@ git push origin main
 ### Deployment Status
 
 View in real-time:
+
 - **Deployments** tab
 - Build logs
 - Deployment timeline
@@ -312,6 +327,7 @@ View in real-time:
 ### Build Failures
 
 **Check build logs:**
+
 1. Go to failed deployment
 2. View **Build log**
 3. Look for errors
@@ -319,12 +335,14 @@ View in real-time:
 **Common issues:**
 
 **Node version mismatch:**
+
 ```bash
 # In build settings
 Environment variable: NODE_VERSION=20
 ```
 
 **Missing dependencies:**
+
 ```bash
 # Ensure package-lock.json is committed
 git add package-lock.json
@@ -346,11 +364,13 @@ git commit -m "fix: add lock file"
 ### Custom Domain Issues
 
 **CNAME not resolving:**
+
 - Wait for DNS propagation (up to 48 hours)
 - Verify DNS records: `dig chrislyons.dev`
 - Check Cloudflare DNS settings
 
 **SSL errors:**
+
 - Ensure SSL/TLS mode is Full (strict)
 - Wait for certificate provisioning
 - Check **SSL/TLS** → **Edge Certificates**
@@ -377,6 +397,7 @@ Full workflow in `.github/workflows/cloudflare.yml`:
 ### Free Tier
 
 Includes:
+
 - Unlimited requests
 - Unlimited bandwidth
 - 500 builds/month
@@ -385,6 +406,7 @@ Includes:
 ### Pro Tier ($20/month)
 
 Adds:
+
 - 5,000 builds/month
 - Advanced DDoS protection
 - Faster builds
@@ -392,13 +414,13 @@ Adds:
 
 ## Comparison with Other Platforms
 
-| Feature | Cloudflare | Vercel | Netlify |
-|---------|-----------|---------|---------|
-| Bandwidth | Unlimited | 100GB | 100GB |
-| Build minutes | 500/mo | 6,000/mo | 300/mo |
-| Edge locations | 300+ | 100+ | 100+ |
-| Functions | Yes (free) | Yes (paid) | Yes (125k/mo) |
-| Analytics | Free | Paid | Paid |
+| Feature        | Cloudflare | Vercel     | Netlify       |
+| -------------- | ---------- | ---------- | ------------- |
+| Bandwidth      | Unlimited  | 100GB      | 100GB         |
+| Build minutes  | 500/mo     | 6,000/mo   | 300/mo        |
+| Edge locations | 300+       | 100+       | 100+          |
+| Functions      | Yes (free) | Yes (paid) | Yes (125k/mo) |
+| Analytics      | Free       | Paid       | Paid          |
 
 ## Next Steps
 

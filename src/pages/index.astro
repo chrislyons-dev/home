@@ -4,19 +4,21 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Chris Lyons — Developer, Architect, and Builder">
   <!-- Hero Section -->
-  <section class="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent leading-tight pb-4">
+  <section class="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <h1
+        class="mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text pb-4 text-5xl leading-tight font-bold text-transparent sm:text-6xl md:text-7xl dark:from-blue-400 dark:to-purple-400"
+      >
         Chris Lyons
       </h1>
-      <p class="text-xl sm:text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8">
+      <p class="mb-8 text-xl text-gray-700 sm:text-2xl md:text-3xl dark:text-gray-300">
         Developer, Architect, and Builder
       </p>
-      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+      <p class="mx-auto mb-12 max-w-2xl text-lg text-gray-600 dark:text-gray-400">
         Crafting elegant solutions to complex problems. Specializing in scalable architectures,
         clean code, and building products that matter.
       </p>
-      <div class="flex gap-4 justify-center">
+      <div class="flex justify-center gap-4">
         <a href="/projects" class="btn-primary">View Projects</a>
         <a href="/contact" class="btn-secondary">Get in Touch</a>
       </div>
@@ -24,27 +26,28 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Skills Section -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900/50">
-    <div class="max-w-6xl mx-auto">
+  <section class="bg-gray-50 px-4 py-20 sm:px-6 lg:px-8 dark:bg-gray-900/50">
+    <div class="mx-auto max-w-6xl">
       <h2 class="section-title">Technical Expertise</h2>
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid gap-8 md:grid-cols-3">
         <div class="card-hover">
-          <div class="text-3xl mb-4">⚡</div>
-          <h3 class="text-xl font-semibold mb-3">Development</h3>
+          <div class="mb-4 text-3xl">⚡</div>
+          <h3 class="mb-3 text-xl font-semibold">Development</h3>
           <p class="text-gray-600 dark:text-gray-400">
-            Building full solutions that fit the need—cloud, AI, microservices, serverless, containerized.
+            Building full solutions that fit the need—cloud, AI, microservices, serverless,
+            containerized.
           </p>
         </div>
         <div class="card-hover">
-          <div class="text-3xl mb-4">🏗️</div>
-          <h3 class="text-xl font-semibold mb-3">Architecture</h3>
+          <div class="mb-4 text-3xl">🏗️</div>
+          <h3 class="mb-3 text-xl font-semibold">Architecture</h3>
           <p class="text-gray-600 dark:text-gray-400">
             Designing systems that scale and adapt to real-world challenges.
           </p>
         </div>
         <div class="card-hover">
-          <div class="text-3xl mb-4">🔨</div>
-          <h3 class="text-xl font-semibold mb-3">Building</h3>
+          <div class="mb-4 text-3xl">🔨</div>
+          <h3 class="mb-3 text-xl font-semibold">Building</h3>
           <p class="text-gray-600 dark:text-gray-400">
             Turning ideas into reality with the right tools and technologies.
           </p>
@@ -54,10 +57,10 @@ import Layout from '../layouts/Layout.astro';
   </section>
   <!-- CTA Section -->
   <section class="section-container-narrow text-center">
-    <h2 class="text-3xl sm:text-4xl font-bold mb-6">Let's Build Something Great</h2>
-    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+    <h2 class="mb-6 text-3xl font-bold sm:text-4xl">Let's Build Something Great</h2>
+    <p class="mb-8 text-lg text-gray-600 dark:text-gray-400">
       I'm always interested in hearing about new projects and opportunities.
     </p>
-    <a href="/contact" class="inline-block btn-primary">Start a Conversation</a>
+    <a href="/contact" class="btn-primary inline-block">Start a Conversation</a>
   </section>
 </Layout>

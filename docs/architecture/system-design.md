@@ -48,6 +48,7 @@ Rel(html, assets, "Loads", "Images/Fonts")
 **Decision:** Use Astro as the primary framework
 
 **Rationale:**
+
 - Zero JavaScript by default
 - Excellent for content-focused sites
 - Island architecture for interactivity
@@ -55,6 +56,7 @@ Rel(html, assets, "Loads", "Images/Fonts")
 - Great DX
 
 **Alternatives Considered:**
+
 - Next.js: Too much overhead for static site
 - Gatsby: Slower builds, more complex
 - Jekyll: Limited modern tooling
@@ -64,12 +66,14 @@ Rel(html, assets, "Loads", "Images/Fonts")
 **Decision:** Use React for interactive components
 
 **Rationale:**
+
 - Familiar ecosystem
 - Rich component library
 - Excellent TypeScript support
 - Works well with Astro islands
 
 **Alternatives Considered:**
+
 - Vue: Less familiar to team
 - Svelte: Smaller ecosystem
 - Vanilla JS: Less maintainable
@@ -79,12 +83,14 @@ Rel(html, assets, "Loads", "Images/Fonts")
 **Decision:** Use Tailwind CSS 4 via Vite plugin
 
 **Rationale:**
+
 - Smaller bundle sizes
 - Faster build times
 - Modern CSS features
 - No PostCSS required
 
 **Alternatives Considered:**
+
 - Styled Components: More runtime overhead
 - CSS Modules: Less utility-based
 - Plain CSS: Less maintainable at scale
@@ -94,12 +100,14 @@ Rel(html, assets, "Loads", "Images/Fonts")
 **Decision:** Deploy as static site to Cloudflare Pages
 
 **Rationale:**
+
 - No server costs
 - Infinite scalability
 - Excellent performance
 - Simple deployment
 
 **Alternatives Considered:**
+
 - Server-side rendering: Unnecessary complexity
 - Client-side rendering: Poor SEO/performance
 - Hybrid: Overkill for this use case
@@ -328,8 +336,10 @@ getTTFB(console.log);
 ### Content Security Policy
 
 ```html
-<meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+/>
 ```
 
 ### Dependency Security

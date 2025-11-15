@@ -144,18 +144,14 @@ import { ViewTransitions } from 'astro:transitions';
 
 <head>
   <ViewTransitions />
-  {import.meta.env.PROD && (
-    <script
-      defer
-      src="/_vercel/insights/script.js"
-    ></script>
-  )}
+  {import.meta.env.PROD && <script defer src="/_vercel/insights/script.js" />}
 </head>
 ```
 
 ### View Metrics
 
 Monitor in Vercel dashboard:
+
 - Page views
 - Unique visitors
 - Core Web Vitals
@@ -175,6 +171,7 @@ Assets:   1 year (immutable)
 ### Optimization
 
 Vercel applies:
+
 - Brotli compression
 - HTTP/2 push
 - Image optimization
@@ -189,6 +186,7 @@ Check build logs in Vercel dashboard.
 Common issues:
 
 **Missing dependencies:**
+
 ```bash
 # Ensure package-lock.json is committed
 git add package-lock.json
@@ -196,6 +194,7 @@ git commit -m "fix: add lock file"
 ```
 
 **Environment variables:**
+
 ```bash
 # Add in Vercel dashboard
 Settings → Environment Variables
@@ -204,10 +203,12 @@ Settings → Environment Variables
 ### Deployment Issues
 
 **Old version showing:**
+
 - Clear CDN cache in Vercel
 - Hard refresh browser (Ctrl+Shift+R)
 
 **Domain not working:**
+
 - Verify DNS settings
 - Wait for propagation
 - Check SSL certificate status
@@ -251,6 +252,7 @@ Same as production, but deployed to preview URL.
 ### Deployment Status
 
 View in Vercel dashboard:
+
 - Build logs
 - Deployment status
 - Error reports
@@ -279,6 +281,7 @@ Configured via `vercel.json`:
 ### DDoS Protection
 
 Vercel provides:
+
 - Rate limiting
 - DDoS mitigation
 - WAF (on Pro plan)
@@ -288,6 +291,7 @@ Vercel provides:
 ### Free Tier
 
 Includes:
+
 - 100 GB bandwidth
 - Unlimited deployments
 - Preview deployments
@@ -296,6 +300,7 @@ Includes:
 ### Pro Tier ($20/month)
 
 Adds:
+
 - 1 TB bandwidth
 - Advanced analytics
 - Password protection

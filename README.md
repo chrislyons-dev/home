@@ -55,13 +55,13 @@ npm run preview
 
 ## Commands
 
-| Command | Action |
-|---------|--------|
-| `npm run dev` | Start dev server |
-| `npm run build` | Build for production |
-| `npm test` | Run tests |
-| `npm run lighthouse` | Run performance audits |
-| `npm run docs:arch` | Generate architecture docs |
+| Command              | Action                     |
+| -------------------- | -------------------------- |
+| `npm run dev`        | Start dev server           |
+| `npm run build`      | Build for production       |
+| `npm test`           | Run tests                  |
+| `npm run lighthouse` | Run performance audits     |
+| `npm run docs:arch`  | Generate architecture docs |
 
 ## Deployment
 

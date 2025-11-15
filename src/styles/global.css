@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Optimize font loading */
 @supports (font-variation-settings: normal) {
@@ -11,8 +11,11 @@
   --color-accent: oklch(70% 0.2 250);
   --color-accent-dark: oklch(60% 0.2 250);
 
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-sans:
+    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -79,7 +82,7 @@ code {
 }
 
 .mermaid-container svg {
-  @apply max-w-full h-auto;
+  @apply h-auto max-w-full;
 }
 
 /* Prevent layout shift for mermaid pre elements */
@@ -92,7 +95,7 @@ pre.mermaid {
 
 /* Navigation link styling - optimize for performance */
 .nav-link {
-  @apply py-2 px-1 min-h-[44px] flex items-center;
+  @apply flex min-h-[44px] items-center px-1 py-2;
   transition: color 0.2s ease;
   position: relative;
 }
@@ -102,13 +105,15 @@ pre.mermaid {
 }
 
 .nav-link-active {
-  @apply text-blue-600 dark:text-blue-400 font-medium;
+  @apply font-medium text-blue-600 dark:text-blue-400;
 }
 
 /* Button styles - use transform for hardware acceleration */
 .btn-primary {
-  @apply px-8 py-4 bg-blue-600 text-white rounded-lg font-medium min-h-[44px] min-w-[44px];
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  @apply min-h-[44px] min-w-[44px] rounded-lg bg-blue-600 px-8 py-4 font-medium text-white;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
   will-change: transform;
 }
 
@@ -118,8 +123,10 @@ pre.mermaid {
 }
 
 .btn-secondary {
-  @apply px-8 py-4 border border-gray-300 dark:border-gray-700 rounded-lg font-medium min-h-[44px] min-w-[44px];
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  @apply min-h-[44px] min-w-[44px] rounded-lg border border-gray-300 px-8 py-4 font-medium dark:border-gray-700;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
   will-change: transform;
 }
 
@@ -130,62 +137,65 @@ pre.mermaid {
 
 /* Card styles - use transform for composited animations */
 .card {
-  @apply p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800;
+  @apply rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900;
 }
 
 .card-hover {
-  @apply p-6 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800;
-  transition: border-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  @apply rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900;
+  transition:
+    border-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
   will-change: transform;
 }
 
 .card-hover:hover {
-  @apply border-blue-600 dark:border-blue-400 shadow-lg;
+  @apply border-blue-600 shadow-lg dark:border-blue-400;
   transform: translateY(-2px);
 }
 
 .card-featured {
-  @apply p-6 rounded-lg border-2 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 border-blue-200 dark:border-blue-800;
+  @apply rounded-lg border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-purple-50 p-6 dark:border-blue-800 dark:from-blue-950/20 dark:to-purple-950/20;
 }
 
 /* Badge/Tag styles */
 .badge {
-  @apply px-3 py-1 text-sm rounded-full;
+  @apply rounded-full px-3 py-1 text-sm;
 }
 
 .badge-primary {
-  @apply px-3 py-1 text-sm rounded-full bg-blue-600 text-white;
+  @apply rounded-full bg-blue-600 px-3 py-1 text-sm text-white;
 }
 
 .badge-secondary {
-  @apply px-3 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-800;
+  @apply rounded-full bg-gray-200 px-3 py-1 text-sm dark:bg-gray-800;
 }
 
 /* Icon container */
 .icon-box {
-  @apply w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0;
+  @apply flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30;
 }
 
 .icon-box svg {
-  @apply w-6 h-6 text-blue-600 dark:text-blue-400;
+  @apply h-6 w-6 text-blue-600 dark:text-blue-400;
 }
 
 /* Info box / CTA box */
 .info-box {
-  @apply p-8 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-800;
+  @apply rounded-lg border border-gray-200 bg-gray-50 p-8 dark:border-gray-800 dark:bg-gray-900/50;
 }
 
 .info-box-featured {
-  @apply p-8 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-lg border border-blue-200 dark:border-blue-800;
+  @apply rounded-lg border border-blue-200 bg-gradient-to-br from-blue-50 to-purple-50 p-8 dark:border-blue-800 dark:from-blue-950/20 dark:to-purple-950/20;
 }
 
 /* Section containers */
 .section-container {
-  @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20;
+  @apply mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8;
 }
 
 .section-container-narrow {
-  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20;
+  @apply mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8;
 }
 
 /* Common text styles */
@@ -203,28 +213,28 @@ pre.mermaid {
 
 /* Headings */
 .page-title {
-  @apply text-4xl sm:text-5xl font-bold mb-8;
+  @apply mb-8 text-4xl font-bold sm:text-5xl;
 }
 
 .section-title {
-  @apply text-3xl sm:text-4xl font-bold text-center mb-12;
+  @apply mb-12 text-center text-3xl font-bold sm:text-4xl;
 }
 
 .subsection-title {
-  @apply text-2xl font-bold mb-4;
+  @apply mb-4 text-2xl font-bold;
 }
 
 .feature-title {
-  @apply text-lg font-semibold mb-2;
+  @apply mb-2 text-lg font-semibold;
 }
 
 /* Prose styling for project cards */
 .prose h2 {
-  @apply text-xl font-bold mt-6 mb-3;
+  @apply mt-6 mb-3 text-xl font-bold;
 }
 
 .prose h3 {
-  @apply text-lg font-semibold mt-4 mb-2;
+  @apply mt-4 mb-2 text-lg font-semibold;
 }
 
 .prose p {
@@ -232,11 +242,11 @@ pre.mermaid {
 }
 
 .prose ul {
-  @apply list-disc pl-5 my-3;
+  @apply my-3 list-disc pl-5;
 }
 
 .prose ol {
-  @apply list-decimal pl-5 my-3;
+  @apply my-3 list-decimal pl-5;
 }
 
 .prose li {
@@ -244,11 +254,11 @@ pre.mermaid {
 }
 
 .prose code {
-  @apply bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm;
+  @apply rounded bg-gray-100 px-1.5 py-0.5 text-sm dark:bg-gray-800;
 }
 
 .prose pre {
-  @apply bg-gray-900 dark:bg-gray-950 p-4 rounded-lg overflow-x-auto my-4;
+  @apply my-4 overflow-x-auto rounded-lg bg-gray-900 p-4 dark:bg-gray-950;
 }
 
 .prose pre code {
@@ -256,7 +266,7 @@ pre.mermaid {
 }
 
 .prose a {
-  @apply text-blue-600 dark:text-blue-400 hover:underline;
+  @apply text-blue-600 hover:underline dark:text-blue-400;
 }
 
 .prose strong {

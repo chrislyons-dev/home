@@ -8,26 +8,26 @@ Understanding the project's dependency structure and management.
 
 Core dependencies shipped to production:
 
-| Package | Version | Purpose |
-|---------|---------|---------|
-| astro | ^5.14.1 | Static site framework |
-| react | ^19.2.0 | UI library |
-| react-dom | ^19.2.0 | React DOM renderer |
-| tailwindcss | ^4.1.14 | Utility-first CSS |
-| @astrojs/react | ^4.4.0 | Astro React integration |
-| @astrojs/sitemap | ^3.6.0 | Sitemap generation |
-| @tailwindcss/vite | ^4.1.14 | Tailwind Vite plugin |
+| Package           | Version | Purpose                 |
+| ----------------- | ------- | ----------------------- |
+| astro             | ^5.14.1 | Static site framework   |
+| react             | ^19.2.0 | UI library              |
+| react-dom         | ^19.2.0 | React DOM renderer      |
+| tailwindcss       | ^4.1.14 | Utility-first CSS       |
+| @astrojs/react    | ^4.4.0  | Astro React integration |
+| @astrojs/sitemap  | ^3.6.0  | Sitemap generation      |
+| @tailwindcss/vite | ^4.1.14 | Tailwind Vite plugin    |
 
 ### Development Dependencies
 
 Tools used during development:
 
-| Package | Version | Purpose |
-|---------|---------|---------|
-| vitest | ^3.2.4 | Unit testing |
-| typescript | Latest | Type checking |
-| husky | ^9.1.7 | Git hooks |
-| @commitlint/cli | ^20.1.0 | Commit linting |
+| Package            | Version | Purpose             |
+| ------------------ | ------- | ------------------- |
+| vitest             | ^3.2.4  | Unit testing        |
+| typescript         | Latest  | Type checking       |
+| husky              | ^9.1.7  | Git hooks           |
+| @commitlint/cli    | ^20.1.0 | Commit linting      |
 | dependency-cruiser | ^17.0.1 | Dependency analysis |
 
 ## Dependency Graph
@@ -149,10 +149,10 @@ npm outdated
 # .github/dependabot.yml
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     open-pull-requests-limit: 10
 ```
 
@@ -185,12 +185,12 @@ npm run analyze
 
 ### Current Bundle Sizes
 
-| Bundle | Size (gzipped) |
-|--------|----------------|
-| Main CSS | ~15kb |
-| Main JS | ~5kb |
-| React chunk | ~40kb |
-| **Total** | **~60kb** |
+| Bundle      | Size (gzipped) |
+| ----------- | -------------- |
+| Main CSS    | ~15kb          |
+| Main JS     | ~5kb           |
+| React chunk | ~40kb          |
+| **Total**   | **~60kb**      |
 
 ## Dependency Updates
 

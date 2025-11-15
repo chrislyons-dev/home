@@ -32,6 +32,7 @@ Enable automatic analytics injection via Cloudflare dashboard:
 ### What Gets Tracked
 
 **Page Metrics:**
+
 - Page views
 - Unique visitors
 - Bounce rate
@@ -39,12 +40,14 @@ Enable automatic analytics injection via Cloudflare dashboard:
 - Exit pages
 
 **Performance Metrics:**
+
 - **LCP** (Largest Contentful Paint) - Load performance
 - **FID** (First Input Delay) - Interactivity
 - **CLS** (Cumulative Layout Shift) - Visual stability
 - **TTFB** (Time to First Byte) - Server response time
 
 **User Context:**
+
 - Browser type and version
 - Operating system
 - Device type (mobile/desktop/tablet)
@@ -52,6 +55,7 @@ Enable automatic analytics injection via Cloudflare dashboard:
 - Country/region (based on IP)
 
 **Traffic Sources:**
+
 - Referrer URLs
 - Direct traffic
 - Search engines
@@ -68,6 +72,7 @@ Enable automatic analytics injection via Cloudflare dashboard:
 ### Accessing Analytics
 
 **Cloudflare Dashboard:**
+
 ```
 https://dash.cloudflare.com
 → Your Domain
@@ -76,6 +81,7 @@ https://dash.cloudflare.com
 ```
 
 **Key Reports:**
+
 - **Traffic**: Real-time and historical page views
 - **Performance**: Core Web Vitals breakdown
 - **Geo**: Geographic distribution
@@ -88,6 +94,7 @@ https://dash.cloudflare.com
 Tracked via GitHub Actions:
 
 **Build Performance:**
+
 ```yaml
 # Automatically tracked in CI
 - Build duration
@@ -98,6 +105,7 @@ Tracked via GitHub Actions:
 ```
 
 **View Build Metrics:**
+
 ```
 GitHub Repository
 → Actions tab
@@ -121,6 +129,7 @@ GitHub Repository
    - **Build Analytics**: Deployment success/failure rates
 
 **Available Metrics:**
+
 - Requests per second
 - Bandwidth usage
 - Cache hit ratio
@@ -134,14 +143,15 @@ GitHub Repository
 
 Cloudflare Web Analytics automatically tracks:
 
-| Metric | Target | What It Measures |
-|--------|--------|------------------|
-| **LCP** | < 2.5s | How fast main content loads |
-| **FID** | < 100ms | How quickly page responds to interaction |
-| **CLS** | < 0.1 | Visual stability (no layout jumps) |
-| **TTFB** | < 800ms | Server response time |
+| Metric   | Target  | What It Measures                         |
+| -------- | ------- | ---------------------------------------- |
+| **LCP**  | < 2.5s  | How fast main content loads              |
+| **FID**  | < 100ms | How quickly page responds to interaction |
+| **CLS**  | < 0.1   | Visual stability (no layout jumps)       |
+| **TTFB** | < 800ms | Server response time                     |
 
 **View Core Web Vitals:**
+
 ```
 Cloudflare Dashboard
 → Web Analytics
@@ -180,12 +190,14 @@ Lighthouse runs automatically on every push/PR via GitHub Actions:
 ```
 
 **Accessing Results:**
+
 1. Go to GitHub Actions workflow run
 2. Scroll to **Artifacts** section
 3. Download `lighthouse-results`
 4. Open `.lighthouseci` folder for detailed reports
 
 **Tracked Metrics:**
+
 - Performance score
 - Accessibility score
 - Best Practices score
@@ -197,12 +209,14 @@ Lighthouse runs automatically on every push/PR via GitHub Actions:
 ### Build Errors
 
 **GitHub Actions:**
+
 - Compilation errors
 - Test failures
 - Linting issues
 - TypeScript errors
 
 **Access Build Logs:**
+
 ```
 GitHub Repository
 → Actions
@@ -215,6 +229,7 @@ GitHub Repository
 **Cloudflare Pages:**
 
 **View Error Rates:**
+
 ```
 Cloudflare Dashboard
 → Workers & Pages
@@ -224,6 +239,7 @@ Cloudflare Dashboard
 ```
 
 **Error Types:**
+
 - **4xx**: Client errors (404 not found, etc.)
 - **5xx**: Server errors (extremely rare with static sites)
 
@@ -241,6 +257,7 @@ Track missing pages via Cloudflare Analytics:
 ### GitHub Actions Status
 
 **CI Pipeline:**
+
 ```
 GitHub Repository
 → Actions tab
@@ -248,12 +265,14 @@ GitHub Repository
 ```
 
 **Tracked:**
+
 - Test results
 - Build success/failure
 - Lighthouse CI results
 - Deployment status
 
 **Status Badge:**
+
 ```markdown
 ![CI](https://github.com/username/repo/workflows/CI/badge.svg)
 ```
@@ -261,6 +280,7 @@ GitHub Repository
 ### Cloudflare Pages Deployments
 
 **View Deployment History:**
+
 ```
 Cloudflare Dashboard
 → Workers & Pages
@@ -269,6 +289,7 @@ Cloudflare Dashboard
 ```
 
 **Deployment Metrics:**
+
 - Build time
 - Success/failure rate
 - Deployment frequency
@@ -279,10 +300,12 @@ Cloudflare Dashboard
 ### GitHub Actions
 
 **Email Notifications:**
+
 - Enabled by default for workflow failures
 - Configure in GitHub Settings → Notifications
 
 **Webhook Integration:**
+
 ```yaml
 # .github/workflows/ci.yml
 - name: Notify on failure
@@ -298,6 +321,7 @@ Cloudflare Dashboard
 **Setup Alerts:**
 
 1. **Navigate to Notifications**
+
    ```
    Cloudflare Dashboard
    → Notifications
@@ -320,11 +344,13 @@ Cloudflare Dashboard
 ### Recommended Alerts
 
 **Critical:**
+
 - ✅ Build failures (GitHub Actions)
 - ✅ 5xx error rate > 1%
 - ✅ SSL certificate expiring < 30 days
 
 **Warning:**
+
 - ⚠️ Lighthouse performance score < 95
 - ⚠️ 404 error spike (sudden increase)
 - ⚠️ Build time > 5 minutes
@@ -336,6 +362,7 @@ Cloudflare Dashboard
 If you need to track custom events beyond page views:
 
 **Client-Side Beacon API:**
+
 ```javascript
 // Example: Track button clicks
 document.querySelector('.btn-primary').addEventListener('click', () => {
@@ -343,7 +370,7 @@ document.querySelector('.btn-primary').addEventListener('click', () => {
     const data = JSON.stringify({
       event: 'button_click',
       label: 'contact_cta',
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
     navigator.sendBeacon('/api/events', data);
   }
@@ -355,11 +382,13 @@ document.querySelector('.btn-primary').addEventListener('click', () => {
 ### Server-Side Logging
 
 **Cloudflare Logs (Enterprise Only):**
+
 - Full HTTP request logs
 - Real-time log streaming
 - Integration with external tools (Datadog, Splunk, etc.)
 
 **Free Tier Alternative:**
+
 - Use Cloudflare Web Analytics
 - Export data via GraphQL API (limited)
 
@@ -374,10 +403,10 @@ Configured in `.lighthouserc.json`:
   "ci": {
     "assert": {
       "assertions": {
-        "categories:performance": ["warn", {"minScore": 0.95}],
-        "categories:accessibility": ["warn", {"minScore": 0.95}],
-        "categories:best-practices": ["warn", {"minScore": 0.95}],
-        "categories:seo": ["warn", {"minScore": 0.95}]
+        "categories:performance": ["warn", { "minScore": 0.95 }],
+        "categories:accessibility": ["warn", { "minScore": 0.95 }],
+        "categories:best-practices": ["warn", { "minScore": 0.95 }],
+        "categories:seo": ["warn", { "minScore": 0.95 }]
       }
     }
   }
@@ -405,15 +434,18 @@ du -sh dist/
 ## Data Retention
 
 **Cloudflare Web Analytics:**
+
 - Free tier: 90 days
 - Pro plan: 1 year
 - Enterprise: Custom retention
 
 **GitHub Actions:**
+
 - Workflow logs: 90 days
 - Artifacts: 90 days (configurable)
 
 **Lighthouse CI:**
+
 - Stored in GitHub Artifacts (30 days as configured)
 - Can be extended or exported to external storage
 
@@ -422,12 +454,14 @@ du -sh dist/
 ### GDPR Compliance
 
 **Cloudflare Web Analytics:**
+
 - ✅ No cookies (no consent banner needed)
 - ✅ No personal data collection
 - ✅ Anonymous IP addresses
 - ✅ No cross-site tracking
 
 **What's NOT tracked:**
+
 - ❌ Individual user identification
 - ❌ Personal information
 - ❌ Session IDs
@@ -438,12 +472,14 @@ du -sh dist/
 **Export Analytics Data:**
 
 Via Cloudflare API:
+
 ```bash
 curl -X GET "https://api.cloudflare.com/client/v4/accounts/{account_id}/analytics/web" \
   -H "Authorization: Bearer {api_token}"
 ```
 
 **Available Formats:**
+
 - JSON (via API)
 - CSV (via dashboard export)
 
@@ -452,6 +488,7 @@ curl -X GET "https://api.cloudflare.com/client/v4/accounts/{account_id}/analytic
 ### Cloudflare Dashboard
 
 **Quick Access:**
+
 - Traffic overview
 - Performance metrics
 - Core Web Vitals
@@ -461,6 +498,7 @@ curl -X GET "https://api.cloudflare.com/client/v4/accounts/{account_id}/analytic
 ### GitHub Insights
 
 **Repository Analytics:**
+
 ```
 GitHub Repository
 → Insights tab
@@ -470,6 +508,7 @@ GitHub Repository
 ```
 
 **Available Data:**
+
 - Repository clones
 - Views and visitors
 - Referring sites
@@ -480,16 +519,19 @@ GitHub Repository
 ### Performance Issues
 
 **Check Cloudflare Analytics:**
+
 1. Identify slow pages (high LCP/TTFB)
 2. Check geographic distribution (CDN issues?)
 3. Review device/browser breakdown
 
 **Run Lighthouse:**
+
 ```bash
 npm run lighthouse
 ```
 
 **Review Diagnostics:**
+
 - Render-blocking resources
 - Unused JavaScript
 - Image optimization opportunities
@@ -497,11 +539,13 @@ npm run lighthouse
 ### High Error Rates
 
 **Check Cloudflare Pages:**
+
 1. View error breakdown by status code
 2. Check recent deployments (did a bad deploy cause it?)
 3. Review build logs for issues
 
 **Rollback if Needed:**
+
 ```
 Cloudflare Dashboard
 → Workers & Pages
@@ -514,17 +558,20 @@ Cloudflare Dashboard
 ### Regular Review
 
 **Weekly:**
+
 - ✅ Check Core Web Vitals trends
 - ✅ Review top pages performance
 - ✅ Monitor error rates
 
 **Monthly:**
+
 - ✅ Analyze traffic patterns
 - ✅ Review bundle sizes
 - ✅ Check Lighthouse scores
 - ✅ Audit 404 errors
 
 **Quarterly:**
+
 - ✅ Performance budget review
 - ✅ Analytics data export
 - ✅ Alert configuration review

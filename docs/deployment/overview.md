@@ -9,6 +9,7 @@ This site supports multiple deployment platforms:
 ### Primary: Cloudflare Pages ⭐
 
 **Best for:**
+
 - Main production site
 - Unlimited bandwidth
 - Global edge network
@@ -19,6 +20,7 @@ This site supports multiple deployment platforms:
 ### Vercel (Alternative)
 
 **Best for:**
+
 - Alternative to Cloudflare
 - Preview deployments
 - Analytics
@@ -28,6 +30,7 @@ This site supports multiple deployment platforms:
 ### GitHub Pages
 
 **Best for:**
+
 - Documentation site
 - MkDocs deployment
 - Open source projects
@@ -37,6 +40,7 @@ This site supports multiple deployment platforms:
 ### Other Platforms
 
 Also compatible with:
+
 - Netlify
 - AWS S3 + CloudFront
 - Any static host
@@ -107,14 +111,16 @@ VERCEL_TOKEN=xxx
 The CI/CD pipeline automatically handles deployments:
 
 **CI Workflow** (runs on every push to main):
+
 - Runs tests and builds
 - Generates architecture documentation
 - Uploads Lighthouse performance reports
 - **Always deploys to GitHub Pages** (documentation)
 
 **CD Workflow** (conditional deployment):
+
 - **Deploys to Cloudflare Pages** only when source code changes
-- **Skips deployment** for documentation-only changes (docs/, *.md files)
+- **Skips deployment** for documentation-only changes (docs/, \*.md files)
 - Can be triggered manually via workflow_dispatch
 
 ### Development
@@ -145,11 +151,13 @@ git pull
 ### Deployment Triggers
 
 **Cloudflare Pages deploys when:**
+
 - Source files change (src/, components/, scripts/, config files)
 - Manual workflow dispatch is triggered
 - NOT when only docs/ or .md files change
 
 **GitHub Pages deploys when:**
+
 - Any push to main branch
 - Documentation or architecture diagrams updated
 
@@ -178,12 +186,14 @@ git push origin main
 ### Build Status
 
 Check build status in:
+
 - GitHub Actions
 - Cloudflare Pages dashboard
 
 ### Site Health
 
 Monitor:
+
 - Cloudflare Web Analytics
 - Core Web Vitals
 - Error rates (Cloudflare dashboard)

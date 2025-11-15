@@ -17,6 +17,7 @@ This directory contains configuration files for various development tools and se
 ## Usage
 
 These configs are referenced by:
+
 - **CI/CD Workflows**: `.github/workflows/ci.yml`
 - **NPM Scripts**: `package.json`
 - **Git Hooks**: `.husky/commit-msg`, `.husky/pre-commit`
@@ -24,6 +25,7 @@ These configs are referenced by:
 ## Framework Configs (Still in Root)
 
 Some configs remain in the project root because the tools require it:
+
 - `astro.config.mjs` - Astro framework
 - `tsconfig.json` - TypeScript compiler
 - `vitest.config.ts` - Vitest test runner

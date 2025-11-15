@@ -14,9 +14,9 @@ Base layout component used by all pages.
 
 ```typescript
 interface Props {
-  title: string;           // Page title
-  description?: string;    // Meta description
-  ogImage?: string;        // Open Graph image
+  title: string; // Page title
+  description?: string; // Meta description
+  ogImage?: string; // Open Graph image
 }
 ```
 
@@ -27,10 +27,7 @@ interface Props {
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout
-  title="My Page"
-  description="Page description"
->
+<Layout title="My Page" description="Page description">
   <h1>Content</h1>
 </Layout>
 ```
@@ -105,11 +102,7 @@ const tech = [
 ];
 ---
 
-<TechStack
-  technologies={tech}
-  filterable={true}
-  client:load
-/>
+<TechStack technologies={tech} filterable={true} client:load />
 ```
 
 ### CodeBlock
@@ -205,7 +198,7 @@ const meta = generateMetaTags({
 });
 ---
 
-{meta.map(tag => <meta {...tag} />)}
+{meta.map((tag) => <meta {...tag} />)}
 ```
 
 ## Types
@@ -249,10 +242,7 @@ interface Metadata {
 ```javascript
 export default defineConfig({
   site: 'https://chrislyons.dev',
-  integrations: [
-    react(),
-    sitemap(),
-  ],
+  integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },

@@ -1,4 +1,13 @@
-echo "🔍 Running tests..."
+echo "🎨 Checking code formatting..."
+npm run formatcheck
+
+echo "🔍 Running linter..."
+npm run lint
+
+echo "📝 Running type checks..."
+npm run type
+
+echo "🧪 Running tests..."
 npm test
 
 echo "🏗️  Generating architecture documentation..."

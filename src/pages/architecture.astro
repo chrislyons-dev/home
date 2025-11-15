@@ -8,191 +8,252 @@ import dataPipelineDiagram from '../../docs/architecture/examples/data-pipeline.
 import orderServiceDiagram from '../../docs/architecture/examples/order-service.puml?raw';
 ---
 
-<Layout title="Architecture — Chris Lyons" description="Architecture as code examples using Mermaid and PlantUML diagrams that live with the system.">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-    <h1 class="text-4xl sm:text-5xl font-bold mb-4">Architecture as Code</h1>
-    <p class="text-xl text-gray-600 dark:text-gray-400 mb-12">
+<Layout
+  title="Architecture — Chris Lyons"
+  description="Architecture as code examples using Mermaid and PlantUML diagrams that live with the system."
+>
+  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+    <h1 class="mb-4 text-4xl font-bold sm:text-5xl">Architecture as Code</h1>
+    <p class="mb-12 text-xl text-gray-600 dark:text-gray-400">
       Living documentation that evolves with your systems. These diagrams are generated from code,
       version-controlled, and automatically updated.
     </p>
 
     <!-- Architecture Philosophy -->
-    <div class="mb-16 p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
-      <h2 class="text-2xl font-bold mb-4">Why Architecture as Code?</h2>
-      <div class="grid md:grid-cols-2 gap-6 text-gray-900 dark:text-gray-100">
+    <div
+      class="mb-16 rounded-lg border border-blue-200 bg-gradient-to-br from-blue-50 to-purple-50 p-6 dark:border-blue-800 dark:from-blue-950/20 dark:to-purple-950/20"
+    >
+      <h2 class="mb-4 text-2xl font-bold">Why Architecture as Code?</h2>
+      <div class="grid gap-6 text-gray-900 md:grid-cols-2 dark:text-gray-100">
         <div>
-          <h3 class="font-semibold mb-2 text-blue-600 dark:text-blue-400">✓ Always Up to Date</h3>
-          <p class="text-sm">Diagrams live in the codebase and update with every change. No more outdated PowerPoints.</p>
+          <h3 class="mb-2 font-semibold text-blue-600 dark:text-blue-400">✓ Always Up to Date</h3>
+          <p class="text-sm">
+            Diagrams live in the codebase and update with every change. No more outdated
+            PowerPoints.
+          </p>
         </div>
         <div>
-          <h3 class="font-semibold mb-2 text-blue-600 dark:text-blue-400">✓ Version Controlled</h3>
-          <p class="text-sm">Track architecture evolution over time. See what changed, when, and why.</p>
+          <h3 class="mb-2 font-semibold text-blue-600 dark:text-blue-400">✓ Version Controlled</h3>
+          <p class="text-sm">
+            Track architecture evolution over time. See what changed, when, and why.
+          </p>
         </div>
         <div>
-          <h3 class="font-semibold mb-2 text-blue-600 dark:text-blue-400">✓ Review & Collaborate</h3>
-          <p class="text-sm">Architecture changes go through pull requests just like code. Team visibility built-in.</p>
+          <h3 class="mb-2 font-semibold text-blue-600 dark:text-blue-400">
+            ✓ Review & Collaborate
+          </h3>
+          <p class="text-sm">
+            Architecture changes go through pull requests just like code. Team visibility built-in.
+          </p>
         </div>
         <div>
-          <h3 class="font-semibold mb-2 text-blue-600 dark:text-blue-400">✓ Automated Publishing</h3>
-          <p class="text-sm">Diagrams render automatically in CI/CD. Documentation deploys with every release.</p>
+          <h3 class="mb-2 font-semibold text-blue-600 dark:text-blue-400">
+            ✓ Automated Publishing
+          </h3>
+          <p class="text-sm">
+            Diagrams render automatically in CI/CD. Documentation deploys with every release.
+          </p>
         </div>
       </div>
     </div>
 
     <!-- C4 Model Levels -->
     <section class="mb-16">
-      <h2 class="text-3xl font-bold mb-6">C4 Model: 4 Levels of Architecture Diagrams</h2>
-      <p class="text-gray-600 dark:text-gray-400 mb-6">
-        Progressive zoom from system context down to code level. Each level can be automatically generated from your infrastructure and application code.
+      <h2 class="mb-6 text-3xl font-bold">C4 Model: 4 Levels of Architecture Diagrams</h2>
+      <p class="mb-6 text-gray-600 dark:text-gray-400">
+        Progressive zoom from system context down to code level. Each level can be automatically
+        generated from your infrastructure and application code.
       </p>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid gap-6 md:grid-cols-2">
         <!-- Level 1: System Context -->
-        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border-2 border-blue-200 dark:border-blue-800">
-          <div class="flex items-center justify-between mb-4">
+        <div
+          class="rounded-lg border-2 border-blue-200 bg-white p-6 dark:border-blue-800 dark:bg-gray-900"
+        >
+          <div class="mb-4 flex items-center justify-between">
             <h3 class="text-xl font-bold">Level 1: System Context</h3>
-            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full text-xs font-semibold">System</span>
+            <span
+              class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900 dark:text-blue-300"
+              >System</span
+            >
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
             Big picture: your system, users, and external dependencies
           </p>
-          <div class="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded text-xs font-mono">
-            User → Web App → Database<br/>
-            Web App → Payment API<br/>
+          <div class="mb-4 rounded bg-gray-50 p-3 font-mono text-xs dark:bg-gray-800">
+            User → Web App → Database<br />
+            Web App → Payment API<br />
             Web App → Email Service
           </div>
-          <div class="text-sm space-y-2">
+          <div class="space-y-2 text-sm">
             <div>
               <strong class="text-green-600 dark:text-green-400">⚡ How It Works:</strong>
-              <p class="text-gray-600 dark:text-gray-400 mt-1">
+              <p class="mt-1 text-gray-600 dark:text-gray-400">
                 Parse deployment pipelines and infrastructure configs to extract external systems
               </p>
             </div>
-            <div class="pl-4 border-l-2 border-blue-200 dark:border-blue-700">
-              <strong class="text-blue-600 dark:text-blue-400 text-xs">Real Example:</strong>
-              <p class="text-gray-600 dark:text-gray-400 mt-1 text-xs">
-                Parse <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">.github/workflows/cd.yml</code> to extract Cloudflare Pages, deployment triggers, and external services
+            <div class="border-l-2 border-blue-200 pl-4 dark:border-blue-700">
+              <strong class="text-xs text-blue-600 dark:text-blue-400">Real Example:</strong>
+              <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+                Parse <code class="rounded bg-gray-100 px-1 dark:bg-gray-700"
+                  >.github/workflows/cd.yml</code
+                > to extract Cloudflare Pages, deployment triggers, and external services
               </p>
             </div>
           </div>
         </div>
 
         <!-- Level 2: Container -->
-        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border-2 border-purple-200 dark:border-purple-800">
-          <div class="flex items-center justify-between mb-4">
+        <div
+          class="rounded-lg border-2 border-purple-200 bg-white p-6 dark:border-purple-800 dark:bg-gray-900"
+        >
+          <div class="mb-4 flex items-center justify-between">
             <h3 class="text-xl font-bold">Level 2: Container</h3>
-            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs font-semibold">Container</span>
+            <span
+              class="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900 dark:text-purple-300"
+              >Container</span
+            >
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
             Applications, databases, microservices, file systems
           </p>
-          <div class="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded text-xs font-mono">
-            React SPA<br/>
-            Node.js API<br/>
-            Redis Cache<br/>
+          <div class="mb-4 rounded bg-gray-50 p-3 font-mono text-xs dark:bg-gray-800">
+            React SPA<br />
+            Node.js API<br />
+            Redis Cache<br />
             PostgreSQL DB
           </div>
-          <div class="text-sm space-y-2">
+          <div class="space-y-2 text-sm">
             <div>
               <strong class="text-green-600 dark:text-green-400">⚡ How It Works:</strong>
-              <p class="text-gray-600 dark:text-gray-400 mt-1">
+              <p class="mt-1 text-gray-600 dark:text-gray-400">
                 Parse Infrastructure as Code to extract resources and dependencies
               </p>
             </div>
-            <div class="pl-4 border-l-2 border-purple-200 dark:border-purple-700">
-              <strong class="text-purple-600 dark:text-purple-400 text-xs">Real Example:</strong>
-              <p class="text-gray-600 dark:text-gray-400 mt-1 text-xs">
-                <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">inframap generate terraform/</code> generates PlantUML from Terraform state, or parse <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">package.json</code> dependencies
+            <div class="border-l-2 border-purple-200 pl-4 dark:border-purple-700">
+              <strong class="text-xs text-purple-600 dark:text-purple-400">Real Example:</strong>
+              <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+                <code class="rounded bg-gray-100 px-1 dark:bg-gray-700"
+                  >inframap generate terraform/</code
+                > generates PlantUML from Terraform state, or parse <code
+                  class="rounded bg-gray-100 px-1 dark:bg-gray-700">package.json</code
+                > dependencies
               </p>
             </div>
           </div>
         </div>
 
         <!-- Level 3: Component -->
-        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border-2 border-green-200 dark:border-green-800">
-          <div class="flex items-center justify-between mb-4">
+        <div
+          class="rounded-lg border-2 border-green-200 bg-white p-6 dark:border-green-800 dark:bg-gray-900"
+        >
+          <div class="mb-4 flex items-center justify-between">
             <h3 class="text-xl font-bold">Level 3: Component</h3>
-            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold">Component</span>
+            <span
+              class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700 dark:bg-green-900 dark:text-green-300"
+              >Component</span
+            >
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
             Services, controllers, repositories within a container
           </p>
-          <div class="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded text-xs font-mono">
-            UserService<br/>
-            OrderController<br/>
-            PaymentGateway<br/>
+          <div class="mb-4 rounded bg-gray-50 p-3 font-mono text-xs dark:bg-gray-800">
+            UserService<br />
+            OrderController<br />
+            PaymentGateway<br />
             DatabaseRepository
           </div>
-          <div class="text-sm space-y-2">
+          <div class="space-y-2 text-sm">
             <div>
               <strong class="text-green-600 dark:text-green-400">⚡ How It Works:</strong>
-              <p class="text-gray-600 dark:text-gray-400 mt-1">
+              <p class="mt-1 text-gray-600 dark:text-gray-400">
                 Scan source code directory structure and module organization
               </p>
             </div>
-            <div class="pl-4 border-l-2 border-green-200 dark:border-green-700">
-              <strong class="text-green-600 dark:text-green-400 text-xs">Real Example:</strong>
-              <p class="text-gray-600 dark:text-gray-400 mt-1 text-xs">
-                Recursively scan <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">src/services/</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">src/components/</code> directories and parse <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">index.ts</code> exports
+            <div class="border-l-2 border-green-200 pl-4 dark:border-green-700">
+              <strong class="text-xs text-green-600 dark:text-green-400">Real Example:</strong>
+              <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+                Recursively scan <code class="rounded bg-gray-100 px-1 dark:bg-gray-700"
+                  >src/services/</code
+                >, <code class="rounded bg-gray-100 px-1 dark:bg-gray-700">src/components/</code> directories
+                and parse <code class="rounded bg-gray-100 px-1 dark:bg-gray-700">index.ts</code> exports
               </p>
             </div>
           </div>
         </div>
 
         <!-- Level 4: Code -->
-        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg border-2 border-orange-200 dark:border-orange-800">
-          <div class="flex items-center justify-between mb-4">
+        <div
+          class="rounded-lg border-2 border-orange-200 bg-white p-6 dark:border-orange-800 dark:bg-gray-900"
+        >
+          <div class="mb-4 flex items-center justify-between">
             <h3 class="text-xl font-bold">Level 4: Code</h3>
-            <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 rounded-full text-xs font-semibold">Code</span>
+            <span
+              class="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700 dark:bg-orange-900 dark:text-orange-300"
+              >Code</span
+            >
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
             Classes, methods, functions, interfaces
           </p>
-          <div class="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded text-xs font-mono">
-            class UserService {"{"}<br/>
-            &nbsp;&nbsp;getUser(id)<br/>
-            &nbsp;&nbsp;updateUser(id, data)<br/>
-            &nbsp;&nbsp;deleteUser(id)<br/>
-            {"}"}
+          <div class="mb-4 rounded bg-gray-50 p-3 font-mono text-xs dark:bg-gray-800">
+            class UserService {'{'}<br />
+            &nbsp;&nbsp;getUser(id)<br />
+            &nbsp;&nbsp;updateUser(id, data)<br />
+            &nbsp;&nbsp;deleteUser(id)<br />
+            {'}'}
           </div>
-          <div class="text-sm space-y-2">
+          <div class="space-y-2 text-sm">
             <div>
               <strong class="text-green-600 dark:text-green-400">⚡ How It Works:</strong>
-              <p class="text-gray-600 dark:text-gray-400 mt-1">
+              <p class="mt-1 text-gray-600 dark:text-gray-400">
                 Use AST parsers to extract class structures, method signatures, and dependencies
               </p>
             </div>
-            <div class="pl-4 border-l-2 border-orange-200 dark:border-orange-700">
-              <strong class="text-orange-600 dark:text-orange-400 text-xs">Real Example:</strong>
-              <p class="text-gray-600 dark:text-gray-400 mt-1 text-xs">
-                Use <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">acorn</code> or <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">@babel/parser</code> to parse TypeScript files and extract class methods, or use <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">typedoc</code> for full API docs
+            <div class="border-l-2 border-orange-200 pl-4 dark:border-orange-700">
+              <strong class="text-xs text-orange-600 dark:text-orange-400">Real Example:</strong>
+              <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+                Use <code class="rounded bg-gray-100 px-1 dark:bg-gray-700">acorn</code> or <code
+                  class="rounded bg-gray-100 px-1 dark:bg-gray-700">@babel/parser</code
+                > to parse TypeScript files and extract class methods, or use <code
+                  class="rounded bg-gray-100 px-1 dark:bg-gray-700">typedoc</code
+                > for full API docs
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-950/20 rounded border border-blue-200 dark:border-blue-800">
+      <div
+        class="mt-6 rounded border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/20"
+      >
         <p class="text-sm text-gray-700 dark:text-gray-300">
           <strong>💡 This Portfolio:</strong> All 4 C4 levels are auto-generated from code using
-          <code class="bg-white dark:bg-gray-800 px-2 py-1 rounded text-xs">npm run docs:arch</code>
+          <code class="rounded bg-white px-2 py-1 text-xs dark:bg-gray-800">npm run docs:arch</code>
         </p>
       </div>
     </section>
 
     <!-- Example 1: C4 Level 1 - System Context -->
     <section class="mb-16">
-      <h2 class="text-3xl font-bold mb-6">
-        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded text-sm font-semibold mr-2">Level 1</span>
+      <h2 class="mb-6 text-3xl font-bold">
+        <span
+          class="mr-2 rounded bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700 dark:bg-blue-900 dark:text-blue-300"
+          >Level 1</span
+        >
         System Context Example
       </h2>
-      <p class="text-gray-600 dark:text-gray-400 mb-6">
-        High-level view of this portfolio site and its external dependencies, auto-generated from GitHub Actions workflows.
+      <p class="mb-6 text-gray-600 dark:text-gray-400">
+        High-level view of this portfolio site and its external dependencies, auto-generated from
+        GitHub Actions workflows.
       </p>
 
-      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+      <div
+        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+      >
         <div class="mermaid-diagram mb-4">
-          <pre class="mermaid bg-white dark:bg-gray-900 p-4 rounded overflow-x-auto">{`graph TB
+          <pre
+            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-gray-900">{`graph TB
     User[Visitor]
     Site[ChrisLyons.dev<br/>Portfolio Site]
     CF[Cloudflare Pages<br/>Hosting + CDN]
@@ -213,88 +274,132 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     style GH fill:#059669,color:#fff`}</pre>
         </div>
         <div class="text-sm text-gray-600 dark:text-gray-400">
-          <strong>Generated from:</strong> <code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">.github/workflows/cd.yml</code> and <code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">ci.yml</code>
+          <strong>Generated from:</strong>
+          <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
+            >.github/workflows/cd.yml</code
+          > and <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800">ci.yml</code>
         </div>
       </div>
     </section>
 
     <!-- Example 2: C4 Level 2 - Microservices -->
     <section class="mb-16">
-      <h2 class="text-3xl font-bold mb-6">
-        <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded text-sm font-semibold mr-2">Level 2</span>
+      <h2 class="mb-6 text-3xl font-bold">
+        <span
+          class="mr-2 rounded bg-purple-100 px-3 py-1 text-sm font-semibold text-purple-700 dark:bg-purple-900 dark:text-purple-300"
+          >Level 2</span
+        >
         Container Example: Microservices Architecture
       </h2>
-      <p class="text-gray-600 dark:text-gray-400 mb-6">
-        Event-driven microservices with Kafka showing containers (services, databases, message queues) and their interactions.
+      <p class="mb-6 text-gray-600 dark:text-gray-400">
+        Event-driven microservices with Kafka showing containers (services, databases, message
+        queues) and their interactions.
       </p>
 
-      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+      <div
+        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+      >
         <div class="mermaid-diagram mb-4">
-          <pre class="mermaid bg-white dark:bg-gray-900 p-4 rounded overflow-x-auto">{microservicesDiagram}</pre>
+          <pre
+            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-gray-900">{microservicesDiagram}</pre>
         </div>
         <div class="text-sm text-gray-600 dark:text-gray-400">
-          <strong>Source:</strong> <code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">docs/architecture/examples/microservices.mmd</code>
+          <strong>Source:</strong>
+          <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
+            >docs/architecture/examples/microservices.mmd</code
+          >
         </div>
       </div>
     </section>
 
     <!-- Example 3: C4 Level 2 - Data Pipeline -->
     <section class="mb-16">
-      <h2 class="text-3xl font-bold mb-6">
-        <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded text-sm font-semibold mr-2">Level 2</span>
+      <h2 class="mb-6 text-3xl font-bold">
+        <span
+          class="mr-2 rounded bg-purple-100 px-3 py-1 text-sm font-semibold text-purple-700 dark:bg-purple-900 dark:text-purple-300"
+          >Level 2</span
+        >
         Container Example: Data Pipeline Architecture
       </h2>
-      <p class="text-gray-600 dark:text-gray-400 mb-6">
-        Real-time and batch data processing containers showing data flow from ingestion through transformation to consumption.
+      <p class="mb-6 text-gray-600 dark:text-gray-400">
+        Real-time and batch data processing containers showing data flow from ingestion through
+        transformation to consumption.
       </p>
 
-      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+      <div
+        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+      >
         <div class="mermaid-diagram mb-4">
-          <pre class="mermaid bg-white dark:bg-gray-900 p-4 rounded overflow-x-auto">{dataPipelineDiagram}</pre>
+          <pre
+            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-gray-900">{dataPipelineDiagram}</pre>
         </div>
         <div class="text-sm text-gray-600 dark:text-gray-400">
-          <strong>Source:</strong> <code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">docs/architecture/examples/data-pipeline.mmd</code>
+          <strong>Source:</strong>
+          <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
+            >docs/architecture/examples/data-pipeline.mmd</code
+          >
         </div>
       </div>
     </section>
 
     <!-- Example 4: C4 Level 3 - Components -->
     <section class="mb-16">
-      <h2 class="text-3xl font-bold mb-6">
-        <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded text-sm font-semibold mr-2">Level 3</span>
+      <h2 class="mb-6 text-3xl font-bold">
+        <span
+          class="mr-2 rounded bg-green-100 px-3 py-1 text-sm font-semibold text-green-700 dark:bg-green-900 dark:text-green-300"
+          >Level 3</span
+        >
         Component Example: Order Service
       </h2>
-      <p class="text-gray-600 dark:text-gray-400 mb-6">
-        Zooming into the Order Service container to show its internal components, controllers, and repositories.
+      <p class="mb-6 text-gray-600 dark:text-gray-400">
+        Zooming into the Order Service container to show its internal components, controllers, and
+        repositories.
       </p>
 
-      <PlantUMLDiagram code={orderServiceDiagram} alt="C4 Component Diagram - Order Service" client:visible />
+      <PlantUMLDiagram
+        code={orderServiceDiagram}
+        alt="C4 Component Diagram - Order Service"
+        client:visible
+      />
 
-      <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+      <div class="mt-6 rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
         <details class="cursor-pointer">
-          <summary class="font-semibold text-sm mb-2">View PlantUML Source Code</summary>
-          <pre class="text-xs overflow-x-auto bg-white dark:bg-gray-900 p-3 rounded mt-2"><code>{orderServiceDiagram}</code></pre>
+          <summary class="mb-2 text-sm font-semibold">View PlantUML Source Code</summary>
+          <pre
+            class="mt-2 overflow-x-auto rounded bg-white p-3 text-xs dark:bg-gray-900"><code>{orderServiceDiagram}</code></pre>
         </details>
         <div class="mt-3 text-sm text-gray-600 dark:text-gray-400">
-          <strong>Source:</strong> <code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">docs/architecture/examples/order-service.puml</code>
+          <strong>Source:</strong>
+          <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
+            >docs/architecture/examples/order-service.puml</code
+          >
         </div>
       </div>
     </section>
 
     <!-- Example 5: C4 Level 4 - Code -->
     <section class="mb-16">
-      <h2 class="text-3xl font-bold mb-6">
-        <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 rounded text-sm font-semibold mr-2">Level 4</span>
+      <h2 class="mb-6 text-3xl font-bold">
+        <span
+          class="mr-2 rounded bg-orange-100 px-3 py-1 text-sm font-semibold text-orange-700 dark:bg-orange-900 dark:text-orange-300"
+          >Level 4</span
+        >
         Code Example: ThemeManager Class
       </h2>
-      <p class="text-gray-600 dark:text-gray-400 mb-6">
-        Zooming into a component to show class structure and method signatures, auto-generated from TypeScript source code.
-        <strong>Note:</strong> Level 4 diagrams are optional. They're great for critical algorithms, security components, or complex business logic that needs detailed documentation. But avoid generating them for entire systems—they quickly become overwhelming and unmaintainable at scale.
+      <p class="mb-6 text-gray-600 dark:text-gray-400">
+        Zooming into a component to show class structure and method signatures, auto-generated from
+        TypeScript source code.
+        <strong>Note:</strong> Level 4 diagrams are optional. They're great for critical algorithms,
+        security components, or complex business logic that needs detailed documentation. But avoid generating
+        them for entire systems—they quickly become overwhelming and unmaintainable at scale.
       </p>
 
-      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+      <div
+        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+      >
         <div class="mermaid-diagram mb-4">
-          <pre class="mermaid bg-white dark:bg-gray-900 p-4 rounded overflow-x-auto">{`classDiagram
+          <pre
+            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-gray-900">{`classDiagram
     class ThemeManager {
         -storage: ThemeStorage
         -favicon: FaviconManager
@@ -320,21 +425,27 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     note "Auto-generated from src/services/ThemeManager.ts"`}</pre>
         </div>
         <div class="text-sm text-gray-600 dark:text-gray-400">
-          <strong>Generated from:</strong> <code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">src/services/ThemeManager.ts</code> using AST parsing
+          <strong>Generated from:</strong>
+          <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
+            >src/services/ThemeManager.ts</code
+          > using AST parsing
         </div>
       </div>
     </section>
 
-
     <!-- Call to Action -->
-    <div class="p-8 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-800 text-center">
-      <h2 class="text-2xl font-bold mb-4">Want to See More?</h2>
-      <p class="text-gray-600 dark:text-gray-400 mb-6">
-        I can help you implement architecture as code practices in your organization.
-        From tooling setup to CI/CD integration and team training.
+    <div
+      class="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center dark:border-gray-800 dark:bg-gray-900/50"
+    >
+      <h2 class="mb-4 text-2xl font-bold">Want to See More?</h2>
+      <p class="mb-6 text-gray-600 dark:text-gray-400">
+        I can help you implement architecture as code practices in your organization. From tooling
+        setup to CI/CD integration and team training.
       </p>
-      <a href="/contact"
-         class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+      <a
+        href="/contact"
+        class="inline-block rounded-lg bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+      >
         Let's Talk Architecture
       </a>
     </div>
@@ -369,14 +480,17 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     };
 
     // Use Intersection Observer to load Mermaid only when diagrams are visible
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          loadAndInitMermaid();
-          observer.disconnect();
-        }
-      });
-    }, { rootMargin: '50px' });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadAndInitMermaid();
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '50px' }
+    );
 
     // Observe the first mermaid diagram
     const firstDiagram = document.querySelector('pre.mermaid');
@@ -389,7 +503,7 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
       mutations.forEach((mutation) => {
         if (mutation.attributeName === 'class' && mermaidLoaded) {
           // Reset and re-render all diagrams
-          document.querySelectorAll('.mermaid-container').forEach(el => {
+          document.querySelectorAll('.mermaid-container').forEach((el) => {
             const pre = document.createElement('pre');
             pre.className = 'mermaid bg-white dark:bg-gray-900 p-4 rounded overflow-x-auto';
             pre.textContent = el.dataset.mermaidCode;

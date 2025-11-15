@@ -1,17 +1,7 @@
 ---
-title: "Executive Cyber Risk Dashboard"
-description: "Real-time cyber risk monitoring platform for C-suite executives. Mobile-first iPhone app with live alerts, interactive drilldowns, and comprehensive risk analytics."
-tech:
-  [
-    "React",
-    "Python",
-    "AWS Glue",
-    "S3",
-    "Snowflake",
-    "Xcode",
-    "Spark",
-    "WebSockets",
-  ]
+title: 'Executive Cyber Risk Dashboard'
+description: 'Real-time cyber risk monitoring platform for C-suite executives. Mobile-first iPhone app with live alerts, interactive drilldowns, and comprehensive risk analytics.'
+tech: ['React', 'Python', 'AWS Glue', 'S3', 'Snowflake', 'Xcode', 'Spark', 'WebSockets']
 featured: true
 order: 3
 ---

@@ -78,11 +78,7 @@ import { useState } from 'react';
 export default function MyComponent() {
   const [count, setCount] = useState(0);
 
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      Count: {count}
-    </button>
-  );
+  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
 }
 ```
 
@@ -112,10 +108,12 @@ This project uses Tailwind CSS 4.x with predefined utility classes in `src/style
 Available utility classes:
 
 **Layout:**
+
 - `.section-container` - Wide container (max-w-6xl)
 - `.section-container-narrow` - Narrow container (max-w-4xl)
 
 **Typography:**
+
 - `.page-title` - Large page heading
 - `.section-title` - Section heading (centered)
 - `.subsection-title` - Subsection heading (2xl)
@@ -125,6 +123,7 @@ Available utility classes:
 - `.text-heading` - Heading text color
 
 **Components:**
+
 - `.btn-primary`, `.btn-secondary` - Buttons
 - `.card`, `.card-hover`, `.card-featured` - Cards
 - `.badge`, `.badge-primary`, `.badge-secondary` - Tags/badges
@@ -132,12 +131,13 @@ Available utility classes:
 - `.info-box`, `.info-box-featured` - Info/CTA boxes
 
 **Content:**
+
 - `.prose` - Formatted text with typography
 
 **Alternative:** Use Tailwind utility classes directly:
 
 ```astro
-<div class="bg-gray-900 text-white p-4 rounded-lg">
+<div class="rounded-lg bg-gray-900 p-4 text-white">
   <h2 class="text-2xl font-bold">Custom Tailwind Styles</h2>
 </div>
 ```

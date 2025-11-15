@@ -24,23 +24,32 @@ console.log('🏗️  Generating architecture documentation...\n');
 console.log('📊 Generating module dependency graph...');
 try {
   // Check for circular dependencies - madge returns paths if circular deps exist
-  const circularCheck = execSync('npx madge --circular --extensions ts,tsx,astro,jsx,js --exclude "node_modules|.astro" --json src/', {
-    cwd: rootDir,
-    encoding: 'utf-8'
-  });
+  const circularCheck = execSync(
+    'npx madge --circular --extensions ts,tsx,astro,jsx,js --exclude "node_modules|.astro" --json src/',
+    {
+      cwd: rootDir,
+      encoding: 'utf-8',
+    }
+  );
 
   const circularDeps = JSON.parse(circularCheck);
   if (Object.keys(circularDeps).length > 0) {
     console.log('  ⚠️  Warning: Circular dependencies detected!');
-    writeFileSync(join(docsDir, 'circular-dependencies.json'), JSON.stringify(circularDeps, null, 2));
+    writeFileSync(
+      join(docsDir, 'circular-dependencies.json'),
+      JSON.stringify(circularDeps, null, 2)
+    );
   }
 
   // Generate Graphviz DOT file and Mermaid diagram
   try {
-    const dotOutput = execSync('npx madge --extensions ts,tsx,astro,jsx,js --exclude "node_modules|.astro" --dot src/', {
-      cwd: rootDir,
-      encoding: 'utf-8'
-    });
+    const dotOutput = execSync(
+      'npx madge --extensions ts,tsx,astro,jsx,js --exclude "node_modules|.astro" --dot src/',
+      {
+        cwd: rootDir,
+        encoding: 'utf-8',
+      }
+    );
     writeFileSync(join(docsDir, 'dependencies.dot'), dotOutput);
 
     // Convert to Mermaid format
@@ -103,7 +112,7 @@ try {
 
   const routeFiles = findRouteFiles(pagesDir);
 
-  const routes = routeFiles.map(route => {
+  const routes = routeFiles.map((route) => {
     const path = route
       .replace(/^/, '/')
       .replace('/index.astro', '/')
@@ -178,8 +187,8 @@ function parseProjectConfig() {
       deployTarget: '',
       buildCommand: '',
       outputDir: '',
-      triggers: []
-    }
+      triggers: [],
+    },
   };
 
   // Parse package.json
@@ -188,7 +197,7 @@ function parseProjectConfig() {
     config.name = packageJson.name || config.name;
     config.dependencies = {
       ...packageJson.dependencies,
-      ...packageJson.devDependencies
+      ...packageJson.devDependencies,
     };
   } catch (error) {
     console.log('  ⚠️  Could not parse package.json');
@@ -205,7 +214,9 @@ function parseProjectConfig() {
     }
 
     // Extract integrations
-    const integrationMatches = astroConfig.matchAll(/import\s+(\w+)\s+from\s+['"]@astrojs\/([^'"]+)['"]/g);
+    const integrationMatches = astroConfig.matchAll(
+      /import\s+(\w+)\s+from\s+['"]@astrojs\/([^'"]+)['"]/g
+    );
     for (const match of integrationMatches) {
       config.integrations.push(match[2]);
     }
@@ -317,7 +328,7 @@ function analyzeComponentStructure() {
     layouts: [],
     services: [],
     utils: [],
-    data: []
+    data: [],
   };
 
   function scanDirectory(dir, category) {
@@ -333,7 +344,7 @@ function analyzeComponentStructure() {
         structure[category].push({
           name: entry.name.replace(/\.(tsx?|astro|jsx?)$/, ''),
           file: relativePath,
-          type: entry.name.split('.').pop()
+          type: entry.name.split('.').pop(),
         });
       }
     }
@@ -347,7 +358,9 @@ function analyzeComponentStructure() {
   scanDirectory(join(srcDir, 'utils'), 'utils');
   scanDirectory(join(srcDir, 'data'), 'data');
 
-  console.log(`  ✓ Found ${structure.pages.length} pages, ${structure.components.length} components, ${structure.services.length} services`);
+  console.log(
+    `  ✓ Found ${structure.pages.length} pages, ${structure.components.length} components, ${structure.services.length} services`
+  );
   return structure;
 }
 
@@ -357,7 +370,7 @@ function analyzeCodeStructure() {
     classes: [],
     functions: [],
     interfaces: [],
-    exports: []
+    exports: [],
   };
 
   // Focus on a key service file for detailed analysis
@@ -380,18 +393,24 @@ function analyzeCodeStructure() {
         // Extract methods for this class (simplified - gets all methods in file)
         const methods = [];
         let methodMatch;
-        const methodPattern = new RegExp(`class\\s+${className}[\\s\\S]*?\\{([\\s\\S]*?)\\n\\}`, 'm');
+        const methodPattern = new RegExp(
+          `class\\s+${className}[\\s\\S]*?\\{([\\s\\S]*?)\\n\\}`,
+          'm'
+        );
         const classBody = code.match(methodPattern);
 
         if (classBody) {
-          const bodyMethodRegex = /^\s*(?:public|private|protected)?\s*(?:async\s+)?(\w+)\s*\([^)]*\)\s*[:{\s]/gm;
+          const bodyMethodRegex =
+            /^\s*(?:public|private|protected)?\s*(?:async\s+)?(\w+)\s*\([^)]*\)\s*[:{\s]/gm;
           let m;
           while ((m = bodyMethodRegex.exec(classBody[1])) !== null) {
             const methodName = m[1];
             // Filter out control flow keywords and only include valid method names
-            if (methodName !== 'constructor' &&
-                !methodName.startsWith('_') &&
-                !['if', 'for', 'while', 'switch', 'catch', 'return'].includes(methodName)) {
+            if (
+              methodName !== 'constructor' &&
+              !methodName.startsWith('_') &&
+              !['if', 'for', 'while', 'switch', 'catch', 'return'].includes(methodName)
+            ) {
               methods.push(methodName);
             }
           }
@@ -400,7 +419,7 @@ function analyzeCodeStructure() {
         structure.classes.push({
           name: className,
           methods: methods,
-          file: 'services/ThemeManager.ts'
+          file: 'services/ThemeManager.ts',
         });
       }
 
@@ -409,13 +428,14 @@ function analyzeCodeStructure() {
       while ((interfaceMatch = interfaceRegex.exec(code)) !== null) {
         structure.interfaces.push(interfaceMatch[1]);
       }
-
     } catch (error) {
       console.log(`  ⚠️  Could not read ThemeManager.ts: ${error.message}`);
     }
   }
 
-  console.log(`  ✓ Analyzed ${structure.classes.length} classes, ${structure.interfaces.length} interfaces`);
+  console.log(
+    `  ✓ Analyzed ${structure.classes.length} classes, ${structure.interfaces.length} interfaces`
+  );
   return structure;
 }
 
@@ -423,8 +443,8 @@ function convertDotToMermaid(dotOutput) {
   // Basic DOT to Mermaid conversion
   const lines = dotOutput
     .split('\n')
-    .filter(line => line.includes('->'))
-    .map(line => {
+    .filter((line) => line.includes('->'))
+    .map((line) => {
       const match = line.match(/"([^"]+)"\s*->\s*"([^"]+)"/);
       if (match) {
         const from = match[1].replace(/[\/\.\-]/g, '_');
@@ -446,8 +466,11 @@ ${lines}
 
 function generateRoutesMermaid(routes) {
   const routeLines = routes
-    .map(route => {
-      const id = route.path === '/' ? 'route_index' : route.path.replace(/[\/\-]/g, '_').replace(/^_/, 'route_');
+    .map((route) => {
+      const id =
+        route.path === '/'
+          ? 'route_index'
+          : route.path.replace(/[\/\-]/g, '_').replace(/^_/, 'route_');
       return `  Pages --> ${id}["${route.path}"]`;
     })
     .join('\n');
@@ -555,7 +578,9 @@ function generateC4ContainerDiagram(config) {
   }
 
   if (hasMermaid || hasPlantUML) {
-    const diagramTools = [hasMermaid && 'Mermaid', hasPlantUML && 'PlantUML'].filter(Boolean).join('/');
+    const diagramTools = [hasMermaid && 'Mermaid', hasPlantUML && 'PlantUML']
+      .filter(Boolean)
+      .join('/');
     containers += `\n    Container(diagrams, "Architecture Diagrams", "${diagramTools}", "Auto-generated technical documentation and visualizations")`;
   }
 
@@ -600,7 +625,7 @@ function generateC4ComponentDiagram(structure, config) {
   // Pages
   if (structure.pages.length > 0) {
     components += `    Component(pages_handler, "Pages Handler", "${config.framework}", "Routes and page rendering")\n`;
-    structure.pages.slice(0, 5).forEach(page => {
+    structure.pages.slice(0, 5).forEach((page) => {
       const id = page.name.replace(/[^a-zA-Z0-9]/g, '_');
       components += `    Component(page_${id}, "${page.name}", "${page.type}", "Page: ${page.file}")\n`;
     });
@@ -612,7 +637,7 @@ function generateC4ComponentDiagram(structure, config) {
   // Components
   if (structure.components.length > 0) {
     components += `    Component(component_registry, "Component Registry", "React/Astro", "UI component library")\n`;
-    structure.components.forEach(comp => {
+    structure.components.forEach((comp) => {
       const id = comp.name.replace(/[^a-zA-Z0-9]/g, '_');
       components += `    Component(comp_${id}, "${comp.name}", "${comp.type}", "${comp.file}")\n`;
     });
@@ -621,7 +646,7 @@ function generateC4ComponentDiagram(structure, config) {
   // Services
   if (structure.services.length > 0) {
     components += `    Component(service_layer, "Service Layer", "TypeScript", "Business logic and state management")\n`;
-    structure.services.forEach(svc => {
+    structure.services.forEach((svc) => {
       const id = svc.name.replace(/[^a-zA-Z0-9]/g, '_');
       components += `    Component(svc_${id}, "${svc.name}", "${svc.type}", "${svc.file}")\n`;
     });
@@ -677,10 +702,10 @@ function generateC4CodeDiagram(structure, config) {
   let code = '';
 
   if (structure.classes.length > 0) {
-    structure.classes.forEach(cls => {
+    structure.classes.forEach((cls) => {
       code += `    class ${cls.name} {\n`;
 
-      cls.methods.forEach(method => {
+      cls.methods.forEach((method) => {
         code += `      +${method}()\n`;
       });
 
@@ -689,7 +714,7 @@ function generateC4CodeDiagram(structure, config) {
   }
 
   if (structure.functions.length > 0) {
-    structure.functions.forEach(func => {
+    structure.functions.forEach((func) => {
       const params = func.params.join(', ');
       code += `    note "function ${func.name}(${params})" as ${func.name}_note\n`;
     });

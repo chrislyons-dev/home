@@ -103,10 +103,10 @@ site_url: https://chrisalexlyons.github.io/home
 theme:
   name: material
   palette:
-    - media: "(prefers-color-scheme: light)"
+    - media: '(prefers-color-scheme: light)'
       scheme: default
       primary: indigo
-    - media: "(prefers-color-scheme: dark)"
+    - media: '(prefers-color-scheme: dark)'
       scheme: slate
       primary: indigo
 
@@ -233,6 +233,7 @@ gh workflow run docs.yml
 ### Build Status
 
 Check in:
+
 - GitHub Actions tab
 - Commit status checks
 
@@ -249,6 +250,7 @@ gh run view <run-id>
 ### Build Fails
 
 **Missing dependencies:**
+
 ```yaml
 - name: Install dependencies
   run: |
@@ -257,6 +259,7 @@ gh run view <run-id>
 ```
 
 **Invalid markdown:**
+
 - Check MkDocs logs
 - Validate frontmatter
 - Fix broken links
@@ -272,6 +275,7 @@ gh run view <run-id>
 **Cause:** GitHub Pages not enabled
 
 **Fix:**
+
 1. Settings → Pages
 2. Source: GitHub Actions
 3. Wait for deployment
@@ -316,9 +320,9 @@ Automatic dark mode toggle:
 ```yaml
 theme:
   palette:
-    - media: "(prefers-color-scheme: light)"
+    - media: '(prefers-color-scheme: light)'
       scheme: default
-    - media: "(prefers-color-scheme: dark)"
+    - media: '(prefers-color-scheme: dark)'
       scheme: slate
 ```
 
@@ -327,6 +331,7 @@ theme:
 **Free** for public repositories.
 
 GitHub Pages includes:
+
 - 1 GB storage
 - 100 GB bandwidth/month
 - Custom domains
