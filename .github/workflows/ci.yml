@@ -24,8 +24,20 @@ jobs:
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             echo "source=true" >> $GITHUB_OUTPUT
           else
+            BASE_SHA="${{ github.event.before }}"
+            TARGET_SHA="${{ github.sha }}"
+
+            if [ "${{ github.event_name }}" == "pull_request" ]; then
+              BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            fi
+
+            EMPTY_TREE=$(git hash-object -t tree /dev/null)
+            if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" == "0000000000000000000000000000000000000000" ]; then
+              BASE_SHA="$EMPTY_TREE"
+            fi
+
             # Check if any files changed outside of docs/ and *.md files
-            git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changed_files.txt
+            git diff --name-only "$BASE_SHA" "$TARGET_SHA" > changed_files.txt
             if grep -v -E '^(docs/|.*\.md$|CONTRIBUTING\.md|DEVELOPMENT\.md|DEPLOYMENT\.md|README\.md)' changed_files.txt; then
               echo "source=true" >> $GITHUB_OUTPUT
               echo "Source code changes detected"
