@@ -40,7 +40,7 @@ import { useState } from 'react';
 
 export default function Interactive() {
   const [state, setState] = useState(0);
-  return <button onClick={() => setState(s => s + 1)}>{state}</button>;
+  return <button onClick={() => setState((s) => s + 1)}>{state}</button>;
 }
 ```
 
@@ -66,7 +66,7 @@ Next-generation Tailwind via Vite plugin:
 - **CSS-first**: No PostCSS required
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-primary: oklch(0.5 0.2 250);
@@ -79,14 +79,17 @@ Next-generation Tailwind via Vite plugin:
 Predefined classes in `src/styles/global.css` for common patterns:
 
 **Layout:**
+
 - `.section-container` - Wide container (max-w-6xl)
 - `.section-container-narrow` - Narrow container (max-w-4xl)
 
 **Typography:**
+
 - `.page-title`, `.section-title`, `.subsection-title`
 - `.text-muted`, `.text-body`, `.text-heading`
 
 **Components:**
+
 - `.btn-primary`, `.btn-secondary` - Buttons with GPU-accelerated hover
 - `.card`, `.card-hover`, `.card-featured` - Card variants
 - `.badge-primary`, `.badge-secondary` - Tags/labels
@@ -94,6 +97,7 @@ Predefined classes in `src/styles/global.css` for common patterns:
 - `.info-box`, `.info-box-featured` - Info/CTA boxes
 
 **Performance Optimizations:**
+
 - Hardware-accelerated animations using `transform`
 - `will-change: transform` for smooth hover effects
 - Composited animations for better performance

@@ -1,7 +1,7 @@
 ---
-title: "Investments Data Warehouse & AI Platform"
-description: "Unified data platform aggregating investment data with tiered pipelines (real-time to daily batch), data products, APIs, and AI integration via Model Context Protocol (MCP)."
-tech: ["Python", "AWS Glue", "Spark", "S3", "Snowflake", "MCP", "Node.js"]
+title: 'Investments Data Warehouse & AI Platform'
+description: 'Unified data platform aggregating investment data with tiered pipelines (real-time to daily batch), data products, APIs, and AI integration via Model Context Protocol (MCP).'
+tech: ['Python', 'AWS Glue', 'Spark', 'S3', 'Snowflake', 'MCP', 'Node.js']
 featured: false
 order: 4
 ---

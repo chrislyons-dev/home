@@ -8,12 +8,12 @@ How this site achieves exceptional performance.
 
 Current scores across all metrics (tested with Lighthouse CI):
 
-| Metric         | Score  | Details                      |
-| -------------- | ------ | ---------------------------- |
-| Performance    | 95+    | Optimized assets, minimal JS |
-| Accessibility  | 95+    | WCAG AA compliant            |
-| Best Practices | 95+    | Modern standards             |
-| SEO            | 95+    | Complete meta tags           |
+| Metric         | Score | Details                      |
+| -------------- | ----- | ---------------------------- |
+| Performance    | 95+   | Optimized assets, minimal JS |
+| Accessibility  | 95+   | WCAG AA compliant            |
+| Best Practices | 95+   | Modern standards             |
+| SEO            | 95+   | Complete meta tags           |
 
 ## Optimization Techniques
 
@@ -101,12 +101,12 @@ Benefits:
 ```javascript
 export default {
   build: {
-    minify: "terser",
+    minify: 'terser',
     cssMinify: true,
     rollupOptions: {
       output: {
         manualChunks: {
-          react: ["react", "react-dom"],
+          react: ['react', 'react-dom'],
         },
       },
     },
@@ -197,33 +197,28 @@ import { Image } from 'astro:assets';
 import heroImage from '../assets/hero.png';
 ---
 
-<Image
-  src={heroImage}
-  alt="Description"
-  loading="lazy"
-  quality={80}
-/>
+<Image src={heroImage} alt="Description" loading="lazy" quality={80} />
 ```
 
 ### Code Splitting
 
 ```typescript
 // Dynamic imports for large components
-const HeavyComponent = lazy(() => import("./HeavyComponent"));
+const HeavyComponent = lazy(() => import('./HeavyComponent'));
 ```
 
 ### Preloading Critical Resources
 
 ```astro
-<link rel="preload" href="/critical.css" as="style">
+<link rel="preload" href="/critical.css" as="style" />
 ```
 
 ## Performance Budget
 
 Target budgets for critical path (initial page load):
 
-| Resource   | Budget | Current  | Notes                          |
-| ---------- | ------ | -------- | ------------------------------ |
+| Resource   | Budget | Current   | Notes                          |
+| ---------- | ------ | --------- | ------------------------------ |
 | HTML       | 20kb   | ~15kb ✅  | Per page                       |
 | CSS        | 30kb   | ~25kb ✅  | Global styles                  |
 | JavaScript | 100kb  | ~45kb ✅  | React + interactive islands    |

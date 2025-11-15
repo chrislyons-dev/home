@@ -1,4 +1,3 @@
-
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default {
@@ -8,7 +7,7 @@ export default {
       open: false,
       gzipSize: true,
       brotliSize: true,
-      template: 'treemap'
-    })
-  ]
+      template: 'treemap',
+    }),
+  ],
 };

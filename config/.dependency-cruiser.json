@@ -33,12 +33,8 @@
       "comment": "Don't use deprecated Node.js core modules",
       "from": {},
       "to": {
-        "dependencyTypes": [
-          "core"
-        ],
-        "path": [
-          "^(punycode|domain|constants|sys|_linklist)$"
-        ]
+        "dependencyTypes": ["core"],
+        "path": ["^(punycode|domain|constants|sys|_linklist)$"]
       }
     },
     {
@@ -48,10 +44,7 @@
       "from": {},
       "to": {
         "couldNotResolve": true,
-        "pathNot": [
-          "^astro:",
-          "^virtual:"
-        ]
+        "pathNot": ["^astro:", "^virtual:"]
       }
     },
     {
@@ -79,17 +72,10 @@
   ],
   "options": {
     "doNotFollow": {
-      "path": [
-        "node_modules",
-        "\\.astro"
-      ]
+      "path": ["node_modules", "\\.astro"]
     },
     "exclude": {
-      "path": [
-        "node_modules",
-        "\\.astro",
-        "dist"
-      ]
+      "path": ["node_modules", "\\.astro", "dist"]
     },
     "tsPreCompilationDeps": true,
     "tsConfig": {

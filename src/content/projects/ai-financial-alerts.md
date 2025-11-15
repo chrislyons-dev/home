@@ -1,7 +1,7 @@
 ---
-title: "AI-Powered Financial Alert System"
-description: "Agentic AI system for financial analysts that identifies market risks and opportunities by synthesizing public, premium, and internal data sources in real-time."
-tech: ["Python", "Anthropic Claude", "DynamoDB", "S3"]
+title: 'AI-Powered Financial Alert System'
+description: 'Agentic AI system for financial analysts that identifies market risks and opportunities by synthesizing public, premium, and internal data sources in real-time.'
+tech: ['Python', 'Anthropic Claude', 'DynamoDB', 'S3']
 featured: true
 order: 1
 ---

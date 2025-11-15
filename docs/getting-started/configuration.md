@@ -26,7 +26,7 @@ export default defineConfig({
 Update the `site` field to match your domain:
 
 ```javascript
-site: 'https://yourdomain.com'
+site: 'https://yourdomain.com';
 ```
 
 This is used for:
@@ -54,7 +54,7 @@ TypeScript settings are in `tsconfig.json`:
 Tailwind CSS 4.x is configured via the Vite plugin. Custom styles go in `src/styles/global.css`:
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-primary: oklch(0.5 0.2 250);
@@ -78,7 +78,7 @@ const siteName = import.meta.env.PUBLIC_SITE_NAME;
 ```
 
 !!! warning "Security"
-    Only variables prefixed with `PUBLIC_` are exposed to the client.
+Only variables prefixed with `PUBLIC_` are exposed to the client.
 
 ## Metadata
 
@@ -87,8 +87,8 @@ Update site metadata in `src/layouts/Layout.astro`:
 ```astro
 ---
 const { title } = Astro.props;
-const description = "Your site description";
-const author = "Your Name";
+const description = 'Your site description';
+const author = 'Your Name';
 ---
 ```
 
@@ -119,10 +119,11 @@ for = "/*"
 Deployment is automated via `.github/workflows/cd.yml` with conditional logic:
 
 - **Deploys to Cloudflare Pages** only when source code changes (src/, components/, scripts/, config files)
-- **Skips deployment** for documentation-only changes (docs/, *.md files)
+- **Skips deployment** for documentation-only changes (docs/, \*.md files)
 - Can be manually triggered via workflow_dispatch
 
 Required secrets in GitHub repository settings:
+
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
 

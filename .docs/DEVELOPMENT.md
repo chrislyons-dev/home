@@ -129,9 +129,7 @@ export default function ThemeToggle({ className }: Props) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   return (
-    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-      Toggle Theme
-    </button>
+    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>Toggle Theme</button>
   );
 }
 ```
@@ -139,9 +137,12 @@ export default function ThemeToggle({ className }: Props) {
 **Hydration Strategies:**
 
 ```astro
-<ThemeToggle client:load />      <!-- Load immediately -->
-<ThemeToggle client:idle />      <!-- Load when idle -->
-<ThemeToggle client:visible />   <!-- Load when visible -->
+<ThemeToggle client:load />
+<!-- Load immediately -->
+<ThemeToggle client:idle />
+<!-- Load when idle -->
+<ThemeToggle client:visible />
+<!-- Load when visible -->
 ```
 
 ## Styling with Tailwind CSS 4
@@ -151,7 +152,7 @@ export default function ThemeToggle({ className }: Props) {
 In `src/styles/global.css`:
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-accent: oklch(70% 0.2 250);
@@ -164,8 +165,8 @@ In `src/styles/global.css`:
 ### Using Utilities
 
 ```astro
-<div class="bg-gray-900 text-white p-4 rounded-lg">
-  <h2 class="text-2xl font-bold mb-2">Title</h2>
+<div class="rounded-lg bg-gray-900 p-4 text-white">
+  <h2 class="mb-2 text-2xl font-bold">Title</h2>
 </div>
 ```
 
@@ -290,6 +291,7 @@ chore(scope): description    # Maintenance
 ### Pre-commit Hooks
 
 Husky automatically runs:
+
 - Commit message validation (commitlint)
 - Type checking
 - Tests
@@ -299,6 +301,7 @@ Husky automatically runs:
 ### GitHub Actions Workflows
 
 **CI** (`.github/workflows/ci.yml`):
+
 - Run tests
 - Build project
 - Lighthouse CI
@@ -306,11 +309,13 @@ Husky automatically runs:
 - Deploy docs to GitHub Pages
 
 **CD** (`.github/workflows/cd.yml`):
+
 - Deploy to Cloudflare Pages (only on source changes)
 
 ## Troubleshooting
 
 **Port in use:**
+
 ```bash
 # Windows
 netstat -ano | findstr :4321
@@ -321,18 +326,21 @@ lsof -ti:4321 | xargs kill
 ```
 
 **Module errors:**
+
 ```bash
 rm -rf node_modules package-lock.json
 npm install
 ```
 
 **Build failures:**
+
 ```bash
 rm -rf .astro
 npm run build
 ```
 
 **Type errors:**
+
 ```bash
 npx tsc --noEmit
 ```

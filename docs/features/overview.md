@@ -68,10 +68,10 @@ A comprehensive look at what makes this site special.
 System-aware dark mode with manual override:
 
 ```tsx
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState("system");
+  const [theme, setTheme] = useState('system');
   // Implementation...
 }
 ```

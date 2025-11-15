@@ -1,17 +1,8 @@
 ---
-title: "Mainframe to Cloud Modernization"
-description: "Led migration from monolithic web application and mainframe backend to cloud-native microservices architecture. Zero-downtime transition with improved scalability and reduced operational costs."
+title: 'Mainframe to Cloud Modernization'
+description: 'Led migration from monolithic web application and mainframe backend to cloud-native microservices architecture. Zero-downtime transition with improved scalability and reduced operational costs.'
 tech:
-  [
-    "Java",
-    "Spring Boot",
-    "Db2 on z/OS",
-    "PostgreSQL",
-    "React",
-    "Node.js",
-    "Kafka",
-    "Kubernetes",
-  ]
+  ['Java', 'Spring Boot', 'Db2 on z/OS', 'PostgreSQL', 'React', 'Node.js', 'Kafka', 'Kubernetes']
 featured: true
 order: 2
 ---

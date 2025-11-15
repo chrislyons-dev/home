@@ -113,4 +113,4 @@ This documentation is licensed under the MIT License.
 
 ---
 
-*This documentation is continuously improved. Check back often for updates!*
+_This documentation is continuously improved. Check back often for updates!_

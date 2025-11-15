@@ -7,7 +7,7 @@ import matter from 'gray-matter';
 async function getProjectFiles() {
   const projectsDir = join(process.cwd(), 'src/content/projects');
   const files = await readdir(projectsDir);
-  return files.filter(f => f.endsWith('.md'));
+  return files.filter((f) => f.endsWith('.md'));
 }
 
 async function parseProjectFile(filename: string) {
@@ -26,7 +26,7 @@ describe('Projects Collection', () => {
   it('should have featured projects', async () => {
     const files = await getProjectFiles();
     const projects = await Promise.all(files.map(parseProjectFile));
-    const featuredProjects = projects.filter(p => p.data.featured);
+    const featuredProjects = projects.filter((p) => p.data.featured);
     expect(featuredProjects.length).toBeGreaterThan(0);
   });
 
@@ -34,7 +34,7 @@ describe('Projects Collection', () => {
     const files = await getProjectFiles();
     const projects = await Promise.all(files.map(parseProjectFile));
 
-    projects.forEach(project => {
+    projects.forEach((project) => {
       expect(project.data.tech).toBeDefined();
       expect(Array.isArray(project.data.tech)).toBe(true);
       expect(project.data.tech.length).toBeGreaterThan(0);
@@ -50,7 +50,7 @@ describe('Projects Collection', () => {
   it('should have unique titles', async () => {
     const files = await getProjectFiles();
     const projects = await Promise.all(files.map(parseProjectFile));
-    const titles = projects.map(p => p.data.title);
+    const titles = projects.map((p) => p.data.title);
     const uniqueTitles = new Set(titles);
 
     expect(titles.length).toBe(uniqueTitles.size);
@@ -59,8 +59,8 @@ describe('Projects Collection', () => {
   it('should have unique order values for featured projects', async () => {
     const files = await getProjectFiles();
     const projects = await Promise.all(files.map(parseProjectFile));
-    const featuredProjects = projects.filter(p => p.data.featured);
-    const orders = featuredProjects.map(p => p.data.order);
+    const featuredProjects = projects.filter((p) => p.data.featured);
+    const orders = featuredProjects.map((p) => p.data.order);
     const uniqueOrders = new Set(orders);
 
     expect(orders.length).toBe(uniqueOrders.size);
@@ -70,7 +70,7 @@ describe('Projects Collection', () => {
     const files = await getProjectFiles();
     const projects = await Promise.all(files.map(parseProjectFile));
 
-    projects.forEach(project => {
+    projects.forEach((project) => {
       expect(project.data.description).toBeDefined();
       expect(typeof project.data.description).toBe('string');
       expect(project.data.description.length).toBeGreaterThan(0);
@@ -83,9 +83,7 @@ describe('Projects Collection', () => {
     const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
 
     for (let i = 1; i < sortedProjects.length; i++) {
-      expect(sortedProjects[i].data.order).toBeGreaterThanOrEqual(
-        sortedProjects[i - 1].data.order
-      );
+      expect(sortedProjects[i].data.order).toBeGreaterThanOrEqual(sortedProjects[i - 1].data.order);
     }
   });
 
@@ -93,7 +91,7 @@ describe('Projects Collection', () => {
     const files = await getProjectFiles();
     const projects = await Promise.all(files.map(parseProjectFile));
 
-    projects.forEach(project => {
+    projects.forEach((project) => {
       expect(project).toHaveProperty('data');
       expect(project.data).toHaveProperty('title');
       expect(project.data).toHaveProperty('description');
@@ -106,13 +104,14 @@ describe('Projects Collection', () => {
   it('should have AI and modernization projects', async () => {
     const files = await getProjectFiles();
     const projects = await Promise.all(files.map(parseProjectFile));
-    const aiProject = projects.find(p =>
-      p.data.title.toLowerCase().includes('ai') ||
-      p.data.description.toLowerCase().includes('ai')
+    const aiProject = projects.find(
+      (p) =>
+        p.data.title.toLowerCase().includes('ai') || p.data.description.toLowerCase().includes('ai')
     );
-    const modernizationProject = projects.find(p =>
-      p.data.title.toLowerCase().includes('modernization') ||
-      p.data.description.toLowerCase().includes('mainframe')
+    const modernizationProject = projects.find(
+      (p) =>
+        p.data.title.toLowerCase().includes('modernization') ||
+        p.data.description.toLowerCase().includes('mainframe')
     );
 
     expect(aiProject).toBeDefined();

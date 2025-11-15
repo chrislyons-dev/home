@@ -62,10 +62,7 @@ Full site navigation via keyboard:
 **ARIA Labels:**
 
 ```astro
-<button
-  aria-label="Toggle dark mode"
-  aria-pressed={isDark}
->
+<button aria-label="Toggle dark mode" aria-pressed={isDark}>
   <span aria-hidden="true">🌙</span>
 </button>
 ```
@@ -73,11 +70,7 @@ Full site navigation via keyboard:
 **Live Regions:**
 
 ```astro
-<div
-  role="status"
-  aria-live="polite"
-  aria-atomic="true"
->
+<div role="status" aria-live="polite" aria-atomic="true">
   {message}
 </div>
 ```
@@ -85,12 +78,7 @@ Full site navigation via keyboard:
 **Skip Links:**
 
 ```astro
-<a
-  href="#main-content"
-  class="skip-link"
->
-  Skip to main content
-</a>
+<a href="#main-content" class="skip-link"> Skip to main content </a>
 ```
 
 ### 4. Color and Contrast
@@ -145,7 +133,7 @@ Proper labels and error handling:
   aria-required="true"
   aria-invalid={hasError}
   aria-describedby="email-error"
->
+/>
 <span id="email-error" role="alert">
   {errorMessage}
 </span>
@@ -171,12 +159,14 @@ describe('Accessibility', () => {
 ### Manual Testing
 
 **Screen Readers:**
+
 - ✅ NVDA (Windows)
 - ✅ JAWS (Windows)
 - ✅ VoiceOver (macOS/iOS)
 - ✅ TalkBack (Android)
 
 **Keyboard Only:**
+
 - ✅ All interactive elements reachable
 - ✅ Logical tab order
 - ✅ Visible focus indicators
@@ -184,6 +174,7 @@ describe('Accessibility', () => {
 ### Browser Testing
 
 Tested across:
+
 - Chrome/Edge with ChromeVox
 - Firefox with NVDA
 - Safari with VoiceOver
@@ -199,18 +190,9 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-export default function Button({
-  onClick,
-  ariaLabel,
-  disabled
-}: ButtonProps) {
+export default function Button({ onClick, ariaLabel, disabled }: ButtonProps) {
   return (
-    <button
-      onClick={onClick}
-      aria-label={ariaLabel}
-      disabled={disabled}
-      aria-disabled={disabled}
-    >
+    <button onClick={onClick} aria-label={ariaLabel} disabled={disabled} aria-disabled={disabled}>
       Click me
     </button>
   );
@@ -220,20 +202,11 @@ export default function Button({
 ### Expandable Sections
 
 ```astro
-<button
-  aria-expanded={isOpen}
-  aria-controls="section-content"
-  onclick="toggleSection()"
->
+<button aria-expanded={isOpen} aria-controls="section-content" onclick="toggleSection()">
   Toggle Section
 </button>
 
-<div
-  id="section-content"
-  hidden={!isOpen}
->
-  Content here
-</div>
+<div id="section-content" hidden={!isOpen}>Content here</div>
 ```
 
 ### Modal Dialogs
@@ -248,12 +221,7 @@ export default function Modal({ isOpen, onClose }) {
   }, [isOpen]);
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-      hidden={!isOpen}
-    >
+    <div role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden={!isOpen}>
       <h2 id="modal-title">Modal Title</h2>
       <button onClick={onClose}>Close</button>
     </div>
@@ -266,18 +234,21 @@ export default function Modal({ isOpen, onClose }) {
 ### Images
 
 **Decorative images:**
+
 ```html
-<img src="decoration.png" alt="" role="presentation">
+<img src="decoration.png" alt="" role="presentation" />
 ```
 
 **Informative images:**
+
 ```html
-<img src="chart.png" alt="Sales increased 40% in Q4">
+<img src="chart.png" alt="Sales increased 40% in Q4" />
 ```
 
 ### Links
 
 **Descriptive link text:**
+
 ```html
 <!-- Bad -->
 <a href="/docs">Click here</a>
@@ -289,11 +260,12 @@ export default function Modal({ isOpen, onClose }) {
 ### Headings
 
 **Logical hierarchy:**
+
 ```html
 <h1>Page Title</h1>
-  <h2>Section</h2>
-    <h3>Subsection</h3>
-  <h2>Another Section</h2>
+<h2>Section</h2>
+<h3>Subsection</h3>
+<h2>Another Section</h2>
 ```
 
 ## Resources

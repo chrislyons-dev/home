@@ -185,18 +185,22 @@ describe('Component', () => {
 
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Testing
+
 How was this tested?
 
 ## Checklist
+
 - [ ] Tests pass
 - [ ] Build succeeds
 - [ ] Documentation updated
@@ -267,6 +271,7 @@ import NewComponent from '../components/NewComponent';
 ### Pre-commit Hooks
 
 Husky runs automatically:
+
 - Commit message validation
 - Type checking
 - Tests

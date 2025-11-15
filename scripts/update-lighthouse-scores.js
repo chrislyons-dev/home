@@ -2,18 +2,15 @@
 
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const LIGHTHOUSECI_DIR = '.lighthouseci';
 const PERFORMANCE_DOC = 'docs/features/performance.md';
 const LINKS_FILE = path.join(LIGHTHOUSECI_DIR, 'links.json');
 
 function calculateAverageScores() {
-  const lhrFiles = fs.readdirSync(LIGHTHOUSECI_DIR)
-    .filter(f => f.startsWith('lhr-') && f.endsWith('.json'));
+  const lhrFiles = fs
+    .readdirSync(LIGHTHOUSECI_DIR)
+    .filter((f) => f.startsWith('lhr-') && f.endsWith('.json'));
 
   if (lhrFiles.length === 0) {
     console.error('No Lighthouse results found');
@@ -24,10 +21,10 @@ function calculateAverageScores() {
     performance: [],
     accessibility: [],
     'best-practices': [],
-    seo: []
+    seo: [],
   };
 
-  lhrFiles.forEach(file => {
+  lhrFiles.forEach((file) => {
     const data = JSON.parse(fs.readFileSync(path.join(LIGHTHOUSECI_DIR, file)));
     if (data.categories) {
       Object.entries(data.categories).forEach(([key, value]) => {
@@ -86,7 +83,9 @@ function updatePerformanceDoc(scores, links) {
 
   fs.writeFileSync(PERFORMANCE_DOC, updatedContent);
   console.log('✅ Updated performance.md with latest Lighthouse scores');
-  console.log(`   Performance: ${scores.performance}, Accessibility: ${scores.accessibility}, Best Practices: ${scores['best-practices']}, SEO: ${scores.seo}`);
+  console.log(
+    `   Performance: ${scores.performance}, Accessibility: ${scores.accessibility}, Best Practices: ${scores['best-practices']}, SEO: ${scores.seo}`
+  );
   if (publicLink) {
     console.log(`   Public report: ${publicLink}`);
   }
