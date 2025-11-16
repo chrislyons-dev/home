@@ -24,6 +24,7 @@ export default [
       '*.d.ts',
       '.lighthouseci/',
       'site/',
+      'scripts/',
     ],
   },
 
