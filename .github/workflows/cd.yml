@@ -72,6 +72,9 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Generate CSP headers
+        run: node scripts/generate-csp-headers.mjs
+
       - name: Deploy to Cloudflare Pages
         id: deployment
         uses: cloudflare/pages-action@v1
