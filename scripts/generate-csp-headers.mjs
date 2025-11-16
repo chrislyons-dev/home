@@ -5,6 +5,10 @@ import { fileURLToPath } from 'node:url';
 
 const DIST_DIR = new URL('../dist', import.meta.url);
 const SCRIPT_SRC_ALLOWLIST = ["'self'", 'https://static.cloudflareinsights.com'];
+const MANUAL_INLINE_SCRIPT_HASHES = [
+  // Cloudflare Pages injects a small inline bootstrap for analytics beacon configuration.
+  'sha256-f+ciQ0o9AmBT/+Kq9n40UrnVTNGWwuRSvlqcFtx3UAA=',
+];
 const OTHER_DIRECTIVES = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://www.plantuml.com",
@@ -46,8 +50,8 @@ const extractInlineScripts = (html) => {
   const scriptRegex = /<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi;
   let match;
   while ((match = scriptRegex.exec(html))) {
-    const body = match[1].trim();
-    if (body) {
+    const body = match[1];
+    if (body.trim()) {
       inlineScripts.push(body);
     }
   }
@@ -78,15 +82,19 @@ const main = async () => {
   }
 
   const sortedHashes = Array.from(hashes).sort();
-  const scriptSrcParts = [...SCRIPT_SRC_ALLOWLIST, ...sortedHashes.map((hash) => `'${hash}'`)];
-  const cspDirective = [
+  const scriptSrcParts = [
+    ...SCRIPT_SRC_ALLOWLIST,
+    ...MANUAL_INLINE_SCRIPT_HASHES.map((hash) => `'${hash}'`),
+    ...sortedHashes.map((hash) => `'${hash}'`),
+  ];
+  const cspDirectives = [
     `Content-Security-Policy: default-src 'self'; script-src ${scriptSrcParts.join(' ')};`,
-    ...OTHER_DIRECTIVES,
-  ].join(' ');
+    ...OTHER_DIRECTIVES.map((directive) => `${directive};`),
+  ];
 
   const headerLines = [
     '/*',
-    `  ${cspDirective}`,
+    ...cspDirectives.map((line) => `  ${line}`),
     ...STATIC_HEADERS.map((line) => `  ${line}`),
     '*/',
     '',
