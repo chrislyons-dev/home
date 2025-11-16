@@ -1,4 +1,7 @@
-const normalizePath = (path: string | null) => {
+/* eslint-env browser */
+/* global window, document */
+
+const normalizePath = (path) => {
   if (!path) return '/';
   const trimmed = path.replace(/\/+$/, '');
   return trimmed === '' ? '/' : trimmed;
@@ -6,7 +9,7 @@ const normalizePath = (path: string | null) => {
 
 const setActiveNavLink = () => {
   const current = normalizePath(window.location.pathname);
-  document.querySelectorAll<HTMLAnchorElement>('nav a[data-route]').forEach((link) => {
+  document.querySelectorAll('nav a[data-route]').forEach((link) => {
     const hrefTarget = normalizePath(link.getAttribute('data-route') || link.getAttribute('href'));
     if (hrefTarget === current) {
       link.classList.add('nav-link-active');
@@ -17,16 +20,16 @@ const setActiveNavLink = () => {
 };
 
 const setupNavigation = () => {
-  const navToggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
-  const mobileNav = document.querySelector<HTMLElement>('[data-mobile-nav]');
-  const mobileOverlay = document.querySelector<HTMLElement>('[data-mobile-overlay]');
+  const navToggle = document.querySelector('[data-nav-toggle]');
+  const mobileNav = document.querySelector('[data-mobile-nav]');
+  const mobileOverlay = document.querySelector('[data-mobile-overlay]');
 
   if (!navToggle || !mobileNav) {
     setActiveNavLink();
     return;
   }
 
-  const setMobileNavState = (isOpen: boolean) => {
+  const setMobileNavState = (isOpen) => {
     navToggle.setAttribute('aria-expanded', String(isOpen));
     mobileNav.dataset.open = String(isOpen);
     mobileNav.style.maxHeight = isOpen ? `${mobileNav.scrollHeight}px` : '0px';
@@ -37,8 +40,8 @@ const setupNavigation = () => {
       mobileOverlay.setAttribute('aria-hidden', String(!isOpen));
     }
 
-    const menuIcon = navToggle.querySelector<SVGElement>('[data-icon="menu"]');
-    const closeIcon = navToggle.querySelector<SVGElement>('[data-icon="close"]');
+    const menuIcon = navToggle.querySelector('[data-icon="menu"]');
+    const closeIcon = navToggle.querySelector('[data-icon="close"]');
     if (menuIcon && closeIcon) {
       menuIcon.classList.toggle('hidden', isOpen);
       closeIcon.classList.toggle('hidden', !isOpen);
@@ -88,5 +91,3 @@ if (document.readyState === 'loading') {
 } else {
   setupNavigation();
 }
-
-export {};

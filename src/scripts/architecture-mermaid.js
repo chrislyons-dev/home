@@ -1,3 +1,6 @@
+/* eslint-env browser */
+/* global document, IntersectionObserver, MutationObserver, setTimeout */
+
 let mermaidLoaded = false;
 
 const loadAndInitMermaid = async () => {
@@ -43,7 +46,7 @@ const initArchitectureMermaid = () => {
   const themeObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.attributeName === 'class' && mermaidLoaded) {
-        document.querySelectorAll<HTMLElement>('.mermaid-container').forEach((el) => {
+        document.querySelectorAll('.mermaid-container').forEach((el) => {
           const pre = document.createElement('pre');
           pre.className = 'mermaid bg-white dark:bg-slate-900 p-4 rounded overflow-x-auto';
           pre.textContent = el.dataset.mermaidCode || '';
@@ -65,5 +68,3 @@ if (document.readyState === 'loading') {
 } else {
   initArchitectureMermaid();
 }
-
-export {};

@@ -1,3 +1,6 @@
+/* eslint-env browser */
+/* global document, MutationObserver, IntersectionObserver */
+
 let mermaidLoaded = false;
 
 const loadMermaid = async () => {
@@ -46,5 +49,3 @@ if (document.readyState === 'loading') {
 } else {
   initProjectMermaid();
 }
-
-export {};
