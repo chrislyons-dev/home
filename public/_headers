@@ -1,10 +1,11 @@
-/*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-tto20NzfUiIByQI5OYKiWSOubyeq3+aAb21oszlWVJs=' 'sha256-BF0290pkb3jxQsE7z00xR8Imp8X34FLC88L0lkMnrGw=' 'sha256-U7a72oKuFFz8D7GUHLA1NZ0ciymHmDOc9T9aVDg2rWU=' 'sha256-O3vfFP5r5eEiNYjNkcLAGvCWuQCbV6WOQfvGk3Fo2tg=' 'sha256-Q2BPg90ZMplYY+FSdApNErhpWafg2hcRRbndmvxuL/Q=' 'sha256-KmpcT33KzQaye+wVhkEYsOvq347NdUDFWOsjtdXpweo=' 'sha256-z5TtZwznv/9Tn8y0JHGWwoxomAHYVFeSZyYy0+7y1PA=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.plantuml.com; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests;
-  Cross-Origin-Opener-Policy: same-origin
-  Cross-Origin-Resource-Policy: same-origin
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: DENY
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), display-capture=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), usb=()
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  X-Permitted-Cross-Domain-Policies: none
+/_
+Content-Security-Policy: generated at build time (see scripts/generate-csp-headers.mjs)
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: accelerometer=(), autoplay=(), camera=(), display-capture=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), usb=()
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Permitted-Cross-Domain-Policies: none
+_/
