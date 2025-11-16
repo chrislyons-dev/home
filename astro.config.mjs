@@ -28,6 +28,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     build: {
       cssMinify: 'lightningcss',
+      assetsInlineLimit: 0,
     },
   },
 });
