@@ -22,7 +22,16 @@ export default function ThemeToggle() {
     setTheme(newTheme);
   };
 
-  if (!theme) return null; // Prevent flash
+  // Render skeleton with fixed dimensions to prevent layout shift
+  if (!theme) {
+    return (
+      <div
+        className="rounded-lg p-2"
+        aria-hidden="true"
+        style={{ width: '36px', height: '36px' }}
+      />
+    );
+  }
 
   return (
     <button

@@ -86,6 +86,7 @@ nav:
       - Overview: architecture/overview.md
       - System Design: architecture/system-design.md
       - Dependencies: architecture/dependencies.md
+  - Security: security.md
   - Deployment:
       - Overview: deployment/overview.md
       - Cloudflare Pages: deployment/cloudflare.md
