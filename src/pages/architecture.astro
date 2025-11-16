@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PlantUMLDiagram from '../components/PlantUMLDiagram';
-import { getArchitectureMermaidScript } from '../utils/inlineScripts';
+import architectureMermaidUrl from '../scripts/architecture-mermaid.ts?url';
 
 // Import example diagrams at build time
 import microservicesDiagram from '../../docs/architecture/examples/microservices.mmd?raw';
@@ -438,5 +438,5 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
     </div>
   </div>
 
-  <script is:inline set:html={getArchitectureMermaidScript()} />
+  <script type="module" src={architectureMermaidUrl}></script>
 </Layout>

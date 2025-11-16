@@ -5,12 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const DIST_DIR = new URL('../dist', import.meta.url);
 const SCRIPT_SRC_ALLOWLIST = ["'self'", 'https://static.cloudflareinsights.com'];
-const MANUAL_INLINE_SCRIPT_HASHES = [
-  // Cloudflare Pages beacon config
-  'sha256-f+ciQ0o9AmBT/+Kq9n40UrnVTNGWwuRSvlqcFtx3UAA=',
-  // Cloudflare Pages inline analytics bootstrap
-  'sha256-hlZrhc+i+vUjl+mMWROalxKxFVLyZYuS3DWvA6KB1No=',
-];
+const MANUAL_INLINE_SCRIPT_HASHES = [];
 const OTHER_DIRECTIVES = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://www.plantuml.com",
