@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import ThemeToggle from '../components/ThemeToggle';
 import { getThemeInitScript } from '../utils/themeInit';
-import navScriptUrl from '../scripts/nav.ts?url';
 
 interface Props {
   title: string;
@@ -204,6 +203,8 @@ const navLinks = [
       </div>
     </footer>
 
-    <script type="module" src={navScriptUrl}></script>
+    <script type="module">
+      import '../scripts/nav.ts';
+    </script>
   </body>
 </html>

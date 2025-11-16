@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import projectsMermaidUrl from '../scripts/projects-mermaid.ts?url';
 
 const projects = await getCollection('projects');
 const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
@@ -65,6 +64,8 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
       </p>
       <a href="/contact" class="btn-primary inline-block">Get in Touch</a>
     </div>
-    <script type="module" src={projectsMermaidUrl}></script>
+    <script type="module">
+      import '../scripts/projects-mermaid.ts';
+    </script>
   </div>
 </Layout>
