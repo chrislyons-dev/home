@@ -1,16 +1,18 @@
 ---
 title: 'AI Employee Assistant with RAG'
-description: 'Retrieval-augmented generation chatbot that helps employees quickly find company policies and procedures. Reduces support tickets and improves policy compliance.'
+description: 'RAG chatbot for company policies and procedures. Vector search with pgvector. Employees get instant answers instead of filing support tickets.'
 tech: ['React', 'Node.js', 'LangChain', 'pgvector']
 featured: false
 order: 5
 ---
 
-Built an intelligent chatbot that serves as a 24/7 knowledge assistant for employees navigating company policies and procedures.
+Employees spent hours hunting for policies. Asking managers. Pinging coworkers on Teams. "Where's the PTO policy?" "How do I expense this?" Constant frustration.
 
-Key capabilities:
+Built a chatbot with RAG. Get the answer in seconds instead of asking around.
 
-- Vector-based semantic search using pgvector for accurate document retrieval
-- Context-aware responses grounded in company documentation
-- Natural language interface that understands questions in plain English
-- Reduces HR/support burden by surfacing answers instantly
+How it works:
+
+- Vector-based semantic search using pgvector for document retrieval
+- Responses grounded in company documentation (no hallucinations)
+- Plain English questions, specific answers
+- Policy lookups went from hours to seconds — employees love it

@@ -1,16 +1,18 @@
 ---
 title: 'Executive Cyber Risk Dashboard'
-description: 'Real-time cyber risk monitoring platform for C-suite executives. Mobile-first iPhone app with live alerts, interactive drilldowns, and comprehensive risk analytics.'
+description: 'Real-time cyber threat monitoring for C-suite executives. Native iOS app with live WebSocket feeds processing millions of security events daily.'
 tech: ['React', 'Python', 'AWS Glue', 'S3', 'Snowflake', 'Xcode', 'Spark', 'WebSockets']
 featured: true
 order: 3
 ---
 
-Built an end-to-end risk intelligence platform delivering real-time cyber threat visibility to executives on mobile and web.
+Executives needed threat visibility. Security team had mountains of data. No way to connect them.
 
-Key capabilities:
+Built a mobile-first dashboard. Real-time alerts. Drill down from summary to raw events.
 
-- Data pipeline processing security events using Spark and AWS Glue
-- Native iOS app with real-time alerts via WebSockets for instant risk notifications
-- Interactive drill-down capabilities from executive summary to raw security events
-- Unified data product with APIs serving both mobile and web applications
+The stack:
+
+- Data pipeline using Spark and AWS Glue processing millions of security events daily
+- Native iOS app with WebSocket feeds for instant threat notifications
+- Interactive drill-down from executive summary to individual security events
+- Unified API layer serving both mobile and web clients
