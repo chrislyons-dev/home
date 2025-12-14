@@ -7,118 +7,201 @@ import Layout from '../layouts/Layout.astro';
   description="Learn more about Chris Lyons, a developer, architect, and builder with expertise in modern web technologies."
 >
   <div class="section-container-narrow">
-    <h1 class="page-title">About Me</h1>
+    <h1 class="page-title">About</h1>
 
     <div class="prose prose-lg dark:prose-invert max-w-none">
-      <p class="mb-8 text-xl text-gray-600 dark:text-slate-400">
-        Architect and engineer. I build systems that work, scale, and last.
-      </p>
+      <!-- About Me -->
+      <section class="mb-16">
+        <h2 class="mb-6 text-3xl font-bold">About Me</h2>
+        <p class="mb-6 text-xl text-gray-600 dark:text-slate-400">
+          Architect and engineer. Whatever the scale, the goal is the same: solve the problem right.
+        </p>
 
-      <h2 class="mt-12 mb-4 text-2xl font-bold">Background</h2>
-      <p class="mb-6 text-gray-700 dark:text-slate-300">
-        End-to-end builder. Small startups to enterprise systems. Whatever the scale, the goal is
-        the same: solve the problem right.
-      </p>
+        <p class="mb-6 text-gray-700 dark:text-slate-300">
+          End-to-end builder. Small startups to enterprise systems.
+        </p>
 
-      <h2 class="mt-12 mb-4 text-2xl font-bold">Technical Stack</h2>
-      <div class="mb-8 grid gap-6 sm:grid-cols-2">
-        <div>
-          <h3 class="text-accent mb-2 font-semibold">Frontend</h3>
-          <ul class="list-inside list-disc text-gray-700 dark:text-slate-300">
-            <li>React, TypeScript</li>
-            <li>Astro, Next.js</li>
-            <li>Tailwind CSS</li>
-            <li>Modern JavaScript (ES2024+)</li>
-          </ul>
+        <h3 class="mb-4 text-xl font-bold">Technical Stack</h3>
+        <div class="mb-8 grid gap-6 sm:grid-cols-2">
+          <div>
+            <h4 class="text-accent mb-2 font-semibold">Frontend</h4>
+            <ul class="list-inside list-disc text-gray-700 dark:text-slate-300">
+              <li>React, TypeScript</li>
+              <li>Astro, Next.js</li>
+              <li>Tailwind CSS</li>
+              <li>Modern JavaScript (ES2024+)</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-accent mb-2 font-semibold">Backend & Infrastructure</h4>
+            <ul class="list-inside list-disc text-gray-700 dark:text-slate-300">
+              <li>Node.js, Python, Java</li>
+              <li>DynamoDB, PostgreSQL, MongoDB</li>
+              <li>Docker, Kubernetes</li>
+              <li>AWS, Azure, GCP</li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <h3 class="text-accent mb-2 font-semibold">Backend & Infrastructure</h3>
-          <ul class="list-inside list-disc text-gray-700 dark:text-slate-300">
-            <li>Node.js, Python, Java</li>
-            <li>DynamoDB, PostgreSQL, MongoDB</li>
-            <li>Docker, Kubernetes</li>
-            <li>AWS, Azure, GCP</li>
-          </ul>
-        </div>
-      </div>
+      </section>
 
-      <h2 class="mt-12 mb-4 text-2xl font-bold">How I Build</h2>
-      <p class="mb-8 text-gray-700 dark:text-slate-300">
-        Code that works today and tomorrow. Here's what matters:
-      </p>
+      <!-- About This Site -->
+      <section
+        class="border-electric-600/20 dark:border-electric-600/40 rounded-lg border-2 bg-gradient-to-br from-white to-gray-50 p-8 dark:from-slate-900 dark:to-slate-900/50"
+      >
+        <h2 class="mb-6 text-3xl font-bold">About This Site</h2>
 
-      <div class="mb-8 grid gap-4 sm:grid-cols-2">
-        <div class="card-hover p-5">
-          <h3 class="mb-2 text-lg font-semibold">Security First</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
-            Input validation, output sanitization, least privilege access. Security is the
-            foundation, not a checkbox.
-          </p>
-        </div>
-        <div class="card-hover p-5">
-          <h3 class="mb-2 text-lg font-semibold">Observability</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
-            Structured logging, distributed tracing, metrics that matter. Know what's happening in
-            production before users do.
-          </p>
-        </div>
-        <div class="card-hover p-5">
-          <h3 class="mb-2 text-lg font-semibold">Reliability</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
-            Circuit breakers, retries with backoff, graceful degradation. Systems fail—design for
-            it.
-          </p>
-        </div>
-        <div class="card-hover p-5">
-          <h3 class="mb-2 text-lg font-semibold">Performance</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
-            Sub-second response times, efficient queries, lazy loading where it counts. Fast by
-            default.
-          </p>
-        </div>
-        <div class="card-hover p-5">
-          <h3 class="mb-2 text-lg font-semibold">Cost Optimization</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
-            Right-sized resources, autoscaling, spot instances where safe. Efficient architecture
-            scales within budget.
-          </p>
-        </div>
-        <div class="card-hover p-5">
-          <h3 class="mb-2 text-lg font-semibold">Architecture as Code</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
-            C4 diagrams generated from source, updated on every commit. Documentation lives with the
-            system.
-          </p>
-        </div>
-        <div class="card-hover p-5">
-          <h3 class="mb-2 text-lg font-semibold">Automated Docs</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
-            API specs from code, architecture from structure. Generate it, version it, never let it
-            drift.
-          </p>
-        </div>
-        <div class="card-hover p-5">
-          <h3 class="mb-2 text-lg font-semibold">Operational Excellence</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
-            CI/CD pipelines, automated rollbacks, incident retrospectives. Build it, run it, learn
-            from it.
-          </p>
-        </div>
-      </div>
+        <p class="mb-6 text-gray-700 dark:text-slate-300">
+          This portfolio is intentionally over-engineered. It's a working demonstration of
+          production-grade practices applied to a static site.
+        </p>
 
-      <!-- Signature Card -->
-      <div class="mb-8">
-        <div
-          class="border-electric-600/20 dark:border-electric-600/40 dark:to-slate-850 rounded-lg border-2 bg-gradient-to-r from-white to-gray-50 p-6 text-center dark:from-slate-900"
-        >
-          <p class="mb-2 text-xl font-semibold text-gray-800 dark:text-gray-200">
-            Every Line Is a Choice
-          </p>
-          <p class="text-gray-600 dark:text-slate-400">
-            Clarity over cleverness. Reliability over shortcuts. Build it right.
+        <h3 class="mb-4 text-xl font-bold">Stack</h3>
+        <ul class="mb-6 space-y-2 text-gray-700 dark:text-slate-300">
+          <li>
+            <strong>Framework:</strong>
+            <a
+              href="https://astro.build"
+              class="text-accent hover:underline"
+              target="_blank"
+              rel="noopener noreferrer">Astro 5</a
+            > — Islands architecture, zero JS by default
+          </li>
+          <li>
+            <strong>UI:</strong> React 19, TypeScript (strict mode), Tailwind CSS 4
+          </li>
+          <li>
+            <strong>Deployment:</strong> Cloudflare Pages (main site), GitHub Pages (architecture docs)
+          </li>
+          <li>
+            <strong>Source:</strong>
+            <a
+              href="https://github.com/chrislyons-dev/home"
+              class="text-accent hover:underline"
+              target="_blank"
+              rel="noopener noreferrer">github.com/chrislyons-dev/home</a
+            >
+          </li>
+        </ul>
+
+        <h3 class="mb-4 text-xl font-bold">CI/CD Pipeline</h3>
+        <p class="mb-4 text-gray-700 dark:text-slate-300">
+          Every push triggers a full quality gate:
+        </p>
+        <ol class="mb-6 list-inside list-decimal space-y-2 text-gray-700 dark:text-slate-300">
+          <li>
+            <strong>Change detection</strong> — Skip deployment for docs-only changes (grep filter for
+            <code class="text-sm">^(docs/|.*\.md$)</code>)
+          </li>
+          <li><strong>Commit validation</strong> — Conventional commits enforced via commitlint</li>
+          <li>
+            <strong>Code quality</strong> — Prettier format check, ESLint (TypeScript strict), type check
+            (tsc --noEmit)
+          </li>
+          <li><strong>Tests</strong> — Vitest with coverage tracking (V8 provider)</li>
+          <li><strong>Build</strong> — Astro production build with Lightning CSS minification</li>
+          <li>
+            <strong>Lighthouse CI</strong> — 3 runs × 5 pages, scores ≥95 required (Performance, Accessibility,
+            Best Practices, SEO)
+          </li>
+          <li>
+            <strong>Performance tracking</strong> — Lighthouse scores auto-committed to <code
+              class="text-sm">docs/performance.md</code
+            >
+          </li>
+        </ol>
+
+        <p class="mb-6 text-gray-700 dark:text-slate-300">
+          Deployment requires: ✅ All checks pass, ✅ Concurrency control (no simultaneous deploys),
+          ✅ CSP hash generation, ✅ Docs validation
+        </p>
+
+        <h3 class="mb-4 text-xl font-bold">Security</h3>
+        <ul class="mb-6 space-y-2 text-gray-700 dark:text-slate-300">
+          <li>
+            <strong>Content Security Policy:</strong> Build-time script hashing — scan built HTML for
+            inline scripts, generate SHA-256 hashes, inject into <code class="text-sm"
+              >_headers</code
+            >. No <code class="text-sm">unsafe-inline</code>, no nonces.
+          </li>
+          <li>
+            <strong>HTTP Security Headers:</strong> X-Frame-Options: DENY, X-Content-Type-Options: nosniff,
+            Strict-Transport-Security, Referrer-Policy
+          </li>
+          <li>
+            <strong>No tracking:</strong> Zero analytics, zero cookies, zero third-party scripts
+          </li>
+          <li>
+            <strong>Dependency scanning:</strong> npm audit on every CI run, Dependabot for automated
+            updates
+          </li>
+        </ul>
+
+        <h3 class="mb-4 text-xl font-bold">Architecture as Code</h3>
+        <ul class="mb-6 space-y-2 text-gray-700 dark:text-slate-300">
+          <li>
+            <strong>Auto-generated diagrams:</strong>
+            <a href="/architecture" class="text-accent hover:underline"
+              >C4 system context, container, and component diagrams</a
+            > — PlantUML generated from source on every commit
+          </li>
+          <li>
+            <strong>Dependency graphs:</strong> Module relationships visualized with Mermaid, circular
+            dependency detection enforced
+          </li>
+          <li>
+            <strong>Route maps:</strong> File-based routing structure auto-documented from <code
+              class="text-sm">src/pages/</code
+            >
+          </li>
+          <li>
+            <strong>Docs publishing:</strong> MkDocs site built and deployed to GitHub Pages on every
+            PR to main
+          </li>
+        </ul>
+
+        <h3 class="mb-4 text-xl font-bold">Performance</h3>
+        <ul class="mb-6 space-y-2 text-gray-700 dark:text-slate-300">
+          <li>
+            <strong>Island architecture:</strong> Zero JS shipped by default, selective hydration (<code
+              class="text-sm">client:idle</code
+            >, <code class="text-sm">client:visible</code>)
+          </li>
+          <li>
+            <strong>Static generation:</strong> No runtime server, pages pre-rendered at build time
+          </li>
+          <li>
+            <strong>View Transitions API:</strong> Smooth page navigation without SPA overhead
+          </li>
+          <li>
+            <strong>Edge CDN:</strong> Cloudflare Pages global distribution, immutable caching for assets
+            (1 year), short cache for HTML (5 min + stale-while-revalidate)
+          </li>
+          <li>
+            <strong>Current scores:</strong> All pages maintain Lighthouse scores ≥95 across all metrics
+          </li>
+        </ul>
+
+        <h3 class="mb-4 text-xl font-bold">Pre-Commit Hooks</h3>
+        <p class="mb-4 text-gray-700 dark:text-slate-300">
+          Husky enforces quality gates before every commit:
+        </p>
+        <ol class="mb-6 list-inside list-decimal space-y-1 text-gray-700 dark:text-slate-300">
+          <li>Format check (Prettier)</li>
+          <li>Lint (ESLint)</li>
+          <li>Type check (tsc)</li>
+          <li>Tests (Vitest)</li>
+          <li>Architecture docs generation</li>
+          <li>Dependency analysis (circular deps, orphans)</li>
+        </ol>
+
+        <div class="mt-8 border-t border-gray-200 pt-6 dark:border-white/10">
+          <p class="text-gray-700 dark:text-slate-300">
+            <strong>Why this matters:</strong> The code shows more than a list of principles ever could.
+            Read the source, check the CI logs, inspect the headers. This site is a portfolio piece that
+            references itself.
           </p>
         </div>
-      </div>
+      </section>
     </div>
   </div>
 </Layout>

@@ -16,8 +16,8 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
   <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
     <h1 class="mb-4 text-4xl font-bold sm:text-5xl">Architecture as Code</h1>
     <p class="mb-12 text-xl text-gray-600 dark:text-slate-400">
-      Living documentation that evolves with your systems. These diagrams are generated from code,
-      version-controlled, and automatically updated.
+      C4 diagrams generated from source code, updated on every commit. PlantUML and Mermaid rendered
+      in CI/CD and deployed to GitHub Pages.
     </p>
 
     <!-- Architecture Philosophy -->
@@ -25,33 +25,28 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
       class="border-electric-600/20 dark:border-electric-600/40 dark:to-slate-850 mb-16 rounded-lg border bg-gradient-to-br from-white to-gray-50 p-6 dark:from-slate-900"
     >
       <h2 class="mb-4 text-2xl font-bold">Why Architecture as Code?</h2>
-      <div class="grid gap-6 text-gray-900 md:grid-cols-2 dark:text-gray-100">
-        <div>
-          <h3 class="text-accent mb-2 font-semibold">Always Up to Date</h3>
-          <p class="text-sm">
-            Diagrams live in the codebase and update with every change. No more outdated
-            PowerPoints.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-accent mb-2 font-semibold">Version Controlled</h3>
-          <p class="text-sm">
-            Track architecture evolution over time. See what changed, when, and why.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-accent mb-2 font-semibold">Review & Collaborate</h3>
-          <p class="text-sm">
-            Architecture changes go through pull requests just like code. Team visibility built-in.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-accent mb-2 font-semibold">Automated Publishing</h3>
-          <p class="text-sm">
-            Diagrams render automatically in CI/CD. Documentation deploys with every release.
-          </p>
-        </div>
-      </div>
+      <p class="mb-4 text-gray-700 dark:text-slate-300">
+        Diagrams live in your codebase, version-controlled and auto-generated. They evolve with your
+        system instead of rotting in outdated PowerPoints.
+      </p>
+      <ul class="space-y-2 text-gray-700 dark:text-slate-300">
+        <li>
+          • <strong>Updated on every commit</strong> — <code
+            class="rounded bg-white px-2 py-1 text-sm dark:bg-slate-900">npm run docs:arch</code
+          > regenerates C4 diagrams from source
+        </li>
+        <li>
+          • <strong>Version controlled</strong> — Track architecture changes in Git, see diffs in PRs
+        </li>
+        <li>
+          • <strong>Reviewed like code</strong> — Architecture changes go through pull requests with team
+          visibility
+        </li>
+        <li>
+          • <strong>Published in CI/CD</strong> — Diagrams render and deploy automatically (this site
+          uses GitHub Actions)
+        </li>
+      </ul>
     </div>
 
     <!-- C4 Model Levels -->

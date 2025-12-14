@@ -145,5 +145,6 @@ docs/architecture/generated/
 site/
 
 CLAUDE.md
-./claude1
+./claude
 CODEX.md
+notes
