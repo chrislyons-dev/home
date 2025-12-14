@@ -8,11 +8,11 @@ This is the personal website and portfolio for Chris Lyons — developer, archit
 
 ## Key Features
 
-- **⚡ Blazing Fast**: Static site generation with optimal performance
-- **🎨 Modern Design**: Clean, minimal interface with dark mode support
-- **♿ Accessible**: WCAG compliant with keyboard navigation
-- **📱 Responsive**: Mobile-first design that scales beautifully
-- **🔍 SEO Optimized**: Meta tags, sitemaps, and structured data
+- **Blazing Fast**: Static site generation with optimal performance
+- **Modern Design**: Clean, minimal interface with dark mode support
+- **Accessible**: WCAG compliant with keyboard navigation
+- **Responsive**: Mobile-first design that scales beautifully
+- **SEO Optimized**: Meta tags, sitemaps, and structured data
 
 ## Quick Links
 
@@ -34,7 +34,3 @@ This site is built with:
 ## Live Site
 
 Visit the live site at [chrislyons.dev](https://chrislyons.dev)
-
-## Contributing
-
-Interested in contributing? Check out the [contributor documentation](https://github.com/chrislyons-dev/home/blob/main/CONTRIBUTING.md) in the main repository.
