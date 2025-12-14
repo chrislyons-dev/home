@@ -77,22 +77,28 @@ async function generateMermaidImages() {
       console.log(`  [${i + 1}/${mmdFiles.length}] Generating ${outputFile}...`);
 
       // Use spawnSync with array args for safer execution
-      const result = spawnSync(
-        'npx',
-        [
-          '-y',
-          MERMAID_CLI_VERSION,
-          '-i',
-          inputPath,
-          '-o',
-          outputPath,
-          '-b',
-          'transparent',
-          '-c',
-          MERMAID_CONFIG,
-        ],
-        { stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf-8' }
-      );
+      const args = [
+        '-y',
+        MERMAID_CLI_VERSION,
+        '-i',
+        inputPath,
+        '-o',
+        outputPath,
+        '-b',
+        'transparent',
+        '-c',
+        MERMAID_CONFIG,
+      ];
+
+      // Add Puppeteer args for CI environments (GitHub Actions, etc.)
+      if (process.env.CI) {
+        args.push('-p', 'puppeteer-config.json');
+      }
+
+      const result = spawnSync('npx', args, {
+        stdio: ['ignore', 'pipe', 'pipe'],
+        encoding: 'utf-8',
+      });
 
       // Verify file was created and has content (mermaid-cli may exit non-zero with warnings)
       try {

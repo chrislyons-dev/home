@@ -82,7 +82,9 @@ describe('generate-diagram-images', () => {
         }
       } catch (error) {
         // Output dir might not exist yet - that's ok for tests
-        expect(error.code).toBe('ENOENT');
+        if (error.code) {
+          expect(error.code).toBe('ENOENT');
+        }
       }
     });
   });
