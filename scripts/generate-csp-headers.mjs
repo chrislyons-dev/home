@@ -8,7 +8,7 @@ const SCRIPT_SRC_ALLOWLIST = ["'self'", 'https://static.cloudflareinsights.com']
 const MANUAL_INLINE_SCRIPT_HASHES = [];
 const OTHER_DIRECTIVES = [
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https://www.plantuml.com",
+  "img-src 'self' data:",
   "font-src 'self'",
   "connect-src 'self'",
   "form-action 'self'",

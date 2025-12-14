@@ -1,0 +1,24 @@
+classDiagram
+    class ThemeManager {
+        -storage: ThemeStorage
+        -favicon: FaviconManager
+        +getThemePreference() Theme
+        +applyTheme(theme: Theme) void
+        +setTheme(theme: Theme) void
+        +initializeTheme() void
+        +toggleTheme() void
+    }
+
+    class ThemeStorage {
+        +get() Theme
+        +set(theme: Theme) void
+    }
+
+    class FaviconManager {
+        +update(theme: Theme) void
+    }
+
+    ThemeManager --> ThemeStorage : uses
+    ThemeManager --> FaviconManager : uses
+
+    note "Auto-generated from src/services/ThemeManager.ts"

@@ -1,0 +1,19 @@
+graph TB
+    User[Visitor]
+    Site[ChrisLyons.dev<br/>Portfolio Site]
+    CF[Cloudflare Pages<br/>Hosting + CDN]
+    GH[GitHub<br/>Source & CI/CD]
+    LH[Lighthouse CI<br/>Performance Testing]
+    GP[GitHub Pages<br/>Documentation]
+
+    User -->|Views| Site
+    Site -->|Deployed to| CF
+    GH -->|Builds & Deploys| CF
+    GH -->|Runs tests| LH
+    GH -->|Publishes docs| GP
+    LH -->|Uploads reports| CF
+
+    style Site fill:#2563eb,color:#fff
+    style User fill:#7c3aed,color:#fff
+    style CF fill:#f97316,color:#fff
+    style GH fill:#059669,color:#fff

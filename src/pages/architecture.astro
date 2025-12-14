@@ -1,12 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PlantUMLDiagram from '../components/PlantUMLDiagram';
-import architectureMermaidUrl from '../scripts/architecture-mermaid.js?url';
-
-// Import example diagrams at build time
-import microservicesDiagram from '../../docs/architecture/examples/microservices.mmd?raw';
-import dataPipelineDiagram from '../../docs/architecture/examples/data-pipeline.mmd?raw';
-import orderServiceDiagram from '../../docs/architecture/examples/order-service.puml?raw';
 ---
 
 <Layout
@@ -238,27 +231,12 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
       <div
         class="rounded-lg border border-gray-200 bg-white p-6 dark:border-white/5 dark:bg-slate-900"
       >
-        <div class="mermaid-diagram mb-4">
-          <pre
-            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-slate-900">{`graph TB
-    User[Visitor]
-    Site[ChrisLyons.dev<br/>Portfolio Site]
-    CF[Cloudflare Pages<br/>Hosting + CDN]
-    GH[GitHub<br/>Source & CI/CD]
-    LH[Lighthouse CI<br/>Performance Testing]
-    GP[GitHub Pages<br/>Documentation]
-
-    User -->|Views| Site
-    Site -->|Deployed to| CF
-    GH -->|Builds & Deploys| CF
-    GH -->|Runs tests| LH
-    GH -->|Publishes docs| GP
-    LH -->|Uploads reports| CF
-
-    style Site fill:#2563eb,color:#fff
-    style User fill:#7c3aed,color:#fff
-    style CF fill:#f97316,color:#fff
-    style GH fill:#059669,color:#fff`}</pre>
+        <div class="mb-4">
+          <img
+            src="/architecture/portfolio-system-context.svg"
+            alt="Portfolio System Context Diagram"
+            class="mx-auto max-w-full rounded p-4"
+          />
         </div>
         <div class="text-sm text-gray-600 dark:text-slate-400">
           <strong>Generated from:</strong>
@@ -286,9 +264,12 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
       <div
         class="rounded-lg border border-gray-200 bg-white p-6 dark:border-white/5 dark:bg-slate-900"
       >
-        <div class="mermaid-diagram mb-4">
-          <pre
-            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-slate-900">{microservicesDiagram}</pre>
+        <div class="mb-4">
+          <img
+            src="/architecture/microservices.svg"
+            alt="Microservices Container Diagram"
+            class="mx-auto max-w-full rounded p-4"
+          />
         </div>
         <div class="text-sm text-gray-600 dark:text-slate-400">
           <strong>Source:</strong>
@@ -316,9 +297,12 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
       <div
         class="rounded-lg border border-gray-200 bg-white p-6 dark:border-white/5 dark:bg-slate-900"
       >
-        <div class="mermaid-diagram mb-4">
-          <pre
-            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-slate-900">{dataPipelineDiagram}</pre>
+        <div class="mb-4">
+          <img
+            src="/architecture/data-pipeline.svg"
+            alt="Data Pipeline Container Diagram"
+            class="mx-auto max-w-full rounded p-4"
+          />
         </div>
         <div class="text-sm text-gray-600 dark:text-slate-400">
           <strong>Source:</strong>
@@ -343,19 +327,15 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
         repositories.
       </p>
 
-      <PlantUMLDiagram
-        code={orderServiceDiagram}
-        alt="C4 Component Diagram - Order Service"
-        client:visible
-      />
-
-      <div class="mt-6 rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
-        <details class="cursor-pointer">
-          <summary class="mb-2 text-sm font-semibold">View PlantUML Source Code</summary>
-          <pre
-            class="mt-2 overflow-x-auto rounded bg-white p-3 text-xs dark:bg-slate-900"><code>{orderServiceDiagram}</code></pre>
-        </details>
-        <div class="mt-3 text-sm text-gray-600 dark:text-slate-400">
+      <div
+        class="rounded-lg border border-gray-200 bg-white p-6 dark:border-white/5 dark:bg-slate-900"
+      >
+        <img
+          src="/architecture/order-service.svg"
+          alt="C4 Component Diagram - Order Service"
+          class="mx-auto max-w-full rounded p-4"
+        />
+        <div class="mt-4 text-sm text-gray-600 dark:text-slate-400">
           <strong>Source:</strong>
           <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
             >docs/architecture/examples/order-service.puml</code
@@ -384,32 +364,12 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
       <div
         class="rounded-lg border border-gray-200 bg-white p-6 dark:border-white/5 dark:bg-slate-900"
       >
-        <div class="mermaid-diagram mb-4">
-          <pre
-            class="mermaid overflow-x-auto rounded bg-white p-4 dark:bg-slate-900">{`classDiagram
-    class ThemeManager {
-        -storage: ThemeStorage
-        -favicon: FaviconManager
-        +getThemePreference() Theme
-        +applyTheme(theme: Theme) void
-        +setTheme(theme: Theme) void
-        +initializeTheme() void
-        +toggleTheme() void
-    }
-
-    class ThemeStorage {
-        +get() Theme
-        +set(theme: Theme) void
-    }
-
-    class FaviconManager {
-        +update(theme: Theme) void
-    }
-
-    ThemeManager --> ThemeStorage : uses
-    ThemeManager --> FaviconManager : uses
-
-    note "Auto-generated from src/services/ThemeManager.ts"`}</pre>
+        <div class="mb-4">
+          <img
+            src="/architecture/theme-manager.svg"
+            alt="ThemeManager Class Diagram"
+            class="mx-auto max-w-full rounded p-4"
+          />
         </div>
         <div class="text-sm text-gray-600 dark:text-slate-400">
           <strong>Generated from:</strong>
@@ -431,6 +391,4 @@ import orderServiceDiagram from '../../docs/architecture/examples/order-service.
       <a href="/contact" class="btn-primary inline-block">Let's Talk</a>
     </div>
   </div>
-
-  <script type="module" src={architectureMermaidUrl}></script>
 </Layout>

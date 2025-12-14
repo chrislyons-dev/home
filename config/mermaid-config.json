@@ -1,0 +1,11 @@
+{
+  "theme": "default",
+  "themeVariables": {
+    "darkMode": false,
+    "lineColor": "#64748b",
+    "primaryTextColor": "#1e293b",
+    "secondaryColor": "#f1f5f9",
+    "tertiaryColor": "#e2e8f0"
+  },
+  "themeCSS": "svg { background-color: transparent !important; } .edgePath .path { stroke: #64748b !important; stroke-width: 2px !important; } .arrowheadPath { fill: #64748b !important; stroke: #64748b !important; } .edgeLabel { background-color: transparent !important; }"
+}

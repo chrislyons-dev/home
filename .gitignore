@@ -141,6 +141,9 @@ vite.config.ts.timestamp-*
 # Generated architecture documentation
 docs/architecture/generated/
 
+# Generated diagram images (built at deploy time)
+public/architecture/*.svg
+
 # MkDocs build output
 site/
 
