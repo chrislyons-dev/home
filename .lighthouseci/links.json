@@ -1,7 +1,7 @@
 {
-  "http://localhost:4321/": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1767292700789-34338.report.html",
-  "http://localhost:4321/about": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1767292702303-61835.report.html",
-  "http://localhost:4321/projects": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1767292703246-87315.report.html",
-  "http://localhost:4321/architecture": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1767292704103-24838.report.html",
-  "http://localhost:4321/contact": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1767292704810-38649.report.html"
+  "http://localhost:4321/": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1767301092401-34801.report.html",
+  "http://localhost:4321/about": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1767301093701-61832.report.html",
+  "http://localhost:4321/projects": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1767301094704-72871.report.html",
+  "http://localhost:4321/architecture": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1767301095603-14173.report.html",
+  "http://localhost:4321/contact": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1767301096303-63256.report.html"
 }
