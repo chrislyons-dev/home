@@ -84,15 +84,14 @@ jobs:
             libxfixes3 \
             libxrandr2 \
             libgbm1 \
-            libasound2t64
-
-      - name: Install headless Chrome for Mermaid
-        env:
-          PUPPETEER_CACHE_DIR: /home/runner/.cache/puppeteer
-        run: npx @puppeteer/browsers install chrome-headless-shell
+            libasound2t64 \
+            chromium
 
       - name: Build application
         run: npm run build
+        env:
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/chromium
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
 
       - name: Generate CSP headers
         run: node scripts/generate-csp-headers.mjs
