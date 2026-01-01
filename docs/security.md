@@ -222,30 +222,20 @@ const PUBLIC_API_URL = import.meta.env.PUBLIC_API_URL;
 
 Prevent accidental commits of secrets:
 
-**Git Hooks:**
+**Local + CI (current choice):**
 
 ```bash
-# .husky/pre-commit
+# .husky/pre-commit and .github/workflows/ci.yml
 npx secretlint **/*
 ```
 
-**GitHub Actions:**
+Secretlint runs in:
 
-```yaml
-- name: Scan for secrets
-  uses: trufflesecurity/trufflehog@main
-  with:
-    path: ./
-    base: ${{ github.event.repository.default_branch }}
-    head: HEAD
-```
+- pre-commit
+- `npm run check`
+- CI
 
-**Tools to consider:**
-
-- [git-secrets](https://github.com/awslabs/git-secrets) - AWS-focused
-- [detect-secrets](https://github.com/Yelp/detect-secrets) - Yelp's scanner
-- [gitleaks](https://github.com/gitleaks/gitleaks) - Fast, popular option
-- [secretlint](https://github.com/secretlint/secretlint) - Pluggable scanner
+We keep it simple and consistent across local and CI.
 
 ### What to Scan For
 
@@ -261,7 +251,7 @@ Common patterns to block:
 
 ## Dependency Security
 
-### npm Audit
+### npm Audit (current choice)
 
 Run security audits regularly:
 
@@ -542,44 +532,15 @@ jobs:
     interval: weekly
 ```
 
-### Static Application Security Testing (SAST)
+### Static Analysis (current choice)
 
-**CodeQL for vulnerability scanning:**
+We run `eslint` with `eslint-plugin-security` to catch common JS/TS footguns:
 
-```yaml
-# .github/workflows/codeql.yml
-name: CodeQL
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  schedule:
-    - cron: '0 0 * * 1' # Weekly scan
-
-jobs:
-  analyze:
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: javascript, typescript
-
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+```bash
+npm run lint
 ```
+
+If you want deeper SAST (CodeQL), add a dedicated GitHub Actions workflow.
 
 ### Secure Environment Variables
 
@@ -648,7 +609,7 @@ Before deploying to production:
 
 - [ ] GitHub Actions use least privilege permissions
 - [ ] Action versions pinned to SHA (not tags)
-- [ ] CodeQL or equivalent SAST enabled
+- [ ] Lint includes `eslint-plugin-security` checks
 - [ ] No secrets logged in CI output
 
 ### Deployment

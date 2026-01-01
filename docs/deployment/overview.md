@@ -110,12 +110,12 @@ VERCEL_TOKEN=xxx
 
 The CI/CD pipeline automatically handles deployments:
 
-**CI Workflow** (runs on every push to main):
+**CI Workflow** (runs on every push to main and PRs):
 
 - Runs tests and builds
 - Generates architecture documentation
 - Uploads Lighthouse performance reports
-- **Always deploys to GitHub Pages** (documentation)
+- Builds docs on PRs to main and deploys to GitHub Pages from that workflow
 
 **CD Workflow** (conditional deployment):
 
@@ -158,8 +158,7 @@ git pull
 
 **GitHub Pages deploys when:**
 
-- Any push to main branch
-- Documentation or architecture diagrams updated
+- PRs target `main` (docs build + deploy job)
 
 ## Rollback Strategy
 
