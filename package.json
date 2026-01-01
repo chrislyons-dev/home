@@ -17,7 +17,7 @@
     "type": "tsc --noEmit",
     "format": "prettier --write .",
     "formatcheck": "prettier --check .",
-    "check": "npm i && npx secretlint **/* && npm run security:audit && npm run build && npm run test:coverage && npm run lint && npm run type && npm run format && npm run lighthouse",
+    "check": "npm i && npx secretlint . && npm run security:audit && npm run build && npm run test:coverage && npm run lint && npm run type && npm run format && npm run lighthouse",
     "prepare": "husky",
     "diagrams:generate": "node scripts/generate-diagram-images.mjs",
     "docs:arch": "node scripts/generate-architecture-docs.js",

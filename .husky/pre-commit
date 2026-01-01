@@ -1,26 +1,26 @@
-echo "🎨 Checking code formatting..."
+echo "Checking code formatting..."
 npm run formatcheck
 
-echo "dY"? Running secret scan..."
-npx secretlint **/*
+echo "Running secret scan..."
+npx secretlint .
 
-echo "dY"? Running npm audit..."
+echo "Running npm audit..."
 npm run security:audit
 
 
-echo "🔍 Running linter..."
+echo "Running linter..."
 npm run lint
 
-echo "📝 Running type checks..."
+echo "Running type checks..."
 npm run type
 
-echo "🧪 Running tests..."
+echo "Running tests..."
 npm test
 
-echo "🏗️  Generating architecture documentation..."
+echo "Generating architecture documentation..."
 npm run docs:arch
 
-echo "🔎 Checking for circular dependencies and CI rule violations..."
+echo "Checking for circular dependencies and CI rule violations..."
 npm run deps:check
 
-echo "✅ Pre-commit checks passed!"
+echo "Pre-commit checks passed!"
