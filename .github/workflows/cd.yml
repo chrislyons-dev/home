@@ -87,7 +87,9 @@ jobs:
             libasound2t64
 
       - name: Install headless Chrome for Mermaid
-        run: npx puppeteer browsers install chrome-headless-shell
+        env:
+          PUPPETEER_CACHE_DIR: /home/runner/.cache/puppeteer
+        run: npx @puppeteer/browsers install chrome-headless-shell
 
       - name: Build application
         run: npm run build
