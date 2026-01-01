@@ -14,6 +14,10 @@ export default function CodeBlock({
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    if (snippets.length === 0) {
+      return;
+    }
+
     const interval = setInterval(() => {
       setIsAnimating(true);
       setTimeout(() => {
@@ -26,6 +30,10 @@ export default function CodeBlock({
   }, [snippets.length, rotationInterval]);
 
   const currentSnippet = snippets[currentIndex];
+
+  if (!currentSnippet) {
+    return null;
+  }
 
   return (
     <div className="mx-auto w-full max-w-2xl">
@@ -53,7 +61,7 @@ export default function CodeBlock({
 
         {/* Indicator dots */}
         <div className="flex justify-center gap-2 border-t border-gray-700 bg-gray-800 px-4 py-3">
-          {snippets.map((_, index) => (
+          {snippets.map((snippet, index) => (
             <button
               key={index}
               onClick={() => {
@@ -66,7 +74,7 @@ export default function CodeBlock({
               className={`h-2 w-2 rounded-full transition-all ${
                 index === currentIndex ? 'bg-electric-500 w-6' : 'bg-gray-600 hover:bg-gray-500'
               }`}
-              aria-label={`Show ${snippets[index].language} snippet`}
+              aria-label={`Show ${snippet.language} snippet`}
             />
           ))}
         </div>

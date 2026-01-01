@@ -83,7 +83,14 @@ describe('Projects Collection', () => {
     const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
 
     for (let i = 1; i < sortedProjects.length; i++) {
-      expect(sortedProjects[i].data.order).toBeGreaterThanOrEqual(sortedProjects[i - 1].data.order);
+      const current = sortedProjects[i];
+      const previous = sortedProjects[i - 1];
+
+      if (!current || !previous) {
+        throw new Error('Project sort comparison failed due to missing entries.');
+      }
+
+      expect(current.data.order).toBeGreaterThanOrEqual(previous.data.order);
     }
   });
 

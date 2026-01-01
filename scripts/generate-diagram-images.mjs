@@ -50,7 +50,7 @@ export function validatePath(filePath, baseDir) {
  * Generate SVG images from Mermaid (.mmd) diagram files
  * @returns {Promise<number>} Number of diagrams generated
  */
-async function generateMermaidImages() {
+export async function generateMermaidImages() {
   console.log('🎨 Generating Mermaid diagram images...');
 
   const files = await fs.readdir(DOCS_DIR);
@@ -167,7 +167,7 @@ export async function fetchPlantUMLWithRetry(url, outputPath, maxRetries = 3) {
  * Generate SVG images from PlantUML (.puml) diagram files
  * @returns {Promise<number>} Number of diagrams generated
  */
-async function generatePlantUMLImages() {
+export async function generatePlantUMLImages() {
   console.log('🏗️  Generating PlantUML diagram images...');
 
   const files = await fs.readdir(DOCS_DIR);
@@ -220,10 +220,17 @@ async function generatePlantUMLImages() {
   return successCount;
 }
 
-// Ensure output directory exists
-await fs.mkdir(OUTPUT_DIR, { recursive: true });
+export async function main() {
+  await fs.mkdir(OUTPUT_DIR, { recursive: true });
+  const mermaidCount = await generateMermaidImages();
+  const pumlCount = await generatePlantUMLImages();
 
-const mermaidCount = await generateMermaidImages();
-const pumlCount = await generatePlantUMLImages();
+  console.log(`Generated ${mermaidCount + pumlCount} total diagrams`);
+}
 
-console.log(`✨ Generated ${mermaidCount + pumlCount} total diagrams`);
+const entryPath = process.argv[1] ? path.resolve(process.argv[1]) : '';
+const isMain = entryPath === fileURLToPath(import.meta.url);
+
+if (isMain) {
+  await main();
+}

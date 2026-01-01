@@ -1,4 +1,3 @@
-/* eslint-env browser */
 /* global document, MutationObserver, IntersectionObserver */
 
 let mermaidLoaded = false;

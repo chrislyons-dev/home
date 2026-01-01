@@ -5,6 +5,7 @@ import tsParser from '@typescript-eslint/parser';
 import eslintPluginAstro from 'eslint-plugin-astro';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
+import security from 'eslint-plugin-security';
 
 export default [
   // Base JavaScript recommended config
@@ -61,6 +62,7 @@ export default [
       '@typescript-eslint': tseslint,
       react,
       'react-hooks': reactHooks,
+      security,
     },
     rules: {
       // TypeScript strict rules
@@ -92,6 +94,7 @@ export default [
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'prefer-const': 'error',
       'no-var': 'error',
+      'security/detect-object-injection': 'off',
     },
     settings: {
       react: {

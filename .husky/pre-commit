@@ -1,6 +1,13 @@
 echo "🎨 Checking code formatting..."
 npm run formatcheck
 
+echo "dY"? Running secret scan..."
+npx secretlint **/*
+
+echo "dY"? Running npm audit..."
+npm run security:audit
+
+
 echo "🔍 Running linter..."
 npm run lint
 

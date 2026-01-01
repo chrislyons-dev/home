@@ -1,6 +1,6 @@
 # Welcome to Chris Lyons' Portfolio
 
-A modern, performant personal website built with cutting-edge web technologies.
+A fast, focused personal website built with Astro, React, and TypeScript.
 
 ## Overview
 
@@ -8,10 +8,10 @@ This is the personal website and portfolio for Chris Lyons — developer, archit
 
 ## Key Features
 
-- **Blazing Fast**: Static site generation with optimal performance
-- **Modern Design**: Clean, minimal interface with dark mode support
+- **Fast**: Static site generation with minimal JavaScript
+- **Clean UI**: Clear layout with dark mode support
 - **Accessible**: WCAG compliant with keyboard navigation
-- **Responsive**: Mobile-first design that scales beautifully
+- **Responsive**: Mobile-first layout across common breakpoints
 - **SEO Optimized**: Meta tags, sitemaps, and structured data
 
 ## Quick Links
@@ -25,11 +25,11 @@ This is the personal website and portfolio for Chris Lyons — developer, archit
 
 This site is built with:
 
-- **Astro 5.x** - Modern static site framework
+- **Astro 5.x** - Static site framework
 - **React 19.x** - UI components
 - **Tailwind CSS 4.x** - Utility-first styling
 - **TypeScript** - Type-safe development
-- **Vite** - Next-gen build tool
+- **Vite** - Build tool
 
 ## Live Site
 

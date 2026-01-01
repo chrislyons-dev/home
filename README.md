@@ -2,7 +2,7 @@
 
 Personal website for Chris Lyons — developer, architect, and builder — hosted at [chrislyons.dev](https://chrislyons.dev)
 
-A modern, performant portfolio built with Astro, React, and TypeScript. Features static site generation, island architecture, and Lighthouse CI scores of 95+ across all metrics.
+A fast portfolio built with Astro, React, and TypeScript. Uses static site generation, island architecture, and Lighthouse CI scores of 95+ across all metrics.
 
 > **📖 [Full Documentation](https://chrislyons-dev.github.io/home/)**
 
@@ -32,9 +32,9 @@ npm run preview
 
 ## Key Features
 
-- **Blazing Fast**: Static generation, minimal JavaScript, optimized assets
+- **Fast**: Static generation, minimal JavaScript, optimized assets
 - **Accessible**: WCAG compliant with keyboard navigation and screen reader support
-- **Responsive**: Mobile-first design that scales beautifully
+- **Responsive**: Mobile-first layout across common breakpoints
 - **Dark Mode**: System-aware theme with manual toggle
 - **SEO Optimized**: Complete meta tags, sitemap, and structured data
 
