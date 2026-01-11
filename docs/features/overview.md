@@ -1,10 +1,10 @@
-# Features Overview
+﻿# Features Overview
 
 A comprehensive look at what makes this site special.
 
 ## Core Features
 
-### ⚡ Performance
+### Performance
 
 - **Static Site Generation**: Pre-rendered HTML for instant page loads
 - **Optimized Assets**: Compressed images, minified CSS/JS
@@ -12,9 +12,9 @@ A comprehensive look at what makes this site special.
 - **View Transitions**: Smooth navigation between pages
 - **Lighthouse Score**: 95+ across all metrics (automated CI testing)
 
-[Learn more about performance →](performance.md)
+[Learn more about performance ](performance.md)
 
-### 🎨 Modern Design
+### Modern Design
 
 - **Dark Mode**: System-aware with manual toggle (loads on idle)
 - **Responsive**: Mobile-first, works on all devices
@@ -23,7 +23,7 @@ A comprehensive look at what makes this site special.
 - **Custom Utilities**: Predefined classes for consistency
 - **View Transitions API**: Native browser animations
 
-### ♿ Accessibility
+### Accessibility
 
 - **WCAG Compliant**: AA standard minimum
 - **Keyboard Navigation**: Full site accessible via keyboard
@@ -31,9 +31,9 @@ A comprehensive look at what makes this site special.
 - **Reduced Motion**: Respects user preferences
 - **Focus Management**: Clear visual indicators
 
-[Learn more about accessibility →](accessibility.md)
+[Learn more about accessibility ](accessibility.md)
 
-### 🔍 SEO Optimized
+### SEO Optimized
 
 - **Meta Tags**: Comprehensive metadata
 - **Open Graph**: Social media previews
@@ -41,7 +41,7 @@ A comprehensive look at what makes this site special.
 - **Robots.txt**: Search engine instructions
 - **Structured Data**: JSON-LD for rich snippets
 
-### 🛠️ Developer Experience
+### Developer Experience
 
 - **TypeScript**: Full type safety
 - **Hot Reload**: Instant updates during development
@@ -49,9 +49,9 @@ A comprehensive look at what makes this site special.
 - **Pre-commit Hooks**: Automated code quality checks
 - **Dependency Analysis**: Visualize module relationships
 
-[Learn more about the tech stack →](tech-stack.md)
+[Learn more about the tech stack ](tech-stack.md)
 
-### 📊 Observability
+### Observability
 
 - **Web Analytics**: Cloudflare Web Analytics (privacy-focused, no cookies)
 - **Performance Monitoring**: Core Web Vitals tracking (LCP, FID, CLS)
@@ -59,7 +59,7 @@ A comprehensive look at what makes this site special.
 - **Error Tracking**: Real-time error rates via Cloudflare
 - **Deployment Monitoring**: GitHub Actions + Cloudflare Pages
 
-[Learn more about observability →](observability.md)
+[Learn more about observability ](observability.md)
 
 ## Interactive Components
 
@@ -86,10 +86,10 @@ Filterable, interactive technology showcase:
 
 ## Browser Support
 
-- ✅ Chrome/Edge 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Mobile browsers
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Mobile browsers
 
 ## Next Steps
 

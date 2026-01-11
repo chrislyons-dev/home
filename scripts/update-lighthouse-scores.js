@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 
 import fs from 'fs';
 import path from 'path';
@@ -82,7 +82,7 @@ function updatePerformanceDoc(scores, links) {
   updatedContent = updatedContent.replace(tableRegex, scoresTable);
 
   fs.writeFileSync(PERFORMANCE_DOC, updatedContent);
-  console.log('✅ Updated performance.md with latest Lighthouse scores');
+  console.log(' Updated performance.md with latest Lighthouse scores');
   console.log(
     `   Performance: ${scores.performance}, Accessibility: ${scores.accessibility}, Best Practices: ${scores['best-practices']}, SEO: ${scores.seo}`
   );

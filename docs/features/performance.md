@@ -1,4 +1,4 @@
-# Performance
+﻿# Performance
 
 How this site achieves exceptional performance.
 
@@ -152,11 +152,11 @@ export default {
 
 ### Core Web Vitals
 
-| Metric | Value | Target     |
-| ------ | ----- | ---------- |
-| LCP    | 0.8s  | < 2.5s ✅  |
-| FID    | 10ms  | < 100ms ✅ |
-| CLS    | 0.01  | < 0.1 ✅   |
+| Metric | Value | Target  |
+| ------ | ----- | ------- |
+| LCP    | 0.8s  | < 2.5s  |
+| FID    | 10ms  | < 100ms |
+| CLS    | 0.01  | < 0.1   |
 
 ### Load Times
 
@@ -217,12 +217,12 @@ const HeavyComponent = lazy(() => import('./HeavyComponent'));
 
 Target budgets for critical path (initial page load):
 
-| Resource   | Budget | Current   | Notes                          |
-| ---------- | ------ | --------- | ------------------------------ |
-| HTML       | 20kb   | ~15kb ✅  | Per page                       |
-| CSS        | 30kb   | ~25kb ✅  | Global styles                  |
-| JavaScript | 100kb  | ~45kb ✅  | React + interactive islands    |
-| Images     | 500kb  | ~200kb ✅ | Lazy loaded, optimized formats |
+| Resource   | Budget | Current | Notes                          |
+| ---------- | ------ | ------- | ------------------------------ |
+| HTML       | 20kb   | ~15kb   | Per page                       |
+| CSS        | 30kb   | ~25kb   | Global styles                  |
+| JavaScript | 100kb  | ~45kb   | React + interactive islands    |
+| Images     | 500kb  | ~200kb  | Lazy loaded, optimized formats |
 
 **Note:** Total build output (~3.2MB) includes all pages, assets, and vendor libraries. These are aggressively cached (1 year for immutable assets) and loaded on-demand.
 

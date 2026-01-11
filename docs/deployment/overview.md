@@ -1,4 +1,4 @@
-# Deployment Overview
+﻿# Deployment Overview
 
 Deploy your site to production with confidence.
 
@@ -6,7 +6,7 @@ Deploy your site to production with confidence.
 
 This site supports multiple deployment platforms:
 
-### Primary: Cloudflare Pages ⭐
+### Primary: Cloudflare Pages
 
 **Best for:**
 
@@ -15,7 +15,7 @@ This site supports multiple deployment platforms:
 - Global edge network
 - Free tier with generous limits
 
-[Cloudflare Pages Guide →](cloudflare.md)
+[Cloudflare Pages Guide ](cloudflare.md)
 
 ### Vercel (Alternative)
 
@@ -25,7 +25,7 @@ This site supports multiple deployment platforms:
 - Preview deployments
 - Analytics
 
-[Vercel Deployment Guide →](vercel.md)
+[Vercel Deployment Guide ](vercel.md)
 
 ### GitHub Pages
 
@@ -35,7 +35,7 @@ This site supports multiple deployment platforms:
 - MkDocs deployment
 - Open source projects
 
-[GitHub Pages Guide →](github-pages.md)
+[GitHub Pages Guide ](github-pages.md)
 
 ### Other Platforms
 
@@ -166,7 +166,7 @@ git pull
 
 Use Cloudflare dashboard to rollback:
 
-1. Go to Workers & Pages → your project
+1. Go to Workers & Pages your project
 2. Click on Deployments
 3. Find last good deployment
 4. Click "Rollback to this deployment"

@@ -1,4 +1,4 @@
-# Observability
+﻿# Observability
 
 Comprehensive monitoring, metrics, and logging for production visibility.
 
@@ -15,7 +15,7 @@ Enable automatic analytics injection via Cloudflare dashboard:
 1. **Navigate to Analytics**
    - Log into Cloudflare dashboard
    - Go to your domain
-   - Click **Analytics & Logs** → **Web Analytics**
+   - Click **Analytics & Logs** **Web Analytics**
 
 2. **Enable Automatic Injection**
    - Click **Add a site**
@@ -26,7 +26,7 @@ Enable automatic analytics injection via Cloudflare dashboard:
 3. **Verify Installation**
    - Deploy your site
    - Visit your site
-   - Check browser DevTools → Network tab
+   - Check browser DevTools Network tab
    - Look for `beacon.min.js` from `static.cloudflareinsights.com`
 
 ### What Gets Tracked
@@ -63,11 +63,11 @@ Enable automatic analytics injection via Cloudflare dashboard:
 
 ### Privacy Features
 
-✅ **No cookies**
-✅ **No fingerprinting**
-✅ **No cross-site tracking**
-✅ **GDPR compliant**
-✅ **No personal data collection**
+**No cookies**
+**No fingerprinting**
+**No cross-site tracking**
+**GDPR compliant**
+**No personal data collection**
 
 ### Accessing Analytics
 
@@ -75,9 +75,9 @@ Enable automatic analytics injection via Cloudflare dashboard:
 
 ```
 https://dash.cloudflare.com
-→ Your Domain
-→ Analytics & Logs
-→ Web Analytics
+ Your Domain
+ Analytics & Logs
+ Web Analytics
 ```
 
 **Key Reports:**
@@ -108,9 +108,9 @@ Tracked via GitHub Actions:
 
 ```
 GitHub Repository
-→ Actions tab
-→ Select workflow run
-→ View job summaries
+ Actions tab
+ Select workflow run
+ View job summaries
 ```
 
 ### Runtime Performance
@@ -154,9 +154,9 @@ Cloudflare Web Analytics automatically tracks:
 
 ```
 Cloudflare Dashboard
-→ Web Analytics
-→ Performance tab
-→ Core Web Vitals section
+ Web Analytics
+ Performance tab
+ Core Web Vitals section
 ```
 
 ## Lighthouse CI Integration
@@ -219,9 +219,9 @@ Lighthouse runs automatically on every push/PR via GitHub Actions:
 
 ```
 GitHub Repository
-→ Actions
-→ Failed workflow run
-→ Job logs
+ Actions
+ Failed workflow run
+ Job logs
 ```
 
 ### Runtime Errors
@@ -232,10 +232,10 @@ GitHub Repository
 
 ```
 Cloudflare Dashboard
-→ Workers & Pages
-→ Your Project
-→ Metrics
-→ Filter by 4xx/5xx status codes
+ Workers & Pages
+ Your Project
+ Metrics
+ Filter by 4xx/5xx status codes
 ```
 
 **Error Types:**
@@ -260,8 +260,8 @@ Track missing pages via Cloudflare Analytics:
 
 ```
 GitHub Repository
-→ Actions tab
-→ CI workflow
+ Actions tab
+ CI workflow
 ```
 
 **Tracked:**
@@ -283,9 +283,9 @@ GitHub Repository
 
 ```
 Cloudflare Dashboard
-→ Workers & Pages
-→ Your Project
-→ Deployments tab
+ Workers & Pages
+ Your Project
+ Deployments tab
 ```
 
 **Deployment Metrics:**
@@ -302,7 +302,7 @@ Cloudflare Dashboard
 **Email Notifications:**
 
 - Enabled by default for workflow failures
-- Configure in GitHub Settings → Notifications
+- Configure in GitHub Settings Notifications
 
 **Webhook Integration:**
 
@@ -324,8 +324,8 @@ Cloudflare Dashboard
 
    ```
    Cloudflare Dashboard
-   → Notifications
-   → Add
+    Notifications
+    Add
    ```
 
 2. **Available Alerts:**
@@ -345,15 +345,15 @@ Cloudflare Dashboard
 
 **Critical:**
 
-- ✅ Build failures (GitHub Actions)
-- ✅ 5xx error rate > 1%
-- ✅ SSL certificate expiring < 30 days
+- Build failures (GitHub Actions)
+- 5xx error rate > 1%
+- SSL certificate expiring < 30 days
 
 **Warning:**
 
-- ⚠️ Lighthouse performance score < 95
-- ⚠️ 404 error spike (sudden increase)
-- ⚠️ Build time > 5 minutes
+- Lighthouse performance score < 95
+- 404 error spike (sudden increase)
+- Build time > 5 minutes
 
 ## Custom Tracking
 
@@ -426,10 +426,10 @@ du -sh dist/
 **Target Budgets:**
 | Asset Type | Budget | Current |
 |------------|--------|---------|
-| HTML | 20kb | ~15kb ✅ |
-| CSS | 30kb | ~25kb ✅ |
-| JavaScript | 100kb | ~50kb ✅ |
-| Total | 200kb | ~100kb ✅ |
+| HTML | 20kb | ~15kb |
+| CSS | 30kb | ~25kb |
+| JavaScript | 100kb | ~50kb |
+| Total | 200kb | ~100kb |
 
 ## Data Retention
 
@@ -455,17 +455,17 @@ du -sh dist/
 
 **Cloudflare Web Analytics:**
 
-- ✅ No cookies (no consent banner needed)
-- ✅ No personal data collection
-- ✅ Anonymous IP addresses
-- ✅ No cross-site tracking
+- No cookies (no consent banner needed)
+- No personal data collection
+- Anonymous IP addresses
+- No cross-site tracking
 
 **What's NOT tracked:**
 
-- ❌ Individual user identification
-- ❌ Personal information
-- ❌ Session IDs
-- ❌ Cookies
+- Individual user identification
+- Personal information
+- Session IDs
+- Cookies
 
 ### Data Export
 
@@ -501,10 +501,10 @@ curl -X GET "https://api.cloudflare.com/client/v4/accounts/{account_id}/analytic
 
 ```
 GitHub Repository
-→ Insights tab
-→ Community
-→ Traffic
-→ Actions
+ Insights tab
+ Community
+ Traffic
+ Actions
 ```
 
 **Available Data:**
@@ -548,9 +548,9 @@ npm run lighthouse
 
 ```
 Cloudflare Dashboard
-→ Workers & Pages
-→ Deployments
-→ Rollback to previous version
+ Workers & Pages
+ Deployments
+ Rollback to previous version
 ```
 
 ## Best Practices
@@ -559,22 +559,22 @@ Cloudflare Dashboard
 
 **Weekly:**
 
-- ✅ Check Core Web Vitals trends
-- ✅ Review top pages performance
-- ✅ Monitor error rates
+- Check Core Web Vitals trends
+- Review top pages performance
+- Monitor error rates
 
 **Monthly:**
 
-- ✅ Analyze traffic patterns
-- ✅ Review bundle sizes
-- ✅ Check Lighthouse scores
-- ✅ Audit 404 errors
+- Analyze traffic patterns
+- Review bundle sizes
+- Check Lighthouse scores
+- Audit 404 errors
 
 **Quarterly:**
 
-- ✅ Performance budget review
-- ✅ Analytics data export
-- ✅ Alert configuration review
+- Performance budget review
+- Analytics data export
+- Alert configuration review
 
 ### Optimization Cycle
 

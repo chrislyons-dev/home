@@ -1,10 +1,10 @@
-# Chris Lyons Personal Website
+﻿# Chris Lyons Personal Website
 
-Personal website for Chris Lyons — developer, architect, and builder — hosted at [chrislyons.dev](https://chrislyons.dev)
+Personal website for Chris Lyons developer, architect, and builder hosted at [chrislyons.dev](https://chrislyons.dev)
 
 A fast portfolio built with Astro, React, and TypeScript. Uses static site generation, island architecture, and Lighthouse CI scores of 95+ across all metrics.
 
-> **📖 [Full Documentation](https://chrislyons-dev.github.io/home/)**
+> ** [Full Documentation](https://chrislyons-dev.github.io/home/)**
 
 ## Quick Start
 
@@ -42,15 +42,15 @@ npm run preview
 
 ```text
 /
-├── src/
-│   ├── components/       # React components
-│   ├── layouts/          # Astro layouts
-│   ├── pages/            # File-based routing
-│   ├── services/         # Business logic (ThemeManager, etc.)
-│   └── styles/           # Global styles + Tailwind
-├── docs/                 # MkDocs documentation
-├── public/               # Static assets
-└── .github/workflows/    # CI/CD pipelines
+ src/
+    components/       # React components
+    layouts/          # Astro layouts
+    pages/            # File-based routing
+    services/         # Business logic (ThemeManager, etc.)
+    styles/           # Global styles + Tailwind
+ docs/                 # MkDocs documentation
+ public/               # Static assets
+ .github/workflows/    # CI/CD pipelines
 ```
 
 ## Commands

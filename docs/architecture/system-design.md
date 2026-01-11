@@ -1,4 +1,4 @@
-# System Design
+﻿# System Design
 
 Detailed system design and architecture decisions.
 
@@ -197,19 +197,19 @@ sequenceDiagram
 
 ```
 astro (core)
-├── @astrojs/react (integration)
-├── @astrojs/sitemap (integration)
-└── vite (bundler)
-    └── @tailwindcss/vite (plugin)
+ @astrojs/react (integration)
+ @astrojs/sitemap (integration)
+ vite (bundler)
+     @tailwindcss/vite (plugin)
 
 react (ui)
-├── react-dom
-└── @types/react
+ react-dom
+ @types/react
 
 dev tools
-├── vitest (testing)
-├── typescript (types)
-└── husky (git hooks)
+ vitest (testing)
+ typescript (types)
+ husky (git hooks)
 ```
 
 ### Dependency Rules
@@ -245,10 +245,10 @@ interface Props {
   title: string; // Required
 }
 
-// ❌ This won't compile
+//  This won't compile
 <Component />
 
-// ✅ This will
+//  This will
 <Component title="Hello" />
 ```
 

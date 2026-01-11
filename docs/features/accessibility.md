@@ -1,4 +1,4 @@
-# Accessibility
+﻿# Accessibility
 
 Building an inclusive web experience for everyone.
 
@@ -8,9 +8,9 @@ This site meets **WCAG 2.1 AA** standards across all pages.
 
 ### Conformance Levels
 
-- ✅ Level A: All criteria met
-- ✅ Level AA: All criteria met
-- ⚠️ Level AAA: Partial (where applicable)
+- Level A: All criteria met
+- Level AA: All criteria met
+- Level AAA: Partial (where applicable)
 
 ## Key Features
 
@@ -63,7 +63,7 @@ Full site navigation via keyboard:
 
 ```astro
 <button aria-label="Toggle dark mode" aria-pressed={isDark}>
-  <span aria-hidden="true">🌙</span>
+  <span aria-hidden="true"></span>
 </button>
 ```
 
@@ -99,7 +99,7 @@ Information never conveyed by color alone:
 
 <!-- Good -->
 <span class="error">
-  <span aria-label="Error">⚠️</span>
+  <span aria-label="Error"></span>
   Error message
 </span>
 ```
@@ -160,16 +160,16 @@ describe('Accessibility', () => {
 
 **Screen Readers:**
 
-- ✅ NVDA (Windows)
-- ✅ JAWS (Windows)
-- ✅ VoiceOver (macOS/iOS)
-- ✅ TalkBack (Android)
+- NVDA (Windows)
+- JAWS (Windows)
+- VoiceOver (macOS/iOS)
+- TalkBack (Android)
 
 **Keyboard Only:**
 
-- ✅ All interactive elements reachable
-- ✅ Logical tab order
-- ✅ Visible focus indicators
+- All interactive elements reachable
+- Logical tab order
+- Visible focus indicators
 
 ### Browser Testing
 

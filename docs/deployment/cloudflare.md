@@ -1,4 +1,4 @@
-# Deploying to Cloudflare Pages
+﻿# Deploying to Cloudflare Pages
 
 Deploy your site to Cloudflare's global edge network.
 
@@ -22,8 +22,8 @@ Deploy your site to Cloudflare's global edge network.
 ### 1. Connect Repository
 
 1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com)
-2. Go to **Workers & Pages** → **Create application**
-3. Select **Pages** → **Connect to Git**
+2. Go to **Workers & Pages** **Create application**
+3. Select **Pages** **Connect to Git**
 4. Authorize Cloudflare to access your GitHub account
 5. Select your repository: `chrislyons-dev/home`
 
@@ -57,7 +57,7 @@ PUBLIC_SITE_URL=https://chrislyons.dev
 
 Set your production branch in project settings:
 
-1. **Settings** → **Builds & deployments**
+1. **Settings** **Builds & deployments**
 2. **Production branch**: `main`
 3. Every push to `main` deploys to production
 
@@ -77,12 +77,12 @@ Preview URL: `https://[commit-hash].chrislyons-dev.pages.dev`
 
 Configure which branches trigger deployments:
 
-1. **Settings** → **Builds & deployments**
+1. **Settings** **Builds & deployments**
 2. **Branch deployments**
 3. Add branches:
-   - `main` → Production
-   - `staging` → Staging environment
-   - `develop` → Development preview
+   - `main` Production
+   - `staging` Staging environment
+   - `develop` Development preview
 
 ## Setup via GitHub Actions
 
@@ -92,19 +92,19 @@ For more control, use the GitHub Actions workflow.
 
 **API Token:**
 
-1. Cloudflare Dashboard → **My Profile** → **API Tokens**
+1. Cloudflare Dashboard **My Profile** **API Tokens**
 2. Click **Create Token**
 3. Use template: **Edit Cloudflare Workers**
 4. Copy the token
 
 **Account ID:**
 
-1. Cloudflare Dashboard → **Workers & Pages**
+1. Cloudflare Dashboard **Workers & Pages**
 2. Copy **Account ID** from the right sidebar
 
 ### 2. Add GitHub Secrets
 
-1. GitHub Repository → **Settings** → **Secrets and variables** → **Actions**
+1. GitHub Repository **Settings** **Secrets and variables** **Actions**
 2. Click **New repository secret**
 3. Add:
    - Name: `CLOUDFLARE_API_TOKEN`
@@ -142,7 +142,7 @@ GitHub Actions will build and deploy automatically.
 
 ### Add Custom Domain
 
-1. **Custom domains** → **Set up a custom domain**
+1. **Custom domains** **Set up a custom domain**
 2. Enter your domain: `chrislyons.dev`
 3. Choose setup method:
 
@@ -174,7 +174,7 @@ SSL certificates are automatically provisioned:
 
 ### Add Variables
 
-1. **Settings** → **Environment variables**
+1. **Settings** **Environment variables**
 2. Click **Add variable**
 3. Set per environment:
    - **Production**: `main` branch
@@ -198,7 +198,7 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL;
 
 ### Custom Build Command
 
-Override default build in **Settings** → **Builds & deployments**:
+Override default build in **Settings** **Builds & deployments**:
 
 ```bash
 # Install dependencies and build
@@ -212,7 +212,7 @@ npm ci && npm test && npm run build
 
 Trigger builds only on specific file changes:
 
-1. **Settings** → **Builds & deployments**
+1. **Settings** **Builds & deployments**
 2. **Build watch paths**
 3. Add patterns:
    ```
@@ -255,7 +255,7 @@ Auto-enabled:
 
 ### Enable Web Analytics
 
-1. **Analytics** → **Web Analytics**
+1. **Analytics** **Web Analytics**
 2. Enable for your domain
 3. View metrics:
    - Page views
@@ -296,7 +296,7 @@ Available at: `/api/hello`
 
 1. **Deployments** tab
 2. Find last good deployment
-3. Click **⋯** → **Rollback to this deployment**
+3. Click \***\* **Rollback to this deployment\*\*
 4. Confirm rollback
 
 ### Via Git
@@ -318,7 +318,7 @@ View in real-time:
 
 ### Error Logs
 
-1. **Functions** → **Logs** (if using functions)
+1. **Functions** **Logs** (if using functions)
 2. Real-time error tracking
 3. Filter by severity
 
@@ -352,7 +352,7 @@ git commit -m "fix: add lock file"
 ### Deployment Not Updating
 
 1. **Clear build cache**:
-   - Settings → Builds & deployments
+   - Settings Builds & deployments
    - Clear cache and retry
 
 2. **Force rebuild**:
@@ -373,7 +373,7 @@ git commit -m "fix: add lock file"
 
 - Ensure SSL/TLS mode is Full (strict)
 - Wait for certificate provisioning
-- Check **SSL/TLS** → **Edge Certificates**
+- Check **SSL/TLS** **Edge Certificates**
 
 ## CI/CD Integration
 

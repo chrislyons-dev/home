@@ -1,4 +1,4 @@
-# Development Guide
+﻿# Development Guide
 
 Technical guide for developers working on this project.
 
@@ -34,39 +34,39 @@ PUBLIC_SITE_NAME=Chris Lyons
 Static site with island-based interactivity:
 
 ```
-┌─────────────────────────────────────┐
-│ Astro (Static Site Generator)       │
-├─────────────────────────────────────┤
-│ React (Interactive Islands)         │
-├─────────────────────────────────────┤
-│ Tailwind CSS 4 (Styling)            │
-├─────────────────────────────────────┤
-│ Vite (Build Tool)                   │
-└─────────────────────────────────────┘
+
+ Astro (Static Site Generator)
+
+ React (Interactive Islands)
+
+ Tailwind CSS 4 (Styling)
+
+ Vite (Build Tool)
+
 ```
 
 ## Project Structure
 
 ```
 src/
-├── components/       # React components
-│   ├── ThemeToggle.tsx
-│   ├── TechStack.tsx
-│   └── PlantUMLDiagram.tsx
-├── layouts/          # Astro layouts
-│   └── Layout.astro
-├── pages/            # File-based routes
-│   ├── index.astro         → /
-│   ├── about.astro         → /about
-│   └── 404.astro           → 404
-├── services/         # Business logic
-│   ├── ThemeManager.ts
-│   ├── ThemeStorage.ts
-│   └── FaviconManager.ts
-├── styles/           # Global CSS
-│   └── global.css
-└── utils/            # Utilities
-    └── themeInit.ts
+ components/       # React components
+    ThemeToggle.tsx
+    TechStack.tsx
+    PlantUMLDiagram.tsx
+ layouts/          # Astro layouts
+    Layout.astro
+ pages/            # File-based routes
+    index.astro          /
+    about.astro          /about
+    404.astro            404
+ services/         # Business logic
+    ThemeManager.ts
+    ThemeStorage.ts
+    FaviconManager.ts
+ styles/           # Global CSS
+    global.css
+ utils/            # Utilities
+     themeInit.ts
 ```
 
 ## Development Workflow
@@ -227,12 +227,12 @@ Output in `dist/`:
 
 ```
 dist/
-├── index.html
-├── about/index.html
-├── _astro/
-│   ├── [hash].css
-│   └── [hash].js
-└── assets/
+ index.html
+ about/index.html
+ _astro/
+    [hash].css
+    [hash].js
+ assets/
 ```
 
 ## Performance Optimization

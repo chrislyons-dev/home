@@ -1,4 +1,4 @@
-# Security Standards
+﻿# Security Standards
 
 This document covers security practices for this site, including Content Security Policy (CSP), secrets management, dependency security, input validation, and CI/CD hardening.
 
@@ -20,7 +20,7 @@ This document covers security practices for this site, including Content Securit
 ### What is CSP?
 
 CSP tells browsers which scripts, styles, and resources are safe to load. Think of it
-as a bouncer that checks IDs — only pre-approved code gets in. This blocks XSS attacks
+as a bouncer that checks IDs only pre-approved code gets in. This blocks XSS attacks
 by stopping malicious scripts from running, even if they slip into your HTML.
 
 The goal is **simple and strict**:
@@ -50,7 +50,7 @@ Key points:
 - **script-src 'self' https://static.cloudflareinsights.com ...hashes...**
   - JS is only allowed from:
     - our own origin (`'self'`)
-    - Cloudflare’s analytics endpoint
+    - Cloudflares analytics endpoint
   - Inline scripts are **not allowed by default**.  
     Only specific inline snippets are allowed, using SHA-256 hashes
     generated at build time.
@@ -98,15 +98,15 @@ Cloudflare may inject its own **inline script** for bot protection or JS challen
 
 #### Why It Gets Blocked
 
-- Script is **not in our source** — added by Cloudflare at the edge
-- Contents **change per request** — cannot pre-compute a CSP hash
-- It has **no nonce** — cannot allowlist dynamically
+- Script is **not in our source** added by Cloudflare at the edge
+- Contents **change per request** cannot pre-compute a CSP hash
+- It has **no nonce** cannot allowlist dynamically
 
 #### This is Intentional
 
 Our CSP **blocks this inline script**. Browser console shows:
 
-> Executing inline script violates the following Content Security Policy directive…
+> Executing inline script violates the following Content Security Policy directive
 
 **This is expected.** We prefer strict CSP over allowing dynamic Cloudflare injections.
 Core site features (navigation, content, theme toggle) still work as designed.
@@ -122,18 +122,18 @@ If needed, we can:
 
 Lighthouse may show a few security suggestions:
 
-- **“Add Trusted Types directive”**  
+- **Add Trusted Types directive**  
   This is an extra hardening step against XSS.  
-  It’s useful for large, dynamic apps, but is **not necessary** for this
+  Its useful for large, dynamic apps, but is **not necessary** for this
   mostly static personal site right now.
 
-- **“Host allowlists can be bypassed; use nonces/hashes and 'strict-dynamic'”**  
+- **Host allowlists can be bypassed; use nonces/hashes and 'strict-dynamic'**  
   We already use hashes for inline scripts and only allow JS from `'self'`
   - Cloudflare Insights.  
     If we ever move to heavy SSR and lots of dynamic JS, we can revisit
     a nonce-based policy with `'strict-dynamic'`.
 
-- **“Consider adding 'unsafe-inline' for backwards compatibility”**  
+- **Consider adding 'unsafe-inline' for backwards compatibility**  
   We **intentionally do not** add `unsafe-inline` for scripts.
   Older browsers are not a priority for this site, and security wins here.
 
@@ -205,10 +205,10 @@ Static sites bundle everything at build time. Any secrets in your code end up in
 Astro exposes `PUBLIC_*` variables to the client:
 
 ```typescript
-// ❌ EXPOSED - Don't do this
+//  EXPOSED - Don't do this
 const API_KEY = import.meta.env.API_KEY;
 
-// ✅ SAFE - Clearly marked as public
+//  SAFE - Clearly marked as public
 const PUBLIC_API_URL = import.meta.env.PUBLIC_API_URL;
 ```
 
@@ -317,11 +317,11 @@ Pin exact versions for reproducibility:
 ```json
 {
   "dependencies": {
-    "astro": "5.0.0", // ✅ Exact version
-    "react": "19.2.1" // ✅ Exact version
+    "astro": "5.0.0", //  Exact version
+    "react": "19.2.1" //  Exact version
   },
   "devDependencies": {
-    "vitest": "2.1.8" // ✅ Exact version
+    "vitest": "2.1.8" //  Exact version
   }
 }
 ```
@@ -428,7 +428,7 @@ const page = pageSchema.parse(Astro.url.searchParams.get('page'));
 **React/Astro auto-escape by default:**
 
 ```tsx
-// ✅ Automatically escaped
+//  Automatically escaped
 function Component({ userInput, project }) {
   return (
     <>
@@ -453,19 +453,19 @@ const cleanHTML = DOMPurify.sanitize(userHTML, {
 **Dangerous patterns to avoid:**
 
 ```tsx
-// ❌ NEVER do this with user input
+//  NEVER do this with user input
 function BadExample1() {
   return <div dangerouslySetInnerHTML={{ __html: userInput }} />;
 }
 ```
 
 ```astro
-<!-- ❌ NEVER interpolate user input in script tags -->
+<!--  NEVER interpolate user input in script tags -->
 <script>
   const data = { userInput };
 </script>
 
-<!-- ✅ Use JSON.stringify and validate -->
+<!--  Use JSON.stringify and validate -->
 <script define:vars={{ data: JSON.parse(validatedJSON) }}>
   // Use data safely
 </script>
@@ -508,10 +508,10 @@ jobs:
 ### Pin Action Versions to SHA
 
 ```yaml
-# ❌ DANGEROUS - tags can be moved
+#  DANGEROUS - tags can be moved
 - uses: actions/checkout@v4
 
-# ✅ SAFE - SHA is immutable
+#  SAFE - SHA is immutable
 - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 ```
 
@@ -551,10 +551,10 @@ If you want deeper SAST (CodeQL), add a dedicated GitHub Actions workflow.
   env:
     API_KEY: ${{ secrets.API_KEY }}
   run: |
-    # ❌ NEVER echo secrets
+    #  NEVER echo secrets
     # echo "API_KEY=$API_KEY"
 
-    # ✅ Use secrets safely
+    #  Use secrets safely
     ./deploy.sh
 ```
 

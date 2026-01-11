@@ -1,4 +1,4 @@
-# Dependencies
+﻿# Dependencies
 
 Understanding the project's dependency structure and management.
 
@@ -57,15 +57,15 @@ graph TD
 ### Dependency Layers
 
 ```
-┌─────────────────────────────────────┐
-│ Application Code                    │
-├─────────────────────────────────────┤
-│ Framework Layer (Astro, React)      │
-├─────────────────────────────────────┤
-│ Build Tools (Vite, TypeScript)      │
-├─────────────────────────────────────┤
-│ Node.js Runtime                     │
-└─────────────────────────────────────┘
+
+ Application Code
+
+ Framework Layer (Astro, React)
+
+ Build Tools (Vite, TypeScript)
+
+ Node.js Runtime
+
 ```
 
 ## Dependency Rules
@@ -248,16 +248,16 @@ npm ci
 
 ```
 home@1.0.0
-├── astro@5.14.1
-│   ├── @astrojs/compiler@2.x
-│   ├── vite@6.x
-│   └── zod@3.x
-├── react@19.2.0
-├── react-dom@19.2.0
-│   └── react@19.2.0 (deduped)
-├── tailwindcss@4.1.14
-│   └── @tailwindcss/oxide@4.x
-└── (... dev dependencies)
+ astro@5.14.1
+    @astrojs/compiler@2.x
+    vite@6.x
+    zod@3.x
+ react@19.2.0
+ react-dom@19.2.0
+    react@19.2.0 (deduped)
+ tailwindcss@4.1.14
+    @tailwindcss/oxide@4.x
+ (... dev dependencies)
 ```
 
 ## Troubleshooting

@@ -21,7 +21,13 @@ export default function PlantUMLDiagram({
   }, [code]);
 
   return (
-    <div className="plantuml-container my-6 overflow-x-auto rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
+    <div
+      className="plantuml-container my-6 overflow-x-auto rounded-lg border p-4"
+      style={{
+        borderColor: 'var(--theme-border-default)',
+        background: 'var(--theme-bg-surface)',
+      }}
+    >
       {imageUrl && (
         <img
           src={imageUrl}

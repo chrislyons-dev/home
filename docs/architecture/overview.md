@@ -1,4 +1,4 @@
-# Architecture Overview
+﻿# Architecture Overview
 
 Understanding the system design and architecture.
 
@@ -67,11 +67,11 @@ React components for reusable UI:
 
 ```
 src/components/
-├── ThemeToggle.tsx      # Dark mode toggle
-├── TechStack.tsx        # Tech stack display
-├── CodeBlock.tsx        # Syntax highlighting
-├── PlantUMLDiagram.tsx  # PlantUML diagrams
-└── AnimatedGrid.tsx     # Animated backgrounds
+ ThemeToggle.tsx      # Dark mode toggle
+ TechStack.tsx        # Tech stack display
+ CodeBlock.tsx        # Syntax highlighting
+ PlantUMLDiagram.tsx  # PlantUML diagrams
+ AnimatedGrid.tsx     # Animated backgrounds
 ```
 
 ### 4. File-Based Routing
@@ -80,12 +80,12 @@ Pages auto-route based on file structure:
 
 ```
 src/pages/
-├── index.astro         → /
-├── about.astro         → /about
-├── projects.astro      → /projects
-├── architecture.astro  → /architecture
-├── contact.astro       → /contact
-└── 404.astro          → 404 error
+ index.astro          /
+ about.astro          /about
+ projects.astro       /projects
+ architecture.astro   /architecture
+ contact.astro        /contact
+ 404.astro           404 error
 ```
 
 ## System Design
@@ -131,11 +131,11 @@ sequenceDiagram
 
 ```
 src/layouts/
-└── Layout.astro       # Base layout
-    ├── <head>         # Meta tags, styles
-    ├── <nav>          # Navigation with ThemeToggle
-    ├── <main>         # Page content slot
-    └── <footer>       # Footer
+ Layout.astro       # Base layout
+     <head>         # Meta tags, styles
+     <nav>          # Navigation with ThemeToggle
+     <main>         # Page content slot
+     <footer>       # Footer
 ```
 
 ### Styling Architecture
@@ -197,15 +197,15 @@ export default defineConfig({
 
 ```
 dist/
-├── index.html
-├── 404.html
-├── about/index.html
-├── architecture/index.html
-├── contact/index.html
-├── projects/index.html
-└── _astro/
-    ├── [hash].css
-    └── [hash].js
+ index.html
+ 404.html
+ about/index.html
+ architecture/index.html
+ contact/index.html
+ projects/index.html
+ _astro/
+     [hash].css
+     [hash].js
 ```
 
 ## C4 Architecture Model
@@ -214,7 +214,7 @@ Architecture diagrams follow the C4 model and are automatically generated in CI/
 
 ### Level 1: System Context
 
-The big picture—how the portfolio site fits into the broader ecosystem.
+The big picturehow the portfolio site fits into the broader ecosystem.
 
 ![C4 System Context](generated/c4-system-context.png)
 

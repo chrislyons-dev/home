@@ -1,10 +1,10 @@
-# Welcome to Chris Lyons' Portfolio
+﻿# Welcome to Chris Lyons' Portfolio
 
 A fast, focused personal website built with Astro, React, and TypeScript.
 
 ## Overview
 
-This is the personal website and portfolio for Chris Lyons — developer, architect, and builder. Built with a focus on performance, accessibility, and user experience.
+This is the personal website and portfolio for Chris Lyons developer, architect, and builder. Built with a focus on performance, accessibility, and user experience.
 
 ## Key Features
 

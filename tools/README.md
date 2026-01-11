@@ -1,4 +1,4 @@
-# Build Tools
+﻿# Build Tools
 
 This directory contains build-time tools that are version controlled for reproducibility and security.
 
@@ -11,11 +11,11 @@ This directory contains build-time tools that are version controlled for reprodu
 
 ### Why Committed?
 
-- ✅ **Security:** Verified hash, no supply chain attacks
-- ✅ **Reproducibility:** Same version across all environments
-- ✅ **Reliability:** No network dependencies during builds
-- ✅ **Offline:** Works without internet access
-- ✅ **Speed:** No download time in CI/CD
+- ... **Security:** Verified hash, no supply chain attacks
+- ... **Reproducibility:** Same version across all environments
+- ... **Reliability:** No network dependencies during builds
+- ... **Offline:** Works without internet access
+- ... **Speed:** No download time in CI/CD
 
 ### Verification
 

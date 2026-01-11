@@ -1,4 +1,4 @@
-# Contributing Guide
+﻿# Contributing Guide
 
 Thanks for your interest in contributing!
 
@@ -216,12 +216,12 @@ How was this tested?
 
 ```
 src/
-├── components/     # React components
-├── layouts/        # Astro layouts
-├── pages/          # File-based routes
-├── services/       # Business logic
-├── styles/         # Global styles
-└── utils/          # Utility functions
+ components/     # React components
+ layouts/        # Astro layouts
+ pages/          # File-based routes
+ services/       # Business logic
+ styles/         # Global styles
+ utils/          # Utility functions
 ```
 
 ## Common Tasks
@@ -284,9 +284,9 @@ Husky runs automatically:
 
 ## Getting Help
 
-- 📖 [Documentation](https://chrislyons-dev.github.io/home/)
-- 🐛 [Report a bug](https://github.com/chrislyons-dev/home/issues/new)
-- 💬 [Discussions](https://github.com/chrislyons-dev/home/discussions)
+- [Documentation](https://chrislyons-dev.github.io/home/)
+- [Report a bug](https://github.com/chrislyons-dev/home/issues/new)
+- [Discussions](https://github.com/chrislyons-dev/home/discussions)
 
 ## License
 
@@ -294,4 +294,4 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ---
 
-Thank you for contributing! 🎉
+Thank you for contributing!

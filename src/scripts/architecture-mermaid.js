@@ -47,7 +47,8 @@ const initArchitectureMermaid = () => {
       if (mutation.attributeName === 'class' && mermaidLoaded) {
         document.querySelectorAll('.mermaid-container').forEach((el) => {
           const pre = document.createElement('pre');
-          pre.className = 'mermaid bg-white dark:bg-slate-900 p-4 rounded overflow-x-auto';
+          pre.className =
+            'mermaid p-4 rounded overflow-x-auto bg-[var(--theme-bg-surface)] text-[var(--theme-text-primary)]';
           pre.textContent = el.dataset.mermaidCode || '';
           el.replaceWith(pre);
         });

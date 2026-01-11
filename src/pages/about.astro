@@ -1,9 +1,9 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="About — Chris Lyons"
+  title="About - Chris Lyons"
   description="Learn more about Chris Lyons, a developer, architect, and builder with expertise in modern web technologies."
 >
   <div class="section-container-narrow">
@@ -13,19 +13,17 @@ import Layout from '../layouts/Layout.astro';
       <!-- About Me -->
       <section class="mb-16">
         <h2 class="mb-6 text-3xl font-bold">About Me</h2>
-        <p class="mb-6 text-xl text-gray-600 dark:text-slate-400">
+        <p class="text-muted mb-6 text-xl">
           Architect and engineer. Whatever the scale, the goal is the same: solve the problem right.
         </p>
 
-        <p class="mb-6 text-gray-700 dark:text-slate-300">
-          End-to-end builder. Small startups to enterprise systems.
-        </p>
+        <p class="text-body mb-6">End-to-end builder. Small startups to enterprise systems.</p>
 
         <h3 class="mb-4 text-xl font-bold">Technical Stack</h3>
         <div class="mb-8 grid gap-6 sm:grid-cols-2">
           <div>
             <h4 class="text-accent mb-2 font-semibold">Frontend</h4>
-            <ul class="list-inside list-disc text-gray-700 dark:text-slate-300">
+            <ul class="text-body list-inside list-disc">
               <li>React, TypeScript</li>
               <li>Astro, Next.js</li>
               <li>Tailwind CSS</li>
@@ -34,7 +32,7 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <div>
             <h4 class="text-accent mb-2 font-semibold">Backend & Infrastructure</h4>
-            <ul class="list-inside list-disc text-gray-700 dark:text-slate-300">
+            <ul class="text-body list-inside list-disc">
               <li>Node.js, Python, Java</li>
               <li>DynamoDB, PostgreSQL, MongoDB</li>
               <li>Docker, Kubernetes</li>
@@ -45,18 +43,16 @@ import Layout from '../layouts/Layout.astro';
       </section>
 
       <!-- About This Site -->
-      <section
-        class="border-electric-600/20 dark:border-electric-600/40 rounded-lg border-2 bg-gradient-to-br from-white to-gray-50 p-8 dark:from-slate-900 dark:to-slate-900/50"
-      >
+      <section class="info-box-featured">
         <h2 class="mb-6 text-3xl font-bold">About This Site</h2>
 
-        <p class="mb-6 text-gray-700 dark:text-slate-300">
+        <p class="text-body mb-6">
           This portfolio is intentionally over-engineered. It's a working demonstration of
           production-grade practices applied to a static site.
         </p>
 
         <h3 class="mb-4 text-xl font-bold">Stack</h3>
-        <ul class="mb-6 space-y-2 text-gray-700 dark:text-slate-300">
+        <ul class="text-body mb-6 space-y-2">
           <li>
             <strong>Framework:</strong>
             <a
@@ -64,7 +60,7 @@ import Layout from '../layouts/Layout.astro';
               class="text-accent hover:underline"
               target="_blank"
               rel="noopener noreferrer">Astro 5</a
-            > — Islands architecture, zero JS by default
+            > - Islands architecture, zero JS by default
           </li>
           <li>
             <strong>UI:</strong> React 19, TypeScript (strict mode), Tailwind CSS 4
@@ -84,41 +80,39 @@ import Layout from '../layouts/Layout.astro';
         </ul>
 
         <h3 class="mb-4 text-xl font-bold">CI/CD Pipeline</h3>
-        <p class="mb-4 text-gray-700 dark:text-slate-300">
-          Every push triggers a full quality gate:
-        </p>
-        <ol class="mb-6 list-inside list-decimal space-y-2 text-gray-700 dark:text-slate-300">
+        <p class="text-body mb-4">Every push triggers a full quality gate:</p>
+        <ol class="text-body mb-6 list-inside list-decimal space-y-2">
           <li>
-            <strong>Change detection</strong> — Skip deployment for docs-only changes (grep filter for
+            <strong>Change detection</strong> - Skip deployment for docs-only changes (grep filter for
             <code class="text-sm">^(docs/|.*\.md$)</code>)
           </li>
-          <li><strong>Commit validation</strong> — Conventional commits enforced via commitlint</li>
+          <li><strong>Commit validation</strong> - Conventional commits enforced via commitlint</li>
           <li>
-            <strong>Code quality</strong> — Prettier format check, ESLint (TypeScript strict), type check
+            <strong>Code quality</strong> - Prettier format check, ESLint (TypeScript strict), type check
             (tsc --noEmit)
           </li>
-          <li><strong>Tests</strong> — Vitest with coverage tracking (V8 provider)</li>
-          <li><strong>Build</strong> — Astro production build with Lightning CSS minification</li>
+          <li><strong>Tests</strong> - Vitest with coverage tracking (V8 provider)</li>
+          <li><strong>Build</strong> - Astro production build with Lightning CSS minification</li>
           <li>
-            <strong>Lighthouse CI</strong> — 3 runs × 5 pages, scores ≥95 required (Performance, Accessibility,
+            <strong>Lighthouse CI</strong> - 3 runs - 5 pages, scores 95 required (Performance, Accessibility,
             Best Practices, SEO)
           </li>
           <li>
-            <strong>Performance tracking</strong> — Lighthouse scores auto-committed to <code
+            <strong>Performance tracking</strong> - Lighthouse scores auto-committed to <code
               class="text-sm">docs/performance.md</code
             >
           </li>
         </ol>
 
-        <p class="mb-6 text-gray-700 dark:text-slate-300">
-          Deployment requires: ✅ All checks pass, ✅ Concurrency control (no simultaneous deploys),
-          ✅ CSP hash generation, ✅ Docs validation
+        <p class="text-body mb-6">
+          Deployment requires: [ok] All checks pass, [ok] Concurrency control (no simultaneous
+          deploys), [ok] CSP hash generation, [ok] Docs validation
         </p>
 
         <h3 class="mb-4 text-xl font-bold">Security</h3>
-        <ul class="mb-6 space-y-2 text-gray-700 dark:text-slate-300">
+        <ul class="text-body mb-6 space-y-2">
           <li>
-            <strong>Content Security Policy:</strong> Build-time script hashing — scan built HTML for
+            <strong>Content Security Policy:</strong> Build-time script hashing - scan built HTML for
             inline scripts, generate SHA-256 hashes, inject into <code class="text-sm"
               >_headers</code
             >. No <code class="text-sm">unsafe-inline</code>, no nonces.
@@ -137,12 +131,12 @@ import Layout from '../layouts/Layout.astro';
         </ul>
 
         <h3 class="mb-4 text-xl font-bold">Architecture as Code</h3>
-        <ul class="mb-6 space-y-2 text-gray-700 dark:text-slate-300">
+        <ul class="text-body mb-6 space-y-2">
           <li>
             <strong>Auto-generated diagrams:</strong>
             <a href="/architecture" class="text-accent hover:underline"
               >C4 system context, container, and component diagrams</a
-            > — PlantUML generated from source on every commit
+            > - PlantUML generated from source on every commit
           </li>
           <li>
             <strong>Dependency graphs:</strong> Module relationships visualized with Mermaid, circular
@@ -160,7 +154,7 @@ import Layout from '../layouts/Layout.astro';
         </ul>
 
         <h3 class="mb-4 text-xl font-bold">Performance</h3>
-        <ul class="mb-6 space-y-2 text-gray-700 dark:text-slate-300">
+        <ul class="text-body mb-6 space-y-2">
           <li>
             <strong>Island architecture:</strong> Zero JS shipped by default, selective hydration (<code
               class="text-sm">client:idle</code
@@ -177,15 +171,13 @@ import Layout from '../layouts/Layout.astro';
             (1 year), short cache for HTML (5 min + stale-while-revalidate)
           </li>
           <li>
-            <strong>Current scores:</strong> All pages maintain Lighthouse scores ≥95 across all metrics
+            <strong>Current scores:</strong> All pages maintain Lighthouse scores &gt;=95 across all metrics
           </li>
         </ul>
 
         <h3 class="mb-4 text-xl font-bold">Pre-Commit Hooks</h3>
-        <p class="mb-4 text-gray-700 dark:text-slate-300">
-          Husky enforces quality gates before every commit:
-        </p>
-        <ol class="mb-6 list-inside list-decimal space-y-1 text-gray-700 dark:text-slate-300">
+        <p class="text-body mb-4">Husky enforces quality gates before every commit:</p>
+        <ol class="text-body mb-6 list-inside list-decimal space-y-1">
           <li>Format check (Prettier)</li>
           <li>Lint (ESLint)</li>
           <li>Type check (tsc)</li>
@@ -194,8 +186,8 @@ import Layout from '../layouts/Layout.astro';
           <li>Dependency analysis (circular deps, orphans)</li>
         </ol>
 
-        <div class="mt-8 border-t border-gray-200 pt-6 dark:border-white/10">
-          <p class="text-gray-700 dark:text-slate-300">
+        <div class="mt-8 border-t pt-6" style="border-color: var(--theme-border-default);">
+          <p class="text-body">
             <strong>Why this matters:</strong> The code shows more than a list of principles ever could.
             Read the source, check the CI logs, inspect the headers. This site is a portfolio piece that
             references itself.

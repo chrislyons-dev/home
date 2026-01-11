@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 
 import { execSync } from 'child_process';
 import { writeFileSync, mkdirSync, existsSync, readdirSync, statSync, readFileSync } from 'fs';
@@ -18,10 +18,10 @@ if (!existsSync(docsDir)) {
 // Disable Jekyll for GitHub Pages
 writeFileSync(join(docsDir, '.nojekyll'), '');
 
-console.log('🏗️  Generating architecture documentation...\n');
+console.log('  Generating architecture documentation...\n');
 
 // 1. Module Dependency Graph with circular dependency detection
-console.log('📊 Generating module dependency graph...');
+console.log(' Generating module dependency graph...');
 try {
   // Check for circular dependencies - madge returns paths if circular deps exist
   const circularCheck = execSync(
@@ -34,7 +34,7 @@ try {
 
   const circularDeps = JSON.parse(circularCheck);
   if (Object.keys(circularDeps).length > 0) {
-    console.log('  ⚠️  Warning: Circular dependencies detected!');
+    console.log('    Warning: Circular dependencies detected!');
     writeFileSync(
       join(docsDir, 'circular-dependencies.json'),
       JSON.stringify(circularDeps, null, 2)
@@ -56,16 +56,16 @@ try {
     const mermaidGraph = convertDotToMermaid(dotOutput);
     writeFileSync(join(docsDir, 'module-dependencies.mmd'), mermaidGraph);
 
-    console.log('  ✓ Module dependency graph generated');
+    console.log('   Module dependency graph generated');
   } catch (dotError) {
-    console.log('  ⚠️  Skipping DOT graph generation (graphviz may not be available)');
+    console.log('    Skipping DOT graph generation (graphviz may not be available)');
   }
 } catch (error) {
-  console.error('  ✗ Failed to generate dependency graph:', error.message);
+  console.error('   Failed to generate dependency graph:', error.message);
 }
 
 // 2. Bundle Analysis (will be generated during build)
-console.log('📦 Setting up bundle analysis...');
+console.log(' Setting up bundle analysis...');
 try {
   // Create a build config that includes the visualizer
   const visualizerConfig = `
@@ -84,13 +84,13 @@ export default {
 };
 `;
   writeFileSync(join(rootDir, 'rollup.config.js'), visualizerConfig);
-  console.log('  ✓ Bundle analysis configured (run npm build to generate)');
+  console.log('   Bundle analysis configured (run npm build to generate)');
 } catch (error) {
-  console.error('  ✗ Failed to setup bundle analysis:', error.message);
+  console.error('   Failed to setup bundle analysis:', error.message);
 }
 
 // 3. Routes Map
-console.log('🗺️  Generating routes map...');
+console.log('  Generating routes map...');
 try {
   const pagesDir = join(rootDir, 'src', 'pages');
 
@@ -127,25 +127,25 @@ try {
   const routesJson = JSON.stringify(routes, null, 2);
   writeFileSync(join(docsDir, 'routes.json'), routesJson);
 
-  console.log(`  ✓ Routes map generated (${routes.length} routes)`);
+  console.log(`   Routes map generated (${routes.length} routes)`);
 } catch (error) {
-  console.error('  ✗ Failed to generate routes map:', error.message);
+  console.error('   Failed to generate routes map:', error.message);
 }
 
 // 4. Parse project configuration
-console.log('⚙️  Parsing project configuration...');
+console.log('  Parsing project configuration...');
 const projectConfig = parseProjectConfig();
 
 // 5. Analyze component structure
-console.log('🔍 Analyzing component structure...');
+console.log(' Analyzing component structure...');
 const componentStructure = analyzeComponentStructure();
 
 // 6. Analyze code structure with AST
-console.log('🔬 Analyzing code structure...');
+console.log(' Analyzing code structure...');
 const codeStructure = analyzeCodeStructure();
 
 // 7. C4 System Diagrams
-console.log('🏛️  Generating C4 system diagrams...');
+console.log('  Generating C4 system diagrams...');
 try {
   const c4Diagram = generateC4SystemDiagram(projectConfig);
   writeFileSync(join(docsDir, 'c4-system-context.puml'), c4Diagram);
@@ -161,13 +161,13 @@ try {
   // const c4Code = generateC4CodeDiagram(codeStructure, projectConfig);
   // writeFileSync(join(docsDir, 'c4-code.puml'), c4Code);
 
-  console.log('  ✓ C4 diagrams generated (Levels 1-3)');
+  console.log('   C4 diagrams generated (Levels 1-3)');
 } catch (error) {
-  console.error('  ✗ Failed to generate C4 diagrams:', error.message);
+  console.error('   Failed to generate C4 diagrams:', error.message);
 }
 
-console.log('\n✨ Architecture documentation generated successfully!');
-console.log(`📁 Output directory: ${docsDir}\n`);
+console.log('\n Architecture documentation generated successfully!');
+console.log(` Output directory: ${docsDir}\n`);
 
 // Helper functions
 
@@ -200,7 +200,7 @@ function parseProjectConfig() {
       ...packageJson.devDependencies,
     };
   } catch (error) {
-    console.log('  ⚠️  Could not parse package.json');
+    console.log('    Could not parse package.json');
   }
 
   // Parse astro.config.mjs
@@ -221,7 +221,7 @@ function parseProjectConfig() {
       config.integrations.push(match[2]);
     }
   } catch (error) {
-    console.log('  ⚠️  Could not parse astro.config.mjs');
+    console.log('    Could not parse astro.config.mjs');
   }
 
   // Parse wrangler.toml
@@ -233,7 +233,7 @@ function parseProjectConfig() {
       config.hosting = 'Cloudflare Pages';
     }
   } catch (error) {
-    console.log('  ⚠️  Could not parse wrangler.toml');
+    console.log('    Could not parse wrangler.toml');
   }
 
   // Parse GitHub Actions CD workflow (Infrastructure as Code!)
@@ -284,9 +284,9 @@ function parseProjectConfig() {
       config.cicd.environment = envMatch[1];
     }
 
-    console.log(`  ✓ Parsed CD workflow: deploys to ${config.cicd.deployTarget || 'unknown'}`);
+    console.log(`   Parsed CD workflow: deploys to ${config.cicd.deployTarget || 'unknown'}`);
   } catch (error) {
-    console.log('  ⚠️  Could not parse cd.yml');
+    console.log('    Could not parse cd.yml');
   }
 
   // Parse CI workflow for additional services
@@ -313,10 +313,10 @@ function parseProjectConfig() {
       config.cicd.hasDocsDeployment = true;
     }
   } catch (error) {
-    console.log('  ⚠️  Could not parse ci.yml');
+    console.log('    Could not parse ci.yml');
   }
 
-  console.log(`  ✓ Parsed configuration: ${config.name} (${config.site})`);
+  console.log(`   Parsed configuration: ${config.name} (${config.site})`);
   return config;
 }
 
@@ -359,7 +359,7 @@ function analyzeComponentStructure() {
   scanDirectory(join(srcDir, 'data'), 'data');
 
   console.log(
-    `  ✓ Found ${structure.pages.length} pages, ${structure.components.length} components, ${structure.services.length} services`
+    `   Found ${structure.pages.length} pages, ${structure.components.length} components, ${structure.services.length} services`
   );
   return structure;
 }
@@ -429,12 +429,12 @@ function analyzeCodeStructure() {
         structure.interfaces.push(interfaceMatch[1]);
       }
     } catch (error) {
-      console.log(`  ⚠️  Could not read ThemeManager.ts: ${error.message}`);
+      console.log(`    Could not read ThemeManager.ts: ${error.message}`);
     }
   }
 
   console.log(
-    `  ✓ Analyzed ${structure.classes.length} classes, ${structure.interfaces.length} interfaces`
+    `   Analyzed ${structure.classes.length} classes, ${structure.interfaces.length} interfaces`
   );
   return structure;
 }
@@ -506,7 +506,7 @@ function generateC4SystemDiagram(config) {
     deploymentFlow += ` ${config.cicd.buildCommand}`;
   }
   if (config.cicd?.outputDir) {
-    deploymentFlow += ` → ${config.cicd.outputDir}`;
+    deploymentFlow += `  ${config.cicd.outputDir}`;
   }
 
   // Build CI pipeline services from detected features
@@ -536,9 +536,9 @@ note as DeploymentNote
   Target: ${hosting}
   ${config.cicd?.environment ? `Environment: ${config.cicd.environment}` : ''}
   ${config.cicd?.projectName ? `Project: ${config.cicd.projectName}` : ''}
-  ${config.cicd?.hasLighthouse ? '✓ Lighthouse CI enabled' : ''}
-  ${config.cicd?.hasTests ? '✓ Automated testing' : ''}
-  ${config.cicd?.hasBuildVerification ? '✓ Build verification' : ''}
+  ${config.cicd?.hasLighthouse ? ' Lighthouse CI enabled' : ''}
+  ${config.cicd?.hasTests ? ' Automated testing' : ''}
+  ${config.cicd?.hasBuildVerification ? ' Build verification' : ''}
 end note
 
 Person(user, "Visitor", "A person visiting the portfolio website")

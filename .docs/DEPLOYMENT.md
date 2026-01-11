@@ -1,4 +1,4 @@
-# Deployment Guide
+﻿# Deployment Guide
 
 This site is optimized for deployment to modern static hosting platforms.
 
@@ -72,11 +72,11 @@ PUBLIC_SITE_URL=https://chrislyons.dev
 
 Already optimized for:
 
-- ✅ Core Web Vitals
-- ✅ Static site generation (SSG)
-- ✅ CSS minification
-- ✅ Image optimization
-- ✅ View Transitions API
+- Core Web Vitals
+- Static site generation (SSG)
+- CSS minification
+- Image optimization
+- View Transitions API
 
 ## Documentation
 

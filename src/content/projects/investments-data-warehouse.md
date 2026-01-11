@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Investments Data Warehouse & AI Platform'
 description: 'Unified data platform for investment analytics. Tiered pipelines (real-time to daily batch), Snowflake warehouse, REST APIs, and MCP integration for AI access.'
 tech: ['Python', 'AWS Glue', 'Spark', 'S3', 'Snowflake', 'MCP', 'Node.js']
@@ -16,4 +16,4 @@ The architecture:
 - Daily batch for static datasets (fundamentals, earnings, holdings)
 - Snowflake-based warehouse with curated data products for different teams
 - RESTful APIs exposing investment metrics and portfolio analytics
-- Model Context Protocol (MCP) integration — LLMs query investment data directly
+- Model Context Protocol (MCP) integration " LLMs query investment data directly

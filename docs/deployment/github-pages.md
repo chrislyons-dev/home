@@ -1,4 +1,4 @@
-# Deploying to GitHub Pages
+﻿# Deploying to GitHub Pages
 
 Deploy the MkDocs documentation site to GitHub Pages.
 
@@ -10,13 +10,13 @@ GitHub Pages hosts the polished MkDocs documentation site, while the main reposi
 
 ```
 Repository
-├── docs/              # MkDocs source (consumer docs)
-├── mkdocs.yml         # MkDocs config
-├── CONTRIBUTING.md    # Contributor docs (repo)
-├── README.md          # Contributor docs (repo)
-└── .github/
-    └── workflows/
-        └── docs.yml   # Deploy workflow
+ docs/              # MkDocs source (consumer docs)
+ mkdocs.yml         # MkDocs config
+ CONTRIBUTING.md    # Contributor docs (repo)
+ README.md          # Contributor docs (repo)
+ .github/
+     workflows/
+         docs.yml   # Deploy workflow
 ```
 
 ## Prerequisites
@@ -29,7 +29,7 @@ Repository
 
 ### 1. Enable GitHub Pages
 
-1. Go to Settings → Pages
+1. Go to Settings Pages
 2. Source: GitHub Actions
 3. Save
 
@@ -174,7 +174,7 @@ Value: yourusername.github.io
 site_url: https://docs.yourdomain.com
 ```
 
-4. Enable in GitHub Settings → Pages
+4. Enable in GitHub Settings Pages
 
 ## Documentation Structure
 
@@ -184,24 +184,24 @@ Polished documentation for users:
 
 ```
 docs/
-├── index.md
-├── getting-started/
-│   ├── installation.md
-│   ├── quick-start.md
-│   └── configuration.md
-├── features/
-│   ├── overview.md
-│   ├── tech-stack.md
-│   ├── performance.md
-│   └── accessibility.md
-├── architecture/
-│   ├── overview.md
-│   ├── system-design.md
-│   └── dependencies.md
-└── deployment/
-    ├── overview.md
-    ├── vercel.md
-    └── github-pages.md
+ index.md
+ getting-started/
+    installation.md
+    quick-start.md
+    configuration.md
+ features/
+    overview.md
+    tech-stack.md
+    performance.md
+    accessibility.md
+ architecture/
+    overview.md
+    system-design.md
+    dependencies.md
+ deployment/
+     overview.md
+     vercel.md
+     github-pages.md
 ```
 
 ### Contributor Docs (Repository)
@@ -209,11 +209,11 @@ docs/
 Technical docs for contributors:
 
 ```
-├── README.md           # Project overview
-├── CONTRIBUTING.md     # Contribution guidelines
-├── DEVELOPMENT.md      # Development setup
-├── DEPLOYMENT.md       # Deployment procedures
-└── ARCHITECTURE.md     # Technical architecture
+ README.md           # Project overview
+ CONTRIBUTING.md     # Contribution guidelines
+ DEVELOPMENT.md      # Development setup
+ DEPLOYMENT.md       # Deployment procedures
+ ARCHITECTURE.md     # Technical architecture
 ```
 
 ## Deployment Triggers
@@ -276,7 +276,7 @@ gh run view <run-id>
 
 **Fix:**
 
-1. Settings → Pages
+1. Settings Pages
 2. Source: GitHub Actions
 3. Wait for deployment
 

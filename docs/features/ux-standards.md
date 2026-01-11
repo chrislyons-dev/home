@@ -1,4 +1,4 @@
-# UX Standards
+﻿# UX Standards
 
 Fast. Clear. Accessible. Works on anything with a screen.
 
@@ -14,8 +14,8 @@ Users should understand **what to do next** without a tooltip or training.
 
 **Examples:**
 
-- ✅ Button says "View Projects" (clear action)
-- ❌ Button says "Explore" (vague, could mean anything)
+- Button says "View Projects" (clear action)
+- Button says "Explore" (vague, could mean anything)
 
 ### 2. Consistency Beats Novelty
 
@@ -51,9 +51,9 @@ Every feature must be usable on mobile-size screens.
 
 **Test at minimum:**
 
-- 375×667 (mobile)
-- 768×1024 (tablet)
-- 1280×720 (desktop)
+- 375667 (mobile)
+- 7681024 (tablet)
+- 1280720 (desktop)
 
 ### 6. Intentional, Not Templated
 
@@ -65,7 +65,7 @@ Every design choice should serve the content and user needs, not just fill a tem
 
 Don't build pages that feel like a template with words poured in.
 
-### ❌ Oversized Hero with No Content
+### Oversized Hero with No Content
 
 **Problem:**
 
@@ -73,7 +73,7 @@ Don't build pages that feel like a template with words poured in.
 - Contains only a vague slogan ("Build. Scale. Win.")
 - Forces scroll to see any actual information
 
-**✅ Do Instead:**
+** Do Instead:**
 
 - Hero should be 50-70% viewport height max
 - Include clear value proposition in 1-2 sentences
@@ -82,12 +82,12 @@ Don't build pages that feel like a template with words poured in.
 **Example:**
 
 ```astro
-<!-- ❌ Bad -->
+<!--  Bad -->
 <section class="flex h-screen items-center justify-center">
   <h1>Transform Your Workflow</h1>
 </section>
 
-<!-- ✅ Good -->
+<!--  Good -->
 <section class="flex min-h-[60vh] items-center justify-center">
   <div>
     <h1>Portfolio Site Generator</h1>
@@ -98,7 +98,7 @@ Don't build pages that feel like a template with words poured in.
 
 ---
 
-### ❌ Generic CTA Pair
+### Generic CTA Pair
 
 **Problem:**
 
@@ -107,7 +107,7 @@ Don't build pages that feel like a template with words poured in.
 - Could swap them and nothing changes
 - User can't predict the outcome
 
-**✅ Do Instead:**
+** Do Instead:**
 
 - Specific CTAs: "View Projects", "Read the Code", "See Architecture"
 - One primary action per section
@@ -116,18 +116,18 @@ Don't build pages that feel like a template with words poured in.
 **Example:**
 
 ```astro
-<!-- ❌ Bad -->
+<!--  Bad -->
 <button>Get Started</button>
 <button>Learn More</button>
 
-<!-- ✅ Good -->
+<!--  Good -->
 <a href="/projects" class="btn-primary">View Projects</a>
 <a href="/architecture" class="btn-secondary">See System Design</a>
 ```
 
 ---
 
-### ❌ Cookie-Cutter Feature Trio
+### Cookie-Cutter Feature Trio
 
 **Problem:**
 
@@ -136,7 +136,7 @@ Don't build pages that feel like a template with words poured in.
 - Vague headlines: "Automate", "Scale", "Secure"
 - One-line descriptions that fit any product
 
-**✅ Do Instead:**
+** Do Instead:**
 
 - Show real features with specific outcomes
 - Use screenshots or actual UI elements
@@ -146,17 +146,17 @@ Don't build pages that feel like a template with words poured in.
 **Example:**
 
 ```astro
-<!-- ❌ Bad -->
+<!--  Bad -->
 <div class="grid grid-cols-3">
   <div>
-    <span>🚀</span>
+    <span></span>
     <h3>Automate</h3>
     <p>Streamline your workflow.</p>
   </div>
   <!-- ... more generic cards ... -->
 </div>
 
-<!-- ✅ Good -->
+<!--  Good -->
 <div class="grid grid-cols-3 gap-4">
   <div>
     <h3>Island Architecture</h3>
@@ -177,7 +177,7 @@ Don't build pages that feel like a template with words poured in.
 
 ---
 
-### ❌ Endless Alternating Sections
+### Endless Alternating Sections
 
 **Problem:**
 
@@ -186,7 +186,7 @@ Don't build pages that feel like a template with words poured in.
 - Repeat 6+ times with same rhythm
 - No content density, just padding
 
-**✅ Do Instead:**
+** Do Instead:**
 
 - Vary section layouts based on content type
 - Group related information
@@ -195,7 +195,7 @@ Don't build pages that feel like a template with words poured in.
 
 ---
 
-### ❌ Stock Abstract Shapes as "Visual Identity"
+### Stock Abstract Shapes as "Visual Identity"
 
 **Problem:**
 
@@ -204,7 +204,7 @@ Don't build pages that feel like a template with words poured in.
 - Generic wave patterns
 - No connection to actual content
 
-**✅ Do Instead:**
+** Do Instead:**
 
 - Show actual product screenshots
 - Use code snippets or real data
@@ -225,8 +225,8 @@ Can you swap the company/product name and nothing breaks?
 
 **Example:**
 
-- ❌ "A modern solution for developers"
-- ✅ "Static site generator with Astro 5, React 19, and TypeScript"
+- "A modern solution for developers"
+- "Static site generator with Astro 5, React 19, and TypeScript"
 
 ### 2. 10-Second Test
 
@@ -267,11 +267,11 @@ Does each claim have evidence (numbers, examples, links)?
 
 **Examples:**
 
-- ❌ "Fast performance"
-- ✅ "Lighthouse Performance score: 98 (see [report](#))"
+- "Fast performance"
+- "Lighthouse Performance score: 98 (see [report](#))"
 
-- ❌ "Easy to deploy"
-- ✅ "Deploy in 90 seconds with `npm run build && git push`"
+- "Easy to deploy"
+- "Deploy in 90 seconds with `npm run build && git push`"
 
 ---
 
@@ -279,13 +279,13 @@ Does each claim have evidence (numbers, examples, links)?
 
 Use a **mobile-first** approach with these breakpoints:
 
-| Breakpoint        | Size        | Usage                              |
-| ----------------- | ----------- | ---------------------------------- |
-| XS / Mobile       | < 640px     | Single-column layout, compact nav  |
-| SM / Small tablet | 640–767px   | May add simple two-column grids    |
-| MD / Tablet       | 768–1023px  | Two-column layouts, persistent nav |
-| LG / Desktop      | 1024–1439px | Multi-column, sidebar layouts      |
-| XL / Wide desktop | ≥ 1440px    | Wide grids, more whitespace        |
+| Breakpoint        | Size       | Usage                              |
+| ----------------- | ---------- | ---------------------------------- |
+| XS / Mobile       | < 640px    | Single-column layout, compact nav  |
+| SM / Small tablet | 640767px   | May add simple two-column grids    |
+| MD / Tablet       | 7681023px  | Two-column layouts, persistent nav |
+| LG / Desktop      | 10241439px | Multi-column, sidebar layouts      |
+| XL / Wide desktop | 1440px     | Wide grids, more whitespace        |
 
 ### Layout Rules
 
@@ -302,7 +302,7 @@ Use a **mobile-first** approach with these breakpoints:
 - Compact nav (hamburger, bottom nav, or collapsible sidebar)
 - Touch targets minimum 44x44px
 
-**Desktop (≥ 768px):**
+**Desktop ( 768px):**
 
 - Persistent nav is fine, but must degrade cleanly
 
@@ -329,12 +329,12 @@ Use responsive units (`rem`, `em`, `clamp`) rather than hard-coded pixel sizes.
 **Example:**
 
 ```css
-/* ❌ Bad - fixed size */
+/*  Bad - fixed size */
 h1 {
   font-size: 48px;
 }
 
-/* ✅ Good - responsive */
+/*  Good - responsive */
 h1 {
   font-size: clamp(2rem, 5vw, 3rem);
 }
@@ -416,9 +416,9 @@ Apply theme class before initial paint:
 
 Both themes must meet **WCAG 2.1 AA** contrast ratios:
 
-- Normal text: ≥ 4.5:1
-- Large text: ≥ 3:1
-- Interactive elements: ≥ 3:1
+- Normal text: 4.5:1
+- Large text: 3:1
+- Interactive elements: 3:1
 
 See [Accessibility](accessibility.md) for details.
 
@@ -455,8 +455,8 @@ Primary actions (e.g., "Save", "Submit", "Next") should be visually distinct and
 
 **Clear, human-readable messages:**
 
-- ❌ "Error 500"
-- ✅ "We couldn't save your changes because the file is read-only. Try saving to a different location."
+- "Error 500"
+- "We couldn't save your changes because the file is read-only. Try saving to a different location."
 
 **No stack traces or jargon in production.**
 
@@ -552,19 +552,19 @@ Each main view should have a deliberate empty state:
 **All non-decorative icons must have labels:**
 
 ```astro
-<!-- ✅ Via adjacent text -->
+<!--  Via adjacent text -->
 <button>
   <SearchIcon />
   <span>Search</span>
 </button>
 
-<!-- ✅ Via aria-label -->
+<!--  Via aria-label -->
 <button aria-label="Search">
   <SearchIcon />
 </button>
 
-<!-- ✅ Decorative icon -->
-<span aria-hidden="true">🎨</span>
+<!--  Decorative icon -->
+<span aria-hidden="true"></span>
 ```
 
 ---
@@ -596,10 +596,10 @@ Before calling a UI feature done:
 ### Performance
 
 - [ ] Lighthouse (mobile) meets targets:
-  - Performance ≥ 95
-  - Accessibility ≥ 95
-  - Best Practices ≥ 95
-  - SEO ≥ 95
+  - Performance 95
+  - Accessibility 95
+  - Best Practices 95
+  - SEO 95
 - [ ] No obvious layout shifts or jank on load
 
 ### UX

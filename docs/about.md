@@ -1,8 +1,8 @@
-# About This Documentation
+﻿# About This Documentation
 
 ## Purpose
 
-This documentation provides comprehensive information about Chris Lyons' personal website — a modern, performant portfolio built with cutting-edge web technologies.
+This documentation provides comprehensive information about Chris Lyons' personal website a modern, performant portfolio built with cutting-edge web technologies.
 
 ## Target Audience
 

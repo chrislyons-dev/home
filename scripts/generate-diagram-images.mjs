@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @module generate-diagram-images
  * @description Generates static SVG images from Mermaid (.mmd) and PlantUML (.puml)
  * diagram source files at build time. Runs automatically before dev/build via npm scripts.
@@ -51,13 +51,13 @@ export function validatePath(filePath, baseDir) {
  * @returns {Promise<number>} Number of diagrams generated
  */
 export async function generateMermaidImages() {
-  console.log('🎨 Generating Mermaid diagram images...');
+  console.log(' Generating Mermaid diagram images...');
 
   const files = await fs.readdir(DOCS_DIR);
   const mmdFiles = files.filter((f) => f.endsWith('.mmd'));
 
   if (mmdFiles.length === 0) {
-    console.log('⚠️  No .mmd files found in', DOCS_DIR);
+    console.log('  No .mmd files found in', DOCS_DIR);
     return 0;
   }
 
@@ -104,13 +104,13 @@ export async function generateMermaidImages() {
       try {
         const stats = await fs.stat(outputPath);
         if (stats.size > 0) {
-          console.log(`  ✅ Generated ${outputFile}`);
+          console.log(`   Generated ${outputFile}`);
           successCount++;
         } else {
-          console.error(`  ❌ Failed to generate ${outputFile} (empty file)`);
+          console.error(`   Failed to generate ${outputFile} (empty file)`);
         }
       } catch (statError) {
-        console.error(`  ❌ Failed to generate ${outputFile}`);
+        console.error(`   Failed to generate ${outputFile}`);
         if (result.stderr) {
           const errorMsg = result.stderr.substring(0, 300).trim();
           if (errorMsg) {
@@ -119,7 +119,7 @@ export async function generateMermaidImages() {
         }
       }
     } catch (error) {
-      console.error(`  ❌ Failed to generate ${outputFile}:`, error.message);
+      console.error(`   Failed to generate ${outputFile}:`, error.message);
     }
   }
 
@@ -232,13 +232,13 @@ async function tryLocalPlantUML(inputPath, outputPath) {
  * @returns {Promise<number>} Number of diagrams generated
  */
 export async function generatePlantUMLImages() {
-  console.log('🏗️  Generating PlantUML diagram images...');
+  console.log('  Generating PlantUML diagram images...');
 
   const files = await fs.readdir(DOCS_DIR);
   const pumlFiles = files.filter((f) => f.endsWith('.puml'));
 
   if (pumlFiles.length === 0) {
-    console.log('⚠️  No .puml files found in', DOCS_DIR);
+    console.log('  No .puml files found in', DOCS_DIR);
     return 0;
   }
 
@@ -250,9 +250,9 @@ export async function generatePlantUMLImages() {
   try {
     await fs.access(jarPath);
     useLocalJar = true;
-    console.log('  ℹ️  Using local PlantUML JAR (secure mode)');
+    console.log('    Using local PlantUML JAR (secure mode)');
   } catch {
-    console.log('  ⚠️  Using remote PlantUML service (consider downloading plantuml.jar)');
+    console.log('    Using remote PlantUML service (consider downloading plantuml.jar)');
   }
 
   for (let i = 0; i < pumlFiles.length; i++) {
@@ -306,13 +306,13 @@ export async function generatePlantUMLImages() {
         const sanitized = sanitizeSVG(svgContent);
         await fs.writeFile(outputPath, sanitized, 'utf-8');
 
-        console.log(`  ✅ Generated ${outputFile} (sanitized)`);
+        console.log(`   Generated ${outputFile} (sanitized)`);
         successCount++;
       } else {
-        console.error(`  ❌ Failed to generate ${outputFile} from all sources`);
+        console.error(`   Failed to generate ${outputFile} from all sources`);
       }
     } catch (error) {
-      console.error(`  ❌ Failed to generate ${outputFile}:`, error.message);
+      console.error(`   Failed to generate ${outputFile}:`, error.message);
     }
   }
 

@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+﻿@import 'tailwindcss';
 
 /* Optimize font loading */
 @supports (font-variation-settings: normal) {
@@ -48,7 +48,7 @@
   /* ==============================================
      SEMANTIC THEME VARIABLES - LIGHT MODE
      Change these to switch entire theme
-     (e.g., slate/green → purple/gold)
+     (e.g., slate/green ' purple/gold)
      ============================================== */
 
   /* Backgrounds */
@@ -138,6 +138,17 @@
   /* Navigation */
   --theme-nav-bg: rgba(232, 234, 239, 0.8);
   --theme-nav-hover-bg: var(--color-slate-100);
+  --theme-overlay-bg: rgba(15, 17, 21, 0.6);
+
+  /* Code blocks */
+  --theme-code-bg: var(--color-slate-900);
+  --theme-code-text: var(--color-slate-50);
+  --theme-code-border: var(--theme-border-emphasis);
+
+  /* Terminal dots */
+  --theme-terminal-dot-red: #ef4444;
+  --theme-terminal-dot-yellow: #f59e0b;
+  --theme-terminal-dot-green: #22c55e;
 
   /* Legacy aliases - for backwards compatibility during refactor */
   --accent-text: var(--theme-accent-primary);
@@ -251,6 +262,17 @@
   /* Navigation */
   --theme-nav-bg: rgba(15, 17, 21, 0.8);
   --theme-nav-hover-bg: var(--color-slate-900);
+  --theme-overlay-bg: rgba(0, 0, 0, 0.6);
+
+  /* Code blocks */
+  --theme-code-bg: var(--color-slate-950);
+  --theme-code-text: var(--color-slate-50);
+  --theme-code-border: var(--theme-border-emphasis);
+
+  /* Terminal dots */
+  --theme-terminal-dot-red: #ef4444;
+  --theme-terminal-dot-yellow: #f59e0b;
+  --theme-terminal-dot-green: #22c55e;
 
   /* Update legacy aliases */
   --accent-text: var(--theme-accent-primary);
@@ -408,12 +430,13 @@ pre.mermaid {
 }
 
 .nav-toggle {
-  @apply min-h-[44px] min-w-[44px] rounded-lg border border-transparent p-2 text-gray-700 transition-colors dark:text-gray-200;
+  @apply min-h-[44px] min-w-[44px] rounded-lg border border-transparent p-2 transition-colors;
+  color: var(--theme-text-secondary);
 }
 
 .nav-toggle:hover {
   background: var(--theme-nav-hover-bg);
-  @apply text-gray-900 dark:text-white;
+  color: var(--theme-text-primary);
 }
 
 .nav-toggle[aria-expanded='true'] {
@@ -421,7 +444,7 @@ pre.mermaid {
 }
 
 .mobile-nav {
-  @apply dark:border-electric-500/20 relative z-50 border-t px-4 pb-4 shadow-sm backdrop-blur-sm;
+  @apply relative z-50 border-t px-4 pb-4 shadow-sm backdrop-blur-sm;
   background: var(--theme-nav-bg);
   border-color: var(--theme-border-nav);
   max-height: 0;
@@ -439,7 +462,8 @@ pre.mermaid {
 }
 
 .mobile-nav-overlay {
-  @apply fixed inset-x-0 top-16 bottom-0 z-40 bg-slate-900/60 opacity-0 transition-opacity duration-200 ease-out;
+  @apply fixed inset-x-0 top-16 bottom-0 z-40 opacity-0 transition-opacity duration-200 ease-out;
+  background: var(--theme-overlay-bg);
   pointer-events: none;
 }
 
@@ -455,7 +479,7 @@ pre.mermaid {
 
 .mobile-nav-link:hover {
   background: var(--theme-nav-hover-bg);
-  @apply text-gray-900 dark:text-white;
+  color: var(--theme-text-primary);
 }
 
 html.nav-scroll-lock,
@@ -528,14 +552,9 @@ html.nav-scroll-lock body {
 .card {
   @apply rounded-2xl border p-6;
   border-color: var(--theme-card-border);
-  background: var(--theme-bg-surface);
+  background: var(--theme-card-bg);
   position: relative;
   overflow: hidden;
-}
-
-.dark .card {
-  @apply bg-gradient-to-b from-white/6 to-white/2;
-  border-color: var(--theme-card-border);
 }
 
 .card-hover {
@@ -571,7 +590,8 @@ html.nav-scroll-lock body {
 }
 
 .card-featured {
-  @apply border-electric-600/20 dark:border-electric-600/40 dark:to-slate-850 rounded-lg border bg-gradient-to-br p-6 dark:from-slate-900;
+  @apply rounded-lg border bg-gradient-to-br p-6;
+  border-color: var(--theme-badge-accent-ring);
   background-image: linear-gradient(to bottom right, var(--theme-bg-surface), var(--theme-bg-base));
   position: relative;
   overflow: hidden;
@@ -595,7 +615,9 @@ html.nav-scroll-lock body {
 }
 
 .badge-primary {
-  @apply bg-electric-600 rounded-full px-3 py-1 text-sm text-slate-950;
+  @apply rounded-full px-3 py-1 text-sm;
+  background: var(--theme-accent-strong);
+  color: var(--theme-text-primary);
 }
 
 .badge-secondary {
@@ -606,7 +628,8 @@ html.nav-scroll-lock body {
 
 /* Icon container */
 .icon-box {
-  @apply bg-electric-600/10 dark:bg-electric-600/20 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg;
+  @apply flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg;
+  background: var(--theme-badge-accent-bg);
 }
 
 .icon-box svg {
@@ -617,18 +640,18 @@ html.nav-scroll-lock body {
 
 /* Info box / CTA box */
 .info-box {
-  @apply rounded-lg border p-8 dark:border-white/5;
+  @apply rounded-lg border p-8;
   background: var(--theme-bg-surface);
   border-color: var(--theme-border-emphasis);
 }
 
 .dark .info-box {
-  background: var(--color-slate-900);
   opacity: 0.5;
 }
 
 .info-box-featured {
-  @apply border-electric-600/20 dark:border-electric-600/40 dark:to-slate-850 rounded-lg border bg-gradient-to-br p-8 dark:from-slate-900;
+  @apply rounded-lg border bg-gradient-to-br p-8;
+  border-color: var(--theme-badge-accent-ring);
   background-image: linear-gradient(to bottom right, var(--theme-bg-surface), var(--theme-bg-base));
   position: relative;
   overflow: hidden;
@@ -722,15 +745,13 @@ html.nav-scroll-lock body {
 
 .prose pre {
   @apply my-4 overflow-x-auto rounded-lg p-4;
-  background: var(--color-slate-900);
-}
-
-.dark .prose pre {
-  background: var(--color-slate-950);
+  background: var(--theme-code-bg);
+  border: 1px solid var(--theme-code-border);
 }
 
 .prose pre code {
-  @apply bg-transparent p-0 text-gray-100;
+  @apply bg-transparent p-0;
+  color: var(--theme-code-text);
 }
 
 .prose a {

@@ -1,4 +1,4 @@
-# Deploying to Vercel
+﻿# Deploying to Vercel
 
 Deploy the main site to Vercel's global edge network.
 
@@ -76,7 +76,7 @@ git push origin feature/new-feature
 
 ### Add Domain
 
-1. Go to Project Settings → Domains
+1. Go to Project Settings Domains
 2. Add your domain: `yourdomain.com`
 3. Configure DNS:
 
@@ -133,7 +133,7 @@ Create `vercel.json` for advanced config:
 
 ### Enable Analytics
 
-1. Go to Project Settings → Analytics
+1. Go to Project Settings Analytics
 2. Enable "Web Analytics"
 3. Add snippet to `Layout.astro`:
 
@@ -197,7 +197,7 @@ git commit -m "fix: add lock file"
 
 ```bash
 # Add in Vercel dashboard
-Settings → Environment Variables
+Settings  Environment Variables
 ```
 
 ### Deployment Issues

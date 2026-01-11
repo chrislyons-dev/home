@@ -1,4 +1,4 @@
-# API Reference
+﻿# API Reference
 
 Component and utility API reference.
 
@@ -318,12 +318,12 @@ npm run docs:arch
 
 ```
 dist/
-├── index.html
-├── about.html
-├── _astro/
-│   ├── [hash].css
-│   └── [hash].js
-└── assets/
+ index.html
+ about.html
+ _astro/
+    [hash].css
+    [hash].js
+ assets/
 ```
 
 ## Next Steps

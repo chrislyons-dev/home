@@ -1,4 +1,4 @@
-# Quick Start
+﻿# Quick Start
 
 Get familiar with the project structure and start building.
 
@@ -6,17 +6,17 @@ Get familiar with the project structure and start building.
 
 ```text
 /
-├── public/               # Static assets
-│   ├── cl_*.svg         # Favicons
-│   └── robots.txt
-├── src/
-│   ├── components/      # React components
-│   ├── layouts/         # Astro layouts
-│   ├── pages/           # File-based routing
-│   └── styles/          # Global styles
-├── docs/                # Documentation (you are here)
-├── astro.config.mjs     # Astro configuration
-└── package.json
+ public/               # Static assets
+    cl_*.svg         # Favicons
+    robots.txt
+ src/
+    components/      # React components
+    layouts/         # Astro layouts
+    pages/           # File-based routing
+    styles/          # Global styles
+ docs/                # Documentation (you are here)
+ astro.config.mjs     # Astro configuration
+ package.json
 ```
 
 ## Development Workflow

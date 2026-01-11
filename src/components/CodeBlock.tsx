@@ -37,15 +37,38 @@ export default function CodeBlock({
 
   return (
     <div className="mx-auto w-full max-w-2xl">
-      <div className="overflow-hidden rounded-lg border border-gray-800 bg-gray-900 shadow-2xl">
+      <div
+        className="overflow-hidden rounded-lg border shadow-2xl"
+        style={{
+          borderColor: 'var(--theme-code-border)',
+          background: 'var(--theme-code-bg)',
+        }}
+      >
         {/* Terminal header */}
-        <div className="flex items-center gap-2 border-b border-gray-700 bg-gray-800 px-4 py-3">
+        <div
+          className="flex items-center gap-2 border-b px-4 py-3"
+          style={{
+            borderColor: 'var(--theme-code-border)',
+            background: 'var(--theme-code-bg)',
+          }}
+        >
           <div className="flex gap-2">
-            <div className="h-3 w-3 rounded-full bg-red-500"></div>
-            <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
-            <div className="h-3 w-3 rounded-full bg-green-500"></div>
+            <div
+              className="h-3 w-3 rounded-full"
+              style={{ background: 'var(--theme-terminal-dot-red)' }}
+            ></div>
+            <div
+              className="h-3 w-3 rounded-full"
+              style={{ background: 'var(--theme-terminal-dot-yellow)' }}
+            ></div>
+            <div
+              className="h-3 w-3 rounded-full"
+              style={{ background: 'var(--theme-terminal-dot-green)' }}
+            ></div>
           </div>
-          <span className="ml-4 text-sm text-gray-400">{currentSnippet.language}</span>
+          <span className="ml-4 text-sm" style={{ color: 'var(--theme-code-text)' }}>
+            {currentSnippet.language}
+          </span>
         </div>
 
         {/* Code content */}
@@ -54,13 +77,19 @@ export default function CodeBlock({
             isAnimating ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <pre className="text-gray-100">
+          <pre style={{ color: 'var(--theme-code-text)' }}>
             <code>{currentSnippet.code}</code>
           </pre>
         </div>
 
         {/* Indicator dots */}
-        <div className="flex justify-center gap-2 border-t border-gray-700 bg-gray-800 px-4 py-3">
+        <div
+          className="flex justify-center gap-2 border-t px-4 py-3"
+          style={{
+            borderColor: 'var(--theme-code-border)',
+            background: 'var(--theme-code-bg)',
+          }}
+        >
           {snippets.map((snippet, index) => (
             <button
               key={index}
@@ -72,7 +101,9 @@ export default function CodeBlock({
                 }, 300);
               }}
               className={`h-2 w-2 rounded-full transition-all ${
-                index === currentIndex ? 'bg-electric-500 w-6' : 'bg-gray-600 hover:bg-gray-500'
+                index === currentIndex
+                  ? 'w-6 bg-[var(--theme-accent-strong)]'
+                  : 'bg-[var(--theme-border-emphasis)] hover:bg-[var(--theme-text-muted)]'
               }`}
               aria-label={`Show ${snippet.language} snippet`}
             />

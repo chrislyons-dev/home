@@ -1,4 +1,4 @@
-# <type>: <short summary>
+﻿# <type>: <short summary>
 # 
 # Types:
 #   feat     A new feature
@@ -11,7 +11,7 @@
 #   build    Build system or dependency changes
 #   ci       CI/CD pipeline changes
 #
-# Summary (≤72 characters, imperative):
+# Summary (72 characters, imperative):
 #   e.g. "feat: add How I Build manifesto section"
 #
 # Body (optional, explain WHY not HOW):
@@ -27,3 +27,4 @@
 #
 #   Introduces a new section to highlight security, observability,
 #   performance, and cost optimization principles. Closes #15.
+
