@@ -147,6 +147,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Audit the signatures of all dependencies
+        run: npm audit signatures
+
       - name: Install Graphviz and Java
         run: |
           sudo apt-get update

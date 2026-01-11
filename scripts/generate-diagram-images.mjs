@@ -164,6 +164,70 @@ export async function fetchPlantUMLWithRetry(url, outputPath, maxRetries = 3) {
 }
 
 /**
+ * Sanitize SVG content by removing potentially dangerous elements
+ * @param {string} svgContent - Raw SVG content
+ * @returns {string} Sanitized SVG content
+ */
+export function sanitizeSVG(svgContent) {
+  // Remove script tags
+  let sanitized = svgContent.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+
+  // Remove event handlers (onload, onclick, etc.)
+  sanitized = sanitized.replace(/\son\w+\s*=\s*["'][^"']*["']/gi, '');
+
+  // Remove javascript: URLs
+  sanitized = sanitized.replace(/javascript:[^"']*/gi, '');
+
+  // Remove foreign objects (can contain HTML)
+  sanitized = sanitized.replace(
+    /<foreignObject\b[^<]*(?:(?!<\/foreignObject>)<[^<]*)*<\/foreignObject>/gi,
+    ''
+  );
+
+  return sanitized;
+}
+
+/**
+ * Try to use local PlantUML JAR if available, fall back to web service
+ * @param {string} inputPath - Input .puml file path
+ * @param {string} outputPath - Output .svg file path
+ * @returns {Promise<boolean>} Success status
+ */
+async function tryLocalPlantUML(inputPath, outputPath) {
+  // Check if plantuml.jar exists in project root or tools directory
+  const jarPaths = [
+    path.join(__dirname, '..', 'tools', 'plantuml.jar'),
+    path.join(__dirname, '..', 'plantuml.jar'),
+  ];
+
+  for (const jarPath of jarPaths) {
+    try {
+      await fs.access(jarPath);
+      // JAR exists, try to use it
+      const result = spawnSync(
+        'java',
+        ['-jar', jarPath, '-tsvg', inputPath, '-o', path.dirname(outputPath)],
+        {
+          stdio: ['ignore', 'pipe', 'pipe'],
+        }
+      );
+
+      if (result.status === 0) {
+        const stats = await fs.stat(outputPath);
+        if (stats.size > 0) {
+          return true;
+        }
+      }
+    } catch (error) {
+      // JAR doesn't exist or failed, continue to next
+      continue;
+    }
+  }
+
+  return false;
+}
+
+/**
  * Generate SVG images from PlantUML (.puml) diagram files
  * @returns {Promise<number>} Number of diagrams generated
  */
@@ -178,10 +242,18 @@ export async function generatePlantUMLImages() {
     return 0;
   }
 
-  // Import plantuml-encoder
-  const { encode } = await import('plantuml-encoder');
-
   let successCount = 0;
+  let useLocalJar = false;
+
+  // Check if local PlantUML JAR is available (more secure)
+  const jarPath = path.join(__dirname, '..', 'tools', 'plantuml.jar');
+  try {
+    await fs.access(jarPath);
+    useLocalJar = true;
+    console.log('  ℹ️  Using local PlantUML JAR (secure mode)');
+  } catch {
+    console.log('  ⚠️  Using remote PlantUML service (consider downloading plantuml.jar)');
+  }
 
   for (let i = 0; i < pumlFiles.length; i++) {
     const file = pumlFiles[i];
@@ -196,21 +268,48 @@ export async function generatePlantUMLImages() {
 
       console.log(`  [${i + 1}/${pumlFiles.length}] Generating ${outputFile}...`);
 
-      // Read PlantUML source
-      const pumlSource = await fs.readFile(inputPath, 'utf-8');
+      let success = false;
 
-      // Encode for PlantUML server
-      const encoded = encode(pumlSource);
-      const url = `https://www.plantuml.com/plantuml/svg/${encoded}`;
+      // Try local JAR first (more secure)
+      if (useLocalJar) {
+        success = await tryLocalPlantUML(inputPath, outputPath);
+      }
 
-      // Download SVG from PlantUML server with retry
-      const success = await fetchPlantUMLWithRetry(url, outputPath);
+      // Fall back to web service if local JAR not available or failed
+      if (!success) {
+        // Import plantuml-encoder
+        const { encode } = await import('plantuml-encoder');
 
+        // Read PlantUML source
+        const pumlSource = await fs.readFile(inputPath, 'utf-8');
+
+        // Encode for PlantUML server
+        const encoded = encode(pumlSource);
+
+        // Try alternative public PlantUML server (Kroki) to avoid v1.2026.0 text bug
+        // Fallback to plantuml.com if Kroki is unavailable
+        const servers = [
+          `https://kroki.io/plantuml/svg/${encoded}`,
+          `https://www.plantuml.com/plantuml/svg/${encoded}`,
+        ];
+
+        // Download SVG from PlantUML server with retry, trying each server
+        for (const url of servers) {
+          success = await fetchPlantUMLWithRetry(url, outputPath, 2);
+          if (success) break;
+        }
+      }
+
+      // Sanitize SVG output to remove potential XSS vectors
       if (success) {
-        console.log(`  ✅ Generated ${outputFile}`);
+        const svgContent = await fs.readFile(outputPath, 'utf-8');
+        const sanitized = sanitizeSVG(svgContent);
+        await fs.writeFile(outputPath, sanitized, 'utf-8');
+
+        console.log(`  ✅ Generated ${outputFile} (sanitized)`);
         successCount++;
       } else {
-        console.error(`  ❌ Failed to generate ${outputFile} after retries`);
+        console.error(`  ❌ Failed to generate ${outputFile} from all sources`);
       }
     } catch (error) {
       console.error(`  ❌ Failed to generate ${outputFile}:`, error.message);

@@ -8,7 +8,9 @@ const fsPromisesMock = {
   readdir: vi.fn(),
   stat: vi.fn(),
   readFile: vi.fn(),
+  writeFile: vi.fn(),
   mkdir: vi.fn(),
+  access: vi.fn(),
 };
 const spawnSyncMock = vi.fn();
 const encodeMock = vi.fn(() => 'encoded');
@@ -149,9 +151,11 @@ describe('generate-diagram-images (unit)', () => {
   it('counts PlantUML diagrams when fetch succeeds', async () => {
     const { module } = await setup();
     fsPromisesMock.readdir.mockResolvedValue(['diagram.puml']);
-    fsPromisesMock.readFile.mockResolvedValue('@startuml\n@enduml');
+    fsPromisesMock.access.mockRejectedValue(new Error('JAR not found')); // No local JAR
+    fsPromisesMock.readFile.mockResolvedValue('<svg>test</svg>'); // SVG content for sanitization
+    fsPromisesMock.writeFile.mockResolvedValue(undefined); // Sanitization write
     fsPromisesMock.stat.mockResolvedValue({ size: 20 });
-    spawnSyncMock.mockReturnValue({ status: 0 });
+    spawnSyncMock.mockReturnValue({ status: 0 }); // curl succeeds
 
     const count = await module.generatePlantUMLImages();
     expect(count).toBe(1);
@@ -162,8 +166,9 @@ describe('generate-diagram-images (unit)', () => {
     vi.useFakeTimers();
 
     fsPromisesMock.readdir.mockResolvedValue(['diagram.puml']);
+    fsPromisesMock.access.mockRejectedValue(new Error('JAR not found')); // No local JAR
     fsPromisesMock.readFile.mockResolvedValue('@startuml\n@enduml');
-    spawnSyncMock.mockReturnValue({ status: 1 });
+    spawnSyncMock.mockReturnValue({ status: 1 }); // curl fails
 
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const promise = module.generatePlantUMLImages();
@@ -173,6 +178,60 @@ describe('generate-diagram-images (unit)', () => {
 
     expect(errorSpy).toHaveBeenCalled();
     errorSpy.mockRestore();
+  });
+
+  it('uses local PlantUML JAR when available', async () => {
+    const { module } = await setup();
+    fsPromisesMock.readdir.mockResolvedValue(['diagram.puml']);
+    fsPromisesMock.access.mockResolvedValue(undefined); // JAR exists
+    fsPromisesMock.readFile.mockResolvedValue('<svg>local jar output</svg>');
+    fsPromisesMock.writeFile.mockResolvedValue(undefined);
+    fsPromisesMock.stat.mockResolvedValue({ size: 20 });
+    spawnSyncMock.mockReturnValue({ status: 0 }); // java -jar succeeds
+
+    const count = await module.generatePlantUMLImages();
+    expect(count).toBe(1);
+
+    // Verify it used java -jar, not curl
+    const javaCall = spawnSyncMock.mock.calls.find((call) => call[0] === 'java');
+    expect(javaCall).toBeDefined();
+    expect(javaCall[1]).toContain('-jar');
+  });
+
+  it('sanitizes SVG by removing script tags', async () => {
+    const { module } = await setup();
+    const malicious = '<svg><script>alert("xss")</script><text>safe</text></svg>';
+    const sanitized = module.sanitizeSVG(malicious);
+
+    expect(sanitized).not.toContain('<script');
+    expect(sanitized).toContain('<text>safe</text>');
+  });
+
+  it('sanitizes SVG by removing event handlers', async () => {
+    const { module } = await setup();
+    const malicious = '<svg><rect onclick="alert(1)" onload="steal()" /></svg>';
+    const sanitized = module.sanitizeSVG(malicious);
+
+    expect(sanitized).not.toContain('onclick');
+    expect(sanitized).not.toContain('onload');
+    expect(sanitized).toContain('<rect');
+  });
+
+  it('sanitizes SVG by removing javascript: URLs', async () => {
+    const { module } = await setup();
+    const malicious = '<svg><a href="javascript:alert(1)">click</a></svg>';
+    const sanitized = module.sanitizeSVG(malicious);
+
+    expect(sanitized).not.toContain('javascript:');
+  });
+
+  it('sanitizes SVG by removing foreignObject elements', async () => {
+    const { module } = await setup();
+    const malicious = '<svg><foreignObject><body><script>xss</script></body></foreignObject></svg>';
+    const sanitized = module.sanitizeSVG(malicious);
+
+    expect(sanitized).not.toContain('foreignObject');
+    expect(sanitized).not.toContain('<body>');
   });
 
   it('runs main without throwing when no diagrams exist', async () => {
