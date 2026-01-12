@@ -395,6 +395,17 @@ code {
   background-attachment: fixed;
 }
 
+@supports (-webkit-touch-callout: none) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .page-surface {
+    background-attachment: scroll;
+  }
+}
+
 /* Mermaid diagram styling - reserve space to prevent layout shift */
 .mermaid-container {
   @apply my-6 overflow-x-auto;
