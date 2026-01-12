@@ -199,6 +199,7 @@ async function tryLocalPlantUML(inputPath, outputPath) {
     path.join(__dirname, '..', 'tools', 'plantuml.jar'),
     path.join(__dirname, '..', 'plantuml.jar'),
   ];
+  const graphvizDot = await resolveGraphvizDot();
 
   for (const jarPath of jarPaths) {
     try {
@@ -208,6 +209,10 @@ async function tryLocalPlantUML(inputPath, outputPath) {
         'java',
         ['-jar', jarPath, '-tsvg', inputPath, '-o', path.dirname(outputPath)],
         {
+          env: {
+            ...process.env,
+            ...(graphvizDot ? { GRAPHVIZ_DOT: graphvizDot } : {}),
+          },
           stdio: ['ignore', 'pipe', 'pipe'],
         }
       );
@@ -215,7 +220,10 @@ async function tryLocalPlantUML(inputPath, outputPath) {
       if (result.status === 0) {
         const stats = await fs.stat(outputPath);
         if (stats.size > 0) {
-          return true;
+          const svgContent = await fs.readFile(outputPath, 'utf-8');
+          if (!isPlantUMLErrorOutput(svgContent)) {
+            return true;
+          }
         }
       }
     } catch (error) {
@@ -225,6 +233,37 @@ async function tryLocalPlantUML(inputPath, outputPath) {
   }
 
   return false;
+}
+
+function isPlantUMLErrorOutput(svgContent) {
+  return (
+    svgContent.includes('Dot executable') ||
+    svgContent.includes('Cannot find Graphviz') ||
+    svgContent.includes('You should try') ||
+    svgContent.includes('testdot')
+  );
+}
+
+async function resolveGraphvizDot() {
+  const candidates = [
+    process.env.GRAPHVIZ_DOT,
+    '/usr/bin/dot',
+    '/usr/local/bin/dot',
+    '/opt/homebrew/bin/dot',
+    'C:\\Program Files\\Graphviz\\bin\\dot.exe',
+    'C:\\Program Files (x86)\\Graphviz\\bin\\dot.exe',
+  ].filter(Boolean);
+
+  for (const candidate of candidates) {
+    try {
+      await fs.access(candidate);
+      return candidate;
+    } catch {
+      // Try next candidate.
+    }
+  }
+
+  return null;
 }
 
 /**
