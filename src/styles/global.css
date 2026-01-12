@@ -399,6 +399,17 @@ code {
   .page-surface {
     background-attachment: scroll;
   }
+
+  :root {
+    --theme-gradient-page:
+      radial-gradient(
+        120% 80% at 110% 20%,
+        var(--theme-glow-strong) 0%,
+        var(--theme-glow-soft) 45%,
+        transparent 70%
+      ),
+      linear-gradient(180deg, var(--theme-bg-base) 0%, var(--theme-bg-base) 100%);
+  }
 }
 
 /* Mermaid diagram styling - reserve space to prevent layout shift */
