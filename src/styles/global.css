@@ -396,11 +396,6 @@ code {
 }
 
 @supports (-webkit-touch-callout: none) {
-  html,
-  body {
-    overflow-x: hidden;
-  }
-
   .page-surface {
     background-attachment: scroll;
   }
