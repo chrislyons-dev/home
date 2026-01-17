@@ -679,11 +679,20 @@ html.nav-scroll-lock body {
   position: absolute;
   top: -30%;
   right: -20%;
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 400px;
   background: radial-gradient(circle, rgba(0, 255, 136, 0.12) 0%, transparent 70%);
   pointer-events: none;
   filter: blur(50px);
+}
+
+/* Webkit-specific: Extend glow further to accommodate wider images */
+@supports (-webkit-touch-callout: none) {
+  .info-box-featured::before {
+    width: 700px;
+    height: 500px;
+    right: -30%;
+  }
 }
 
 /* Section containers */
