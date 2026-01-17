@@ -1,5 +1,11 @@
 {
   "permissions": {
-    "allow": ["Bash(curl:*)", "Bash(npm run test:e2e:mobile:*)", "Bash(npm run test:e2e:*)"]
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(npm run test:e2e:mobile:*)",
+      "Bash(npm run test:e2e:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run docs:arch:*)"
+    ]
   }
 }

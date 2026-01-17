@@ -4,6 +4,7 @@ import { execSync } from 'child_process';
 import { writeFileSync, mkdirSync, existsSync, readdirSync, statSync, readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { parseFiles } from './ast/file-parser.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -142,7 +143,7 @@ const componentStructure = analyzeComponentStructure();
 
 // 6. Analyze code structure with AST
 console.log(' Analyzing code structure...');
-const codeStructure = analyzeCodeStructure();
+const codeStructure = await analyzeCodeStructure();
 
 // 7. C4 System Diagrams
 console.log('  Generating C4 system diagrams...');
@@ -156,12 +157,11 @@ try {
   const c4Component = generateC4ComponentDiagram(componentStructure, projectConfig);
   writeFileSync(join(docsDir, 'c4-component.puml'), c4Component);
 
-  // Level 4 (Code) diagrams intentionally skipped - they quickly become overwhelming
-  // at scale. Generate them manually for critical components when needed.
-  // const c4Code = generateC4CodeDiagram(codeStructure, projectConfig);
-  // writeFileSync(join(docsDir, 'c4-code.puml'), c4Code);
+  // Level 4 (Code) diagram - service architecture
+  const c4Code = generateC4CodeDiagram(codeStructure, projectConfig);
+  writeFileSync(join(docsDir, 'c4-code.puml'), c4Code);
 
-  console.log('   C4 diagrams generated (Levels 1-3)');
+  console.log('   C4 diagrams generated (Levels 1-4)');
 } catch (error) {
   console.error('   Failed to generate C4 diagrams:', error.message);
 }
@@ -364,79 +364,59 @@ function analyzeComponentStructure() {
   return structure;
 }
 
-function analyzeCodeStructure() {
+async function analyzeCodeStructure() {
   const srcDir = join(rootDir, 'src');
-  const structure = {
-    classes: [],
-    functions: [],
-    interfaces: [],
-    exports: [],
-  };
+  const servicesDir = join(srcDir, 'services');
 
-  // Focus on a key service file for detailed analysis
-  const themeManagerPath = join(srcDir, 'services', 'ThemeManager.ts');
+  // Find all TypeScript files in the services directory
+  const serviceFiles = readdirSync(servicesDir)
+    .filter((file) => file.endsWith('.ts'))
+    .map((file) => join(servicesDir, file));
 
-  if (existsSync(themeManagerPath)) {
-    try {
-      const code = readFileSync(themeManagerPath, 'utf-8');
+  console.log(`   Analyzing ${serviceFiles.length} service files with AST parsing...`);
 
-      // Use regex to extract TypeScript class information
-      const classRegex = /(?:export\s+)?class\s+(\w+)/g;
-      const methodRegex = /^\s*(?:public|private|protected)?\s*(\w+)\s*\([^)]*\)\s*[:{\s]/gm;
-      const interfaceRegex = /interface\s+(\w+)/g;
+  // Parse all service files using ts-morph
+  const extractions = await parseFiles(serviceFiles);
 
-      // Extract classes
-      let classMatch;
-      while ((classMatch = classRegex.exec(code)) !== null) {
-        const className = classMatch[1];
+  // Collect all classes and interfaces
+  const allClasses = [];
+  const allInterfaces = [];
+  const allImports = [];
 
-        // Extract methods for this class (simplified - gets all methods in file)
-        const methods = [];
-        let methodMatch;
-        const methodPattern = new RegExp(
-          `class\\s+${className}[\\s\\S]*?\\{([\\s\\S]*?)\\n\\}`,
-          'm'
-        );
-        const classBody = code.match(methodPattern);
-
-        if (classBody) {
-          const bodyMethodRegex =
-            /^\s*(?:public|private|protected)?\s*(?:async\s+)?(\w+)\s*\([^)]*\)\s*[:{\s]/gm;
-          let m;
-          while ((m = bodyMethodRegex.exec(classBody[1])) !== null) {
-            const methodName = m[1];
-            // Filter out control flow keywords and only include valid method names
-            if (
-              methodName !== 'constructor' &&
-              !methodName.startsWith('_') &&
-              !['if', 'for', 'while', 'switch', 'catch', 'return'].includes(methodName)
-            ) {
-              methods.push(methodName);
-            }
-          }
-        }
-
-        structure.classes.push({
-          name: className,
-          methods: methods,
-          file: 'services/ThemeManager.ts',
-        });
-      }
-
-      // Extract interfaces
-      let interfaceMatch;
-      while ((interfaceMatch = interfaceRegex.exec(code)) !== null) {
-        structure.interfaces.push(interfaceMatch[1]);
-      }
-    } catch (error) {
-      console.log(`    Could not read ThemeManager.ts: ${error.message}`);
+  for (const extraction of extractions) {
+    // Add classes with their file information
+    for (const cls of extraction.classes) {
+      allClasses.push({
+        ...cls,
+        // Normalize file path for display
+        file: extraction.filePath.replace(rootDir + '\\', '').replace(/\\/g, '/'),
+      });
     }
+
+    // Add interfaces with their file information
+    for (const iface of extraction.interfaces) {
+      allInterfaces.push({
+        ...iface,
+        file: extraction.filePath.replace(rootDir + '\\', '').replace(/\\/g, '/'),
+      });
+    }
+
+    // Store imports for relationship analysis
+    allImports.push({
+      filePath: extraction.filePath,
+      imports: extraction.imports,
+    });
   }
 
-  console.log(
-    `   Analyzed ${structure.classes.length} classes, ${structure.interfaces.length} interfaces`
-  );
-  return structure;
+  console.log(`   Analyzed ${allClasses.length} classes, ${allInterfaces.length} interfaces`);
+
+  return {
+    classes: allClasses,
+    interfaces: allInterfaces,
+    imports: allImports,
+    functions: [],
+    exports: [],
+  };
 }
 
 function convertDotToMermaid(dotOutput) {
@@ -698,45 +678,122 @@ SHOW_LEGEND()
 function generateC4CodeDiagram(structure, config) {
   const siteName = config.site || 'ChrisLyons.dev';
 
-  // Generate class and method definitions
   let code = '';
 
-  if (structure.classes.length > 0) {
-    structure.classes.forEach((cls) => {
-      code += `    class ${cls.name} {\n`;
+  // Helper function to clean up type names (remove import paths)
+  const cleanTypeName = (typeName) => {
+    if (!typeName) return 'any';
+    // Remove import() wrapper and path, keep only the type name after the last dot
+    const cleaned = typeName.replace(/import\([^)]+\)\./g, '');
+    return cleaned;
+  };
 
-      cls.methods.forEach((method) => {
-        code += `      +${method}()\n`;
-      });
+  // Generate interface definitions
+  if (structure.interfaces && structure.interfaces.length > 0) {
+    structure.interfaces.forEach((iface) => {
+      code += `    interface ${iface.name} {\n`;
+
+      // Add interface methods with signatures
+      if (iface.methods && iface.methods.length > 0) {
+        iface.methods.forEach((method) => {
+          const params = method.parameters
+            .map((p) => `${p.name}: ${cleanTypeName(p.type)}`)
+            .join(', ');
+          code += `      +${method.name}(${params}): ${cleanTypeName(method.returnType)}\n`;
+        });
+      }
 
       code += `    }\n\n`;
     });
   }
 
-  if (structure.functions.length > 0) {
-    structure.functions.forEach((func) => {
-      const params = func.params.join(', ');
-      code += `    note "function ${func.name}(${params})" as ${func.name}_note\n`;
+  // Generate class definitions with method signatures
+  if (structure.classes && structure.classes.length > 0) {
+    structure.classes.forEach((cls) => {
+      code += `    class ${cls.name} {\n`;
+
+      // Add methods with signatures
+      if (cls.methods && cls.methods.length > 0) {
+        cls.methods.forEach((method) => {
+          const params = method.parameters
+            .map((p) => `${p.name}: ${cleanTypeName(p.type)}`)
+            .join(', ');
+          const visibility =
+            method.visibility === 'public' ? '+' : method.visibility === 'protected' ? '#' : '-';
+          code += `      ${visibility}${method.name}(${params}): ${cleanTypeName(method.returnType)}\n`;
+        });
+      }
+
+      code += `    }\n\n`;
     });
   }
 
-  // Generate relationships example
+  // Generate relationships
   let relationships = '';
-  if (structure.classes.length > 0) {
-    relationships = `
-    note right of ${structure.classes[0].name}
-      Auto-generated from AST analysis
-      of services/ThemeManager.ts
-    end note`;
+
+  // Add implements relationships (class -> interface)
+  if (structure.classes && structure.classes.length > 0) {
+    structure.classes.forEach((cls) => {
+      if (cls.implements && cls.implements.length > 0) {
+        cls.implements.forEach((iface) => {
+          relationships += `    ${cls.name} ..|> ${iface} : implements\n`;
+        });
+      }
+    });
   }
+
+  // Add uses relationships based on imports and property types
+  if (structure.classes && structure.interfaces) {
+    const interfaceNames = structure.interfaces.map((i) => i.name);
+
+    structure.classes.forEach((cls) => {
+      // Check if class properties use interfaces
+      if (cls.properties) {
+        cls.properties.forEach((prop) => {
+          interfaceNames.forEach((ifaceName) => {
+            if (prop.type && prop.type.includes(ifaceName)) {
+              relationships += `    ${cls.name} ..> ${ifaceName} : uses\n`;
+            }
+          });
+        });
+      }
+
+      // Check if method parameters use interfaces
+      if (cls.methods) {
+        const usedInterfaces = new Set();
+        cls.methods.forEach((method) => {
+          method.parameters.forEach((param) => {
+            interfaceNames.forEach((ifaceName) => {
+              if (param.type && param.type.includes(ifaceName)) {
+                usedInterfaces.add(ifaceName);
+              }
+            });
+          });
+        });
+
+        usedInterfaces.forEach((ifaceName) => {
+          relationships += `    ${cls.name} ..> ${ifaceName} : uses\n`;
+        });
+      }
+    });
+  }
+
+  // Add note about AST parsing
+  const note = `
+    note right of ${structure.classes?.[0]?.name || structure.interfaces?.[0]?.name || 'N1'}
+      Auto-generated from AST parsing
+      using ts-morph library
+    end note`;
 
   return `@startuml
 
-title Code Level diagram - ThemeManager Service Example
+title Code Level Diagram - Service Architecture
 
 ${code || 'note "Code analysis in progress" as N1'}
 
 ${relationships}
+
+${code ? note : ''}
 
 @enduml`;
 }
