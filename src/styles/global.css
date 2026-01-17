@@ -346,6 +346,59 @@ html {
   color: var(--color-text);
 }
 
+body {
+  overflow-wrap: break-word;
+}
+
+/* Fix flexbox children minimum width issue */
+body > * {
+  min-width: 0; /* Allow flex children to shrink below content width */
+}
+
+/* Ensure main content containers and their children don't overflow viewport */
+.section-container,
+.mx-auto {
+  min-width: 0; /* Allow containers to shrink */
+}
+
+/* Prevent all content from exceeding viewport on mobile */
+@media (max-width: 640px) {
+  /* Constrain text content */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    max-width: calc(100vw - 2rem);
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Constrain images */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain;
+  }
+
+  /* Constrain all block-level children of containers */
+  .mx-auto > *,
+  .mx-auto > * > * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Specifically target common block elements */
+  div,
+  section,
+  article,
+  aside {
+    max-width: 100% !important;
+  }
+}
+
 code {
   font-family: var(--font-mono);
 }
@@ -672,26 +725,31 @@ html.nav-scroll-lock body {
   background-image: linear-gradient(to bottom right, var(--theme-bg-surface), var(--theme-bg-base));
   position: relative;
   overflow: hidden;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .info-box-featured::before {
   content: '';
   position: absolute;
-  top: -30%;
-  right: -20%;
-  width: 500px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(0, 255, 136, 0.12) 0%, transparent 70%);
+  inset: 0; /* Fill the container */
+  background: radial-gradient(
+    ellipse 800px 600px at 85% 20%,
+    rgba(0, 255, 136, 0.12) 0%,
+    transparent 70%
+  );
   pointer-events: none;
   filter: blur(50px);
 }
 
-/* Webkit-specific: Extend glow further to accommodate wider images */
+/* Webkit-specific: Adjust gradient position for better coverage */
 @supports (-webkit-touch-callout: none) {
   .info-box-featured::before {
-    width: 700px;
-    height: 500px;
-    right: -30%;
+    background: radial-gradient(
+      ellipse 1000px 700px at 90% 15%,
+      rgba(0, 255, 136, 0.12) 0%,
+      transparent 70%
+    );
   }
 }
 
