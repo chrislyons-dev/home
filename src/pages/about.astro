@@ -13,16 +13,64 @@ import Layout from '../layouts/Layout.astro';
       <!-- About Me -->
       <section class="mb-16">
         <h2 class="mb-6 text-3xl font-bold">About Me</h2>
-        <p class="text-muted mb-6 text-xl">
-          Architect and engineer. Whatever the scale, the goal is the same: solve the problem right.
+        <p class="text-body mb-6">I've been lucky to build a career in technology.</p>
+
+        <p class="text-body mb-4">
+          I'm an engineer and architect who believes software should make the world steadier, not
+          noisier. My work and my life run on the same principles:
         </p>
 
-        <p class="text-body mb-6">End-to-end builder. Small startups to enterprise systems.</p>
+        <ul class="text-body mb-6 list-none space-y-1">
+          <li>be humble</li>
+          <li>be kind</li>
+          <li>be useful</li>
+          <li>say what's true</li>
+          <li>take responsibility</li>
+        </ul>
 
-        <h3 class="mb-4 text-xl font-bold">Technical Stack</h3>
-        <div class="mb-8 grid gap-6 sm:grid-cols-2">
+        <p class="text-body mb-6">
+          I optimize for long time horizons. I care about tradeoffs, edge cases, and the person who
+          has to operate the system at 2 a.m.
+        </p>
+
+        <p class="text-body mb-6">Speed matters. Judgment matters more.</p>
+      </section>
+
+      <!-- What I Won't Build -->
+      <section class="mb-16">
+        <h2 class="mb-6 text-3xl font-bold">What I Won't Build</h2>
+        <ul class="text-body mb-6 list-none space-y-2">
+          <li>dark patterns — engagement mechanics designed to exploit</li>
+          <li>systems without auditability or rollback</li>
+          <li>features that quietly degrade user agency</li>
+          <li>growth-at-all-costs architecture that ignores long-term cost</li>
+        </ul>
+        <p class="text-body">There are easier ways to make money. This isn't what I'm here for.</p>
+      </section>
+
+      <!-- On AI -->
+      <section class="mb-16">
+        <h2 class="mb-6 text-3xl font-bold">On AI</h2>
+        <p class="text-body mb-6">
+          I use AI heavily. Work that used to take a year takes a month. That compression doesn't
+          come at the cost of quality — it buys more of it. More test coverage, more engineering
+          rigor, more advanced features at a fraction of the cost. The time constraint that can make
+          good engineering expensive shrinks significantly.
+        </p>
+        <p class="text-body">
+          What makes it work is judgment. AI can generate. It can't prioritize, can't read an org,
+          can't translate what a stakeholder actually means versus what they said. Architecture
+          decisions, system boundaries, the call to slow down or push back — that's experience. That
+          stays mine.
+        </p>
+      </section>
+
+      <!-- Technical Stack -->
+      <section class="mb-16">
+        <h2 class="mb-6 text-3xl font-bold">Technical Stack</h2>
+        <div class="grid gap-6 sm:grid-cols-2">
           <div>
-            <h4 class="text-accent mb-2 font-semibold">Frontend</h4>
+            <h3 class="text-accent mb-2 font-semibold">Frontend</h3>
             <ul class="text-body list-inside list-disc">
               <li>React, TypeScript</li>
               <li>Astro, Next.js</li>
@@ -31,7 +79,7 @@ import Layout from '../layouts/Layout.astro';
             </ul>
           </div>
           <div>
-            <h4 class="text-accent mb-2 font-semibold">Backend & Infrastructure</h4>
+            <h3 class="text-accent mb-2 font-semibold">Backend & Infrastructure</h3>
             <ul class="text-body list-inside list-disc">
               <li>Node.js, Python, Java</li>
               <li>DynamoDB, PostgreSQL, MongoDB</li>
@@ -47,8 +95,8 @@ import Layout from '../layouts/Layout.astro';
         <h2 class="mb-6 text-3xl font-bold">About This Site</h2>
 
         <p class="text-body mb-6">
-          This portfolio is intentionally over-engineered. It's a working demonstration of
-          production-grade practices applied to a static site.
+          This is a portfolio site built the way I'd build anything that matters. The scale is
+          small. The practices aren't.
         </p>
 
         <h3 class="mb-4 text-xl font-bold">Stack</h3>

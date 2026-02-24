@@ -150,6 +150,9 @@ public/architecture/*.svg
 site/
 
 CLAUDE.md
-./claude
 CODEX.md
 notes
+
+# Local tool state (never commit)
+.astro/
+.claude/settings.local.json
